@@ -5,6 +5,8 @@ import { compareSuppliers } from '../api/client';
 import { ExternalLink, readableError } from './ui';
 import { useDialog } from './useDialog';
 import { CompareAssortments } from './CompareAssortments';
+import { FilterSelect } from './FilterSelect';
+import { parsePurchaseQuantity, purchaseUnitOptions, type PurchaseQuantity, type PurchaseUnit } from './purchaseEstimate';
 
 interface Props {
   ids: string[];
@@ -12,7 +14,7 @@ interface Props {
   region?: string;
   maxMoqRub?: number;
   onClose: () => void;
-  onOpen: (id: string, tab?: 'rfq' | 'assortment', query?: string) => void;
+  onOpen: (id: string, tab?: 'rfq' | 'assortment', query?: string, quantity?: PurchaseQuantity) => void;
   onRemove: (id: string) => void;
   onStatus: (id: string, status: SupplierStatus) => Promise<void>;
 }
@@ -35,6 +37,10 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
   const [section, setSection] = useState<'conditions' | 'assortment'>(search ? 'assortment' : 'conditions');
   const [draft, setDraft] = useState(search ?? '');
   const [productQuery, setProductQuery] = useState(search ?? '');
+  const [quantityInput, setQuantityInput] = useState('');
+  const [quantityUnit, setQuantityUnit] = useState<PurchaseUnit>('kg');
+  const quantity = parsePurchaseQuantity(quantityInput, quantityUnit);
+  const invalidQuantity = Boolean(quantityInput.trim()) && !quantity;
   const request = useMemo(() => ({ ids, region, maxMoqRub, ...(productQuery ? { search: productQuery } : {}) }), [ids, productQuery, region, maxMoqRub]);
   const [response, setResponse] = useState<{ request: typeof request; result?: CompareResponse; error?: string } | null>(null);
   const [onlyDifferences, setOnlyDifferences] = useState(false);
@@ -122,19 +128,37 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
           </button>}
         </div>
 
-        {section === 'assortment' && <div role="search" aria-label="Поиск позиций в сравнении" className="shrink-0 px-3 pt-3 sm:px-5">
-          <label className="relative block">
-            <span className="sr-only">Товар или фасовка</span>
-            <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted">
-              {!current && result ? <LoaderCircle size={15} aria-label="Обновляем позиции" role="status" className="animate-spin" /> : <Search size={15} aria-hidden="true" />}
-            </span>
-            <input type="search" value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field field-search" style={{ paddingInlineStart: '2rem' }} />
-          </label>
+        {section === 'assortment' && <div className="shrink-0 px-3 pt-3 sm:px-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
+            <div role="search" aria-label="Поиск позиций в сравнении" className="min-w-0 flex-1">
+              <label className="relative block">
+                <span className="sr-only">Товар или фасовка</span>
+                <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted">
+                  {!current && result ? <LoaderCircle size={15} aria-label="Обновляем позиции" role="status" className="animate-spin" /> : <Search size={15} aria-hidden="true" />}
+                </span>
+                <input type="search" value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field field-search min-h-9 py-1.5!" style={{ paddingInlineStart: '2rem' }} />
+              </label>
+            </div>
+            <div className="flex items-end gap-1.5 sm:shrink-0">
+              <label className="min-w-0 flex-1 sm:w-28">
+                <span className="filter-label block whitespace-nowrap">Нужный объём</span>
+                <input type="text" inputMode={quantityUnit === 'pcs' ? 'numeric' : 'decimal'} maxLength={11} value={quantityInput}
+                  onChange={event => setQuantityInput(event.target.value)} placeholder="Напр., 20" aria-invalid={invalidQuantity || undefined}
+                  aria-describedby={invalidQuantity || quantity ? 'compare-quantity-help' : undefined} className="field field-search num mt-1 min-h-9 py-1.5!" />
+              </label>
+              <div className="w-18 shrink-0">
+                <FilterSelect label="Единица объёма" hideLabel value={quantityUnit} options={purchaseUnitOptions} onChange={setQuantityUnit} />
+              </div>
+            </div>
+          </div>
+          {(invalidQuantity || quantity) && <p id="compare-quantity-help" className={`mt-1.5 text-[11px] ${invalidQuantity ? 'text-caution' : 'text-secondary'}`}>
+            {invalidQuantity ? (quantityUnit === 'pcs' ? 'Укажите от 1 до 1 000 000 штук.' : 'Укажите число от 0,001 до 1 000 000.') : 'Ориентир по цене товара без доставки. Считаем целыми упаковками.'}
+          </p>}
         </div>}
         <div key={section} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3 sm:px-5">
           {error && <div role="alert" className="mb-3 rounded-md border border-rose-100 bg-rose-50 px-3 py-2 text-xs text-rose-800">{error}</div>}
           {!current && !result && <div role="status" className="flex min-h-32 items-center justify-center gap-2 text-sm text-secondary"><LoaderCircle className="animate-spin" size={16} aria-hidden="true" /> Готовим сравнение…</div>}
-          {result && section === 'assortment' && <CompareAssortments result={result} query={displayedQuery} onOpen={(id, query) => onOpen(id, 'assortment', query)} onRemove={ids.length > 2 && !pending ? remove : undefined} />}
+          {result && section === 'assortment' && <CompareAssortments result={result} query={displayedQuery} quantity={quantity} onOpen={(id, query) => onOpen(id, 'assortment', query, quantity)} onRemove={ids.length > 2 && !pending ? remove : undefined} />}
           {result && section === 'conditions' && (
             <>
               {tied && <p className="mb-3 rounded-md border border-line bg-soft px-3 py-2 text-xs text-secondary">Несколько поставщиков набрали одинаковый максимальный балл.</p>}
@@ -148,7 +172,7 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
                     </div>
                     <p className="mt-0.5 text-xs leading-snug text-graphite-muted">{result.winnerReason}</p>
                   </div>
-                  <button type="button" onClick={() => onOpen(winner.id, 'rfq')} className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-white px-2.5 py-1.5 text-xs font-semibold text-graphite hover:bg-[#E3F5FA] focus-visible:outline-white">
+                  <button type="button" onClick={() => onOpen(winner.id, 'rfq', quantity ? displayedQuery : undefined, quantity)} className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-white px-2.5 py-1.5 text-xs font-semibold text-graphite hover:bg-[#E3F5FA] focus-visible:outline-white">
                     Перейти к КП <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </div>

@@ -701,6 +701,48 @@ describe('Каталог поставщиков', () => {
     expect(drawer.queryByText('Сливки 33%')).toBeNull();
   });
 
+  it('считает объём без фильтрации фасовок и переносит объём и регион в КП', async () => {
+    const user = userEvent.setup();
+    const pack = { id: 'paprika-25', name: 'Паприка копчёная', pack: 'Мешок 25 кг', price: { kind: 'published' as const, amount: 485, unit: 'кг' }, sourceUrl: 'https://supplier.test/paprika', checkedAt: '2026-11-24' };
+    const smallPack = { ...pack, id: 'paprika-5', pack: 'Пакет 5 кг', price: { kind: 'published' as const, amount: 3225, unit: 'уп.' } };
+    const unknown = { ...smallPack, id: 'paprika-1', pack: 'Пакет 1 кг', price: { kind: 'on_request' as const } };
+    const assortment = { catalogUrl: 'https://supplier.test/catalog', groups: ['Специи'], products: [pack, smallPack, unknown] };
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, facets: { ...list.facets, regions: ['Москва', 'Вся РФ'] } });
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment });
+    vi.mocked(client.compareSuppliers).mockResolvedValue({
+      suppliers: [first, second], winnerId: 'one', winnerReason: '', rows: [],
+      assortments: { one: { ...assortment, shown: assortment.products, total: 3, matchingTotal: 3 }, two: null },
+    });
+    render(<CatalogPage />);
+    await screen.findByText(first.name);
+    await user.click(screen.getByRole('button', { name: 'Фильтры' }));
+    await chooseFilter(user, 'Регион', 'Москва');
+    await user.click(screen.getByRole('button', { name: 'Закрыть фильтры' }));
+    await user.type(screen.getByLabelText('Поиск', { exact: true }), 'паприка');
+    await waitFor(() => expect(client.fetchSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'паприка', region: 'Москва' })));
+    for (const supplier of [first, second]) await user.click(screen.getByRole('button', { name: 'Сравнить ' + supplier.name }));
+    await user.click(screen.getByRole('button', { name: 'Сравнить (2)' }));
+    const modal = within(await screen.findByRole('dialog', { name: 'Сравнение поставщиков' }));
+    await modal.findByText('Совпадений: 3');
+    await user.type(modal.getByRole('textbox', { name: 'Нужный объём' }), '20');
+    expect(modal.getByText('1 уп. · 25 кг (с запасом)')).toBeTruthy();
+    expect(modal.getByText(/≈ 12\s125 ₽/)).toBeTruthy();
+    expect(modal.getByText('4 уп. · 20 кг')).toBeTruthy();
+    expect(modal.getByText(/≈ 12\s900 ₽/)).toBeTruthy();
+    expect(modal.getByText('Недостаточно данных для расчёта на этот объём')).toBeTruthy();
+    expect(client.compareSuppliers).toHaveBeenCalledTimes(1);
+    expect(client.compareSuppliers).toHaveBeenCalledWith(expect.objectContaining({ search: 'паприка', region: 'Москва' }));
+    await user.click(modal.getByRole('button', { name: 'Открыть ассортимент: Первый поставщик' }));
+    const drawer = within(await screen.findByRole('dialog', { name: first.name }));
+    const offerRow = (await drawer.findByText('Пакет 5 кг')).closest('tr')!;
+    await user.click(within(offerRow).getByRole('button', { name: 'В запрос КП: Паприка копчёная' }));
+    const mail = new URL(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href')!).searchParams.get('body');
+    expect(mail).toContain('Нужный объём закупки: 20 кг.');
+    expect(mail).toContain('Регион доставки: Москва. Укажите, пожалуйста, стоимость и срок доставки.');
+    expect(mail).toContain('Паприка копчёная — Пакет 5 кг');
+    expect(mail).not.toContain('Мешок 25 кг');
+  });
+
   it('обновляет сравнение при удалении колонки, скрывает одинаковые условия и открывает КП лидера', async () => {
     const user = userEvent.setup();
     const third = { ...fixture('three', 'Третий поставщик'), pricingNote: 'За штуку', scoring: { ...first.scoring, total: 50 } };

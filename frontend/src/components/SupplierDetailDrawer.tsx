@@ -6,6 +6,7 @@ import { updateSupplierWorkspace } from '../api/client';
 import { ExternalLink, FactList, getVerdictStyle, InlineStatusSelect, readableError, Regions, ScoreBadge } from './ui';
 import { useDialog } from './useDialog';
 import { describeProduct, SupplierAssortmentPanel } from './SupplierAssortmentPanel';
+import { formatPurchaseQuantity, type PurchaseQuantity } from './purchaseEstimate';
 
 export type DrawerTab = 'overview' | 'assortment' | 'workspace' | 'rfq';
 
@@ -37,6 +38,8 @@ interface Props {
   loadError: string;
   initialTab?: DrawerTab;
   assortmentSearch?: string;
+  purchaseQuantity?: PurchaseQuantity;
+  deliveryRegion?: string;
   matchedProductIds?: string[];
   navigation?: {
     position: number;
@@ -134,7 +137,7 @@ function sourceLabel(value: string): string {
   }
 }
 
-export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', assortmentSearch = '', matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
+export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', assortmentSearch = '', purchaseQuantity, deliveryRegion, matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
   const s = detail ?? preview;
   const [tab, setTab] = useState<DrawerTab>(initialTab);
   const [expanded, setExpanded] = useState(false);
@@ -223,13 +226,20 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
 
   const rfq = detail?.rfqTemplate;
   const rfqProducts = detail?.assortment?.products.filter(product => rfqProductIds.includes(product.id)) ?? [];
-  const rfqBody = rfq ? (rfqProducts.length ? (() => {
-    const details = 'Пожалуйста, сообщите наличие, оптовую цену и минимальный объём по следующим позициям:\n'
-      + rfqProducts.map(product => '• ' + describeProduct(product)).join('\n');
-    const signature = rfq.body.lastIndexOf('\n\nС уважением,');
-    return signature === -1 ? rfq.body + '\n\n' + details
-      : rfq.body.slice(0, signature) + '\n\n' + details + rfq.body.slice(signature);
-  })() : rfq.body) : null;
+  const destination = deliveryRegion && !['Вся РФ', 'Отдельные регионы РФ'].includes(deliveryRegion) ? deliveryRegion : undefined;
+  const orderContext = [
+    purchaseQuantity && !rfqProducts.length && assortmentSearch ? `Интересующая позиция: ${assortmentSearch}.` : '',
+    purchaseQuantity ? `Нужный объём закупки: ${formatPurchaseQuantity(purchaseQuantity)}.` : '',
+    destination ? `Регион доставки: ${destination}. Укажите, пожалуйста, стоимость и срок доставки.` : '',
+  ].filter(Boolean).join('\n');
+  const productRequest = rfqProducts.length
+    ? 'Пожалуйста, сообщите наличие, оптовую цену и минимальный объём по следующим позициям:\n'
+      + rfqProducts.map(product => '• ' + describeProduct(product)).join('\n')
+    : '';
+  const requestDetails = [orderContext, productRequest].filter(Boolean).join('\n\n');
+  const signature = rfq?.body.lastIndexOf('\n\nС уважением,') ?? -1;
+  const rfqBody = !rfq ? null : !requestDetails ? rfq.body : signature === -1 ? `${rfq.body}\n\n${requestDetails}`
+    : `${rfq.body.slice(0, signature)}\n\n${requestDetails}${rfq.body.slice(signature)}`;
   const verdictStyle = s ? getVerdictStyle(s.scoring.verdict) : null;
   const limitations = s ? [...new Map([...s.cons, ...s.scoring.clarifications].map(item =>
     [item.trim().toLocaleLowerCase('ru-RU').replace(/[.!?]+$/u, ''), item],

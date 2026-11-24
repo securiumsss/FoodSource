@@ -2,11 +2,14 @@ import type { CSSProperties } from 'react';
 import type { CompareResponse, SupplierProduct, SupplierWithEvaluation } from '@food-suppliers/shared';
 import { ArrowUpRight, X } from 'lucide-react';
 import { ExternalLink } from './ui';
+import { estimatePurchase, formatEstimateCost, formatPurchaseQuantity, unmetMinimum, type PurchaseQuantity } from './purchaseEstimate';
 
 const number = new Intl.NumberFormat('ru-RU');
 
-function ProductRow({ product }: { product: SupplierProduct }) {
+function ProductRow({ product, quantity, moq }: { product: SupplierProduct; quantity?: PurchaseQuantity; moq: SupplierWithEvaluation['moq'] }) {
   const { price } = product;
+  const estimate = quantity && estimatePurchase(product, quantity);
+  const minimum = estimate && unmetMinimum(moq, estimate);
   return (
     <li className="grid gap-x-3 gap-y-1 px-3.5 py-2.5 min-[360px]:grid-cols-[minmax(0,1fr)_auto]">
       <div className="min-w-0">
@@ -24,13 +27,21 @@ function ProductRow({ product }: { product: SupplierProduct }) {
         {product.availabilityNote && <p className="text-caution">{product.availabilityNote}</p>}
         {product.priceNote && <p className="text-secondary">{product.priceNote}</p>}
       </div>}
+      {quantity && (estimate ? (
+        <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 rounded border border-brand-line bg-brand-soft px-2 py-1.5 text-[11px] min-[360px]:col-span-2">
+          <span className="text-secondary">{number.format(estimate.packs)} уп. · {formatPurchaseQuantity(estimate.purchased)}{estimate.surplus && ' (с запасом)'}</span>
+          <span className="num whitespace-nowrap font-semibold text-brand-ink-strong">≈ {formatEstimateCost(estimate.cost)}</span>
+          {minimum && <span className="basis-full text-caution">Ниже минимума поставщика: от {minimum}</span>}
+        </div>
+      ) : <p className="mt-1 text-[11px] text-secondary min-[360px]:col-span-2">Недостаточно данных для расчёта на этот объём</p>)}
     </li>
   );
 }
 
-export function CompareAssortments({ result, query, onOpen, onRemove }: {
+export function CompareAssortments({ result, query, quantity, onOpen, onRemove }: {
   result: CompareResponse;
   query: string;
+  quantity?: PurchaseQuantity;
   onOpen: (id: string, query: string) => void;
   onRemove?: (id: string) => void;
 }) {
@@ -59,7 +70,7 @@ export function CompareAssortments({ result, query, onOpen, onRemove }: {
                   </ul>}
                 </header>
                 {catalog?.shown.length ? <ul className="divide-y divide-separator sm:row-span-[var(--product-rows)] sm:grid sm:grid-rows-subgrid">
-                  {catalog.shown.map(product => <ProductRow key={product.id} product={product} />)}
+                  {catalog.shown.map(product => <ProductRow key={product.id} product={product} quantity={quantity} moq={supplier.moq} />)}
                 </ul> : <p className="px-3.5 py-4 leading-relaxed text-secondary sm:row-span-[var(--product-rows)]">
                   {!catalog || !catalog.total ? 'Позиции этого поставщика пока не собраны.' : 'В собранных позициях совпадений нет. Это не означает, что товара нет у поставщика.'}
                 </p>}

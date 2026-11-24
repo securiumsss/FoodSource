@@ -8,14 +8,15 @@ interface Props<Value extends string> {
   options: readonly { value: Value; label: string }[];
   onChange: (value: Value) => void;
   compactSuffix?: string;
+  hideLabel?: boolean;
 }
 
-export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix }: Props<Value>) {
+export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix, hideLabel }: Props<Value>) {
   const id = useId();
 
   return (
     <div className="min-w-0">
-      <label id={id + '-label'} htmlFor={id} className={compactSuffix ? 'sr-only' : 'filter-label block'}>{label}</label>
+      <label id={id + '-label'} htmlFor={id} className={compactSuffix || hideLabel ? 'sr-only' : 'filter-label block'}>{label}</label>
       <Select.Root value={value} onValueChange={next => {
         const option = options.find(item => item.value === next);
         if (option) onChange(option.value);
