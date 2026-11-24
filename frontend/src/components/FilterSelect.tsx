@@ -9,9 +9,10 @@ interface Props<Value extends string> {
   onChange: (value: Value) => void;
   compactSuffix?: string;
   hideLabel?: boolean;
+  inDialog?: boolean;
 }
 
-export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix, hideLabel }: Props<Value>) {
+export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix, hideLabel, inDialog }: Props<Value>) {
   const id = useId();
 
   return (
@@ -39,7 +40,7 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
             side={compactSuffix ? 'top' : 'bottom'}
             sideOffset={4}
             collisionPadding={12}
-            className={`flex max-h-[min(17rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] flex-col overflow-hidden rounded-lg border border-line bg-white text-[13px] text-ink shadow-lg ${compactSuffix ? 'z-[60] min-w-20' : 'z-[45]'}`}
+            className={`flex max-h-[min(17rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] flex-col overflow-hidden rounded-lg border border-line bg-white text-[13px] text-ink shadow-lg ${compactSuffix || inDialog ? 'z-[60]' : 'z-[45]'} ${compactSuffix ? 'min-w-20' : ''}`}
           >
             <Select.ScrollUpButton className="flex h-6 shrink-0 items-center justify-center text-muted"><ChevronUp size={14} /></Select.ScrollUpButton>
             <Select.Viewport className="min-h-0 p-1">

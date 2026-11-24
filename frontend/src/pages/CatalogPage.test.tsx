@@ -77,8 +77,37 @@ describe('Каталог поставщиков', () => {
     expect(paging.getByText('1–10 из 21')).toBeTruthy();
     await user.click(paging.getByRole('button', { name: 'Последняя страница' }));
     expect(paging.getByText('21–21 из 21')).toBeTruthy();
+    await user.click(screen.getByRole('button', { name: 'Очистить сравнение' }));
     await user.type(screen.getByLabelText('Поиск'), 'овощи');
     await waitFor(() => expect(paging.getByText('1–10 из 21')).toBeTruthy());
+  });
+
+  it('заменяет поиск панелью сравнения и возвращает поисковый запрос с фильтрами', async () => {
+    const user = userEvent.setup();
+    render(<CatalogPage />);
+    await screen.findByText(first.name);
+    const table = screen.getByRole('region', { name: 'Таблица поставщиков' });
+    await user.type(screen.getByLabelText('Поиск'), 'овощи');
+    await user.click(screen.getByRole('button', { name: 'Фильтры' }));
+    await chooseFilter(user, 'Регион', 'Вся РФ');
+    await user.click(screen.getByRole('button', { name: 'Закрыть фильтры' }));
+    await waitFor(() => expect(client.fetchSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'овощи', region: 'Вся РФ' })));
+
+    await user.click(within(table).getByRole('button', { name: `Сравнить ${first.name}` }));
+    const bar = screen.getByRole('region', { name: 'Панель сравнения' });
+    expect(bar.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByLabelText('Поиск')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Фильтры' })).toBeNull();
+    expect(within(bar).getByRole<HTMLButtonElement>('button', { name: 'Сравнить (1)' }).disabled).toBe(true);
+    await user.click(within(table).getByRole('button', { name: `Сравнить ${second.name}` }));
+    expect(within(bar).getByRole<HTMLButtonElement>('button', { name: 'Сравнить (2)' }).disabled).toBe(false);
+    await user.click(within(bar).getByRole('button', { name: `Удалить из выбранных: ${first.name}` }));
+    expect(within(table).getByRole('button', { name: `Сравнить ${first.name}` })).toBeTruthy();
+    await user.click(within(bar).getByRole('button', { name: 'Очистить сравнение' }));
+
+    expect(screen.queryByRole('region', { name: 'Панель сравнения' })).toBeNull();
+    expect(screen.getByLabelText<HTMLInputElement>('Поиск').value).toBe('овощи');
+    expect(screen.getByLabelText('Активных фильтров: 1')).toBeTruthy();
   });
 
   it('показывает обзор сразу и использует уже начатую фоновую загрузку', async () => {

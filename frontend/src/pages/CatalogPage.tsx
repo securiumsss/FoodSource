@@ -143,7 +143,12 @@ export function CatalogPage() {
     <main className="flex min-h-0 min-w-0 flex-1 flex-col pt-5">
       <h1 className="sr-only">{sectionTitle}</h1>
       <div className={'shrink-0 ' + tableGutters}>
-        <CatalogToolbar
+        {selected.length > 0 ? <CompareBar
+          selected={selected}
+          onRemove={id => setSelected(current => current.filter(s => s.id !== id))}
+          onClear={() => setSelected([])}
+          onCompare={() => setCompareIds(selected.map(s => s.id))}
+        /> : <CatalogToolbar
           filters={filters}
           facets={catalog?.facets ?? null}
           search={search}
@@ -151,7 +156,7 @@ export function CatalogPage() {
           onClearSearch={clearSearch}
           onChange={changeFilters}
           onReset={reset}
-        />
+        />}
       </div>
       <section aria-label="Результаты поиска" className="flex min-h-0 flex-1 flex-col">
         {error && (
@@ -190,10 +195,8 @@ export function CatalogPage() {
           onPageChange={setPage}
           onSizeChange={next => { setPageSize(next); setPage(0); }}
         />}
-        {selected.length >= 4 && <p role="status" className={`mt-3 shrink-0 text-xs text-brand-ink ${tableGutters}`}>Выбраны 4 поставщика — это максимум для сравнения. Уберите одного, чтобы добавить другого.</p>}
       </section>
     </main>
-    <CompareBar selected={selected} onRemove={id => setSelected(current => current.filter(s => s.id !== id))} onClear={() => setSelected([])} onCompare={() => setCompareIds(selected.map(s => s.id))} />
     {detailId && (
       <SupplierDetailDrawer
         ref={drawerRef}

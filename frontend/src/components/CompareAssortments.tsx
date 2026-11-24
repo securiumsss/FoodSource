@@ -56,8 +56,8 @@ export function CompareAssortments({ result, query, quantity, onOpen, onRemove }
           {pair.map(supplier => {
             const catalog = result.assortments[supplier.id];
             return (
-              <article key={supplier.id} aria-label={`Ассортимент: ${supplier.name}`} className="min-w-0 overflow-hidden rounded-lg border border-line bg-white text-xs sm:row-span-[var(--catalog-rows)] sm:grid sm:grid-rows-subgrid">
-                <header className="space-y-2 border-b border-line bg-soft px-3.5 py-3">
+              <article key={supplier.id} aria-label={`Ассортимент: ${supplier.name}`} className="min-w-0 rounded-lg border border-line bg-white text-xs sm:row-span-[var(--catalog-rows)] sm:grid sm:grid-rows-subgrid">
+                <header className="sticky top-0 z-10 space-y-2 rounded-t-[7px] border-b border-line bg-soft px-3.5 py-3">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <h3 className="break-words text-sm font-semibold text-ink">{supplier.name}</h3>
                     <div className="flex items-center gap-2">
