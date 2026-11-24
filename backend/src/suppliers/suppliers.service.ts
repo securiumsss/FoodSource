@@ -4,6 +4,7 @@ import type {
   CompareRequestDto, CompareResponse, ComparisonRow, SupplierCategory, SupplierDetailResponse,
   SupplierStatus, SuppliersListResponse, SuppliersQueryParams, SupplierWithEvaluation, WorkspaceUpdateDto,
 } from '@food-suppliers/shared';
+import { findProducts, getAssortment, productPrice } from './assortment';
 import { ScoringService } from '../scoring/scoring.service';
 import { StorageService, type StoredSupplier } from '../storage/storage.service';
 
@@ -36,6 +37,7 @@ export class SuppliersService {
     for (const { workspace } of all) statusCounts[workspace.status]++;
     const needle = query.search?.trim().toLocaleLowerCase('ru');
 
+    const matchesBySupplier = new Map<string, NonNullable<SupplierWithEvaluation['matchedProducts']>>();
     const filtered = all.filter(({ supplier: s, workspace }) => {
       if (query.category !== undefined && s.category !== query.category) return false;
       if (query.region !== undefined && !getDeliveryCoverage(s.regions, query.region)) return false;
@@ -51,14 +53,20 @@ export class SuppliersService {
       }
       if (needle) {
         const haystack = [s.name, s.description, s.city, s.categoryLabel, s.priceEstimate.label, s.delivery.terms,
-          ...s.documents, ...s.complianceSystems, ...s.pros, ...s.cons, workspace.notes]
+          ...s.documents, ...s.complianceSystems, ...s.pros, ...s.cons, ...(getAssortment(s.id)?.groups ?? []), workspace.notes]
           .join('\n').toLocaleLowerCase('ru');
-        if (!haystack.includes(needle)) return false;
+        const matches = findProducts(s.id, needle);
+        if (!matches.length && !haystack.includes(needle)) return false;
+        if (matches.length) matchesBySupplier.set(s.id, matches.slice(0, 3).map(({ id, name, pack }) => ({ id, name, pack })));
       }
       return true;
     });
 
-    const items = filtered.map(row => this.evaluate(row, query));
+    const items = filtered.map(row => {
+      const evaluated = this.evaluate(row, query);
+      const matchedProducts = matchesBySupplier.get(evaluated.id);
+      return matchedProducts ? { ...evaluated, matchedProducts } : evaluated;
+    });
     items.sort((a, b) => {
       switch (query.sortBy ?? 'score') {
         case 'name_asc': return compareNames(a, b);
@@ -82,7 +90,7 @@ export class SuppliersService {
     const row = await this.storage.findWithWorkspace(id);
     if (!row) throw new NotFoundException(`Supplier ${id} not found`);
     const evaluated = this.evaluate(row, context);
-    return { ...evaluated, rfqTemplate: this.scoring.buildRfqTemplate(row.supplier, evaluated.scoring, context) };
+    return { ...evaluated, assortment: getAssortment(id), rfqTemplate: this.scoring.buildRfqTemplate(row.supplier, evaluated.scoring, context) };
   }
 
   async updateWorkspace(id: string, update: WorkspaceUpdateDto): Promise<SupplierDetailResponse> {
@@ -92,7 +100,7 @@ export class SuppliersService {
     const row = await this.storage.updateWorkspace(id, update);
     if (!row) throw new NotFoundException(`Supplier ${id} not found`);
     const evaluated = this.evaluate(row, {});
-    return { ...evaluated, rfqTemplate: this.scoring.buildRfqTemplate(row.supplier, evaluated.scoring) };
+    return { ...evaluated, assortment: getAssortment(id), rfqTemplate: this.scoring.buildRfqTemplate(row.supplier, evaluated.scoring) };
   }
 
   async compare(request: CompareRequestDto): Promise<CompareResponse> {
@@ -120,11 +128,17 @@ export class SuppliersService {
     };
     const knownMoq = suppliers.map(rubMoq).filter((value): value is number => value !== null);
     const minMoq = knownMoq.length >= 2 ? Math.min(...knownMoq) : null;
+    const productsBySupplier = new Map(suppliers.map(s => [s.id, findProducts(s.id, request.search)]));
     const rows: ComparisonRow[] = [
       makeRow('score', 'Итоговый скоринг', s => `${s.scoring.total} / 100`, winners.map(s => s.id)),
       makeRow('regions', 'Регионы доставки', s => s.regions.join(', ') || 'Не указаны'),
       makeRow('moq', 'Минимальный заказ (MOQ)', s => s.moq.label, minMoq === null ? [] : suppliers.filter(s => rubMoq(s) === minMoq).map(s => s.id)),
-      makeRow('price', 'Ориентир цены', s => s.priceEstimate.label),
+      ...([...productsBySupplier.values()].some(items => items.length) ? [
+        makeRow('matchedProducts', 'Позиции по запросу', s => productsBySupplier.get(s.id)?.slice(0, 3).map(product =>
+          [product.name, product.pack, productPrice(product), product.availabilityNote].filter(Boolean).join(' · '),
+        ).join('\n') || 'Нет совпадений в собранных позициях'),
+      ] : []),
+      makeRow('price', 'Пример цены', s => s.priceEstimate.label),
       makeRow('delivery', 'Доставка и сроки', s => [`Своя доставка: ${s.delivery.hasOwnDelivery === true ? 'да' : s.delivery.hasOwnDelivery === false ? 'нет' : 'не указано'}.`, s.delivery.terms, s.delivery.leadTime ? `Срок: ${s.delivery.leadTime}` : 'Срок не указан'].join(' '), suppliers.filter(s => s.delivery.hasOwnDelivery === true).map(s => s.id)),
       ...(suppliers.some(s => requiresTemperatureControl(s.category)) ? [
         makeRow('temperature', 'Температурный режим', s => !requiresTemperatureControl(s.category) ? 'Не применяется' : s.delivery.temperatureControlled === true ? 'Подтверждён' : s.delivery.temperatureControlled === false ? 'Не предусмотрен' : 'Не подтверждён', suppliers.filter(s => requiresTemperatureControl(s.category) && s.delivery.temperatureControlled === true).map(s => s.id)),

@@ -5,8 +5,9 @@ import { ArrowDown, ArrowUp, Check, Clipboard, GitCompareArrows, LoaderCircle, M
 import { updateSupplierWorkspace } from '../api/client';
 import { ExternalLink, FactList, getVerdictStyle, InlineStatusSelect, readableError, Regions, ScoreBadge } from './ui';
 import { useDialog } from './useDialog';
+import { describeProduct, SupplierAssortmentPanel } from './SupplierAssortmentPanel';
 
-type DrawerTab = 'overview' | 'workspace' | 'rfq';
+export type DrawerTab = 'overview' | 'assortment' | 'workspace' | 'rfq';
 
 export interface SupplierDrawerHandle {
   canSwitchSupplier: () => boolean;
@@ -35,6 +36,7 @@ interface Props {
   loadError: string;
   initialTab?: DrawerTab;
   supplierName?: string;
+  matchedProductIds?: string[];
   navigation?: {
     position: number;
     total: number;
@@ -77,8 +79,9 @@ function sourceLabel(value: string): string {
   }
 }
 
-export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialTab = 'overview', supplierName, navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
+export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialTab = 'overview', supplierName, matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
   const [tab, setTab] = useState<DrawerTab>(initialTab);
+  const [rfqProductIds, setRfqProductIds] = useState<string[]>([]);
   const [draft, setDraft] = useState<{ id: string; notes: string } | null>(null);
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
@@ -94,7 +97,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
     setTab(initialTab);
   }, [id, initialTab]);
 
-  useEffect(() => { setError(''); setDraft(null); }, [id]);
+  useEffect(() => { setError(''); setDraft(null); setRfqProductIds([]); }, [id]);
 
   const dialogRef = useDialog<HTMLElement>(onClose, returnFocusRef, !docked);
   useEffect(() => {
@@ -159,6 +162,14 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
     navigate(event.key === 'ArrowUp' ? 'previous' : 'next');
   }
 
+  const rfqProducts = s?.assortment?.products.filter(product => rfqProductIds.includes(product.id)) ?? [];
+  const rfqBody = s && (rfqProducts.length ? (() => {
+    const details = 'Пожалуйста, сообщите наличие, оптовую цену и минимальный объём по следующим позициям:\n'
+      + rfqProducts.map(product => '• ' + describeProduct(product)).join('\n');
+    const signature = s.rfqTemplate.body.lastIndexOf('\n\nС уважением,');
+    return signature === -1 ? s.rfqTemplate.body + '\n\n' + details
+      : s.rfqTemplate.body.slice(0, signature) + '\n\n' + details + s.rfqTemplate.body.slice(signature);
+  })() : s.rfqTemplate.body);
   const verdictStyle = s ? getVerdictStyle(s.scoring.verdict) : null;
   const limitations = s ? [...new Map([...s.cons, ...s.scoring.clarifications].map(item =>
     [item.trim().toLocaleLowerCase('ru-RU').replace(/[.!?]+$/u, ''), item],
@@ -226,10 +237,11 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
           {navigation && hasDraft && <p className="mb-2 text-[11px] text-secondary">Сохраните или отмените изменения, чтобы перейти к другой записи.</p>}
 
           {s && (
-            <div role="tablist" aria-label="Разделы карточки поставщика" className="mt-4 flex gap-5">
+            <div role="tablist" aria-label="Разделы карточки поставщика" className="mt-4 flex flex-wrap gap-x-3 gap-y-1 sm:gap-x-5">
               {(
                 [
                   { id: 'overview', label: 'Обзор и скоринг' },
+                  { id: 'assortment', label: 'Ассортимент' },
                   { id: 'workspace', label: 'Заметки', dot: Boolean(s.workspace.notes.trim()) },
                   { id: 'rfq', label: 'Запрос КП', count: s.rfqTemplate.checklist.length },
                 ] as Array<{ id: DrawerTab; label: string; dot?: boolean; count?: number }>
@@ -285,7 +297,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
                   <h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Условия и доставка</h3>
                   <dl className="mt-3 grid grid-cols-2 gap-3">
                     <div><dt className="fact-label">Минимальный заказ</dt><dd className="fact-value">{s.moq.label}</dd></div>
-                    <div><dt className="fact-label">Ориентир цены</dt><dd className="fact-value">{s.priceEstimate.label}</dd></div>
+                    <div><dt className="fact-label">Пример цены</dt><dd className="fact-value">{s.priceEstimate.label}</dd></div>
                     <div><dt className="fact-label">Срок доставки</dt><dd className="fact-value">{s.delivery.leadTime ?? 'По запросу'}</dd></div>
                     <div><dt className="fact-label">Своя доставка</dt><dd className="fact-value">{s.delivery.hasOwnDelivery === null ? 'Не подтверждена' : s.delivery.hasOwnDelivery ? 'Да' : 'Нет'}</dd></div>
                     {requiresTemperatureControl(s.category) && <div><dt className="fact-label">Температурный режим</dt><dd className="fact-value">{s.delivery.temperatureControlled === null ? 'Не подтверждён' : s.delivery.temperatureControlled ? 'Подтверждён' : 'Нет'}</dd></div>}
@@ -334,6 +346,12 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
             </div>
           )}
 
+          {s && tab === 'assortment' && <SupplierAssortmentPanel supplier={s} matches={matchedProductIds} onRequest={productId => {
+            setRfqProductIds(current => current.includes(productId) ? current : [...current, productId]);
+            setCopiedKey(null);
+            setTab('rfq');
+          }} />}
+
           {s && tab === 'workspace' && (
             <div className="space-y-5">
               <div><label htmlFor="workspace-notes" className="filter-label">Заметки менеджера</label><textarea id="workspace-notes" className="field mt-2 min-h-36 resize-y" maxLength={2000} disabled={saving} value={notes} onChange={event => { setDraft(event.target.value === s.workspace.notes ? null : { id, notes: event.target.value }); setSaved(false); }} placeholder="Договорённости, вопросы и следующие шаги" /><p className="mt-1 text-right text-[11px] text-muted">{notes.length} / 2000</p></div>
@@ -341,11 +359,18 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
             </div>
           )}
 
-          {s && tab === 'rfq' && (
+          {s && rfqBody !== null && tab === 'rfq' && (
             <div className="space-y-5">
               <div><h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Что спросить перед заказом</h3><div className="mt-3"><FactList items={s.rfqTemplate.checklist} kind="clarify" /></div></div>
-              <div className="rounded-md border border-line bg-soft p-4"><p className="fact-label">Тема</p><p className="mt-1 text-xs font-medium">{s.rfqTemplate.subject}</p><p className="fact-label mt-4">Текст письма</p><p className="mt-1 whitespace-pre-wrap text-xs leading-relaxed text-secondary">{s.rfqTemplate.body}</p></div>
-              <div className="flex flex-wrap gap-2"><button type="button" className="btn-primary" onClick={() => void copyText('rfq', `Тема: ${s.rfqTemplate.subject}\n\n${s.rfqTemplate.body}`)}>{copiedKey === 'rfq' ? <Check size={14} /> : <Clipboard size={14} />}{copiedKey === 'rfq' ? 'Скопировано' : 'Скопировать текст КП'}</button>{s.contacts.email && <a className="btn-secondary" href={`mailto:${s.contacts.email}?subject=${encodeURIComponent(s.rfqTemplate.subject)}&body=${encodeURIComponent(s.rfqTemplate.body)}`}><Mail size={14} />Написать письмо</a>}</div>
+              {rfqProducts.length > 0 && <section aria-label="Позиции в запросе" className="space-y-2">
+                <h3 className="text-xs font-semibold text-ink">Позиции в запросе</h3>
+                <ul className="space-y-1">{rfqProducts.map(product => <li key={product.id} className="flex items-center justify-between gap-2 rounded-md border border-line px-2.5 py-1 text-xs text-secondary">
+                  <span>{describeProduct(product)}</span>
+                  <button type="button" aria-label={`Убрать из запроса: ${product.name}`} className="grid size-7 shrink-0 place-items-center rounded hover:bg-separator" onClick={() => { setRfqProductIds(current => current.filter(id => id !== product.id)); setCopiedKey(null); }}><X size={14} aria-hidden="true" /></button>
+                </li>)}</ul>
+              </section>}
+              <div className="rounded-md border border-line bg-soft p-4"><p className="fact-label">Тема</p><p className="mt-1 text-xs font-medium">{s.rfqTemplate.subject}</p><p className="fact-label mt-4">Текст письма</p><p className="mt-1 whitespace-pre-wrap text-xs leading-relaxed text-secondary">{rfqBody}</p></div>
+              <div className="flex flex-wrap gap-2"><button type="button" className="btn-primary" onClick={() => void copyText('rfq', `Тема: ${s.rfqTemplate.subject}\n\n${rfqBody}`)}>{copiedKey === 'rfq' ? <Check size={14} /> : <Clipboard size={14} />}{copiedKey === 'rfq' ? 'Скопировано' : 'Скопировать текст КП'}</button>{s.contacts.email && <a className="btn-secondary" href={`mailto:${s.contacts.email}?subject=${encodeURIComponent(s.rfqTemplate.subject)}&body=${encodeURIComponent(rfqBody)}`}><Mail size={14} />Написать письмо</a>}</div>
             </div>
           )}
         </div>

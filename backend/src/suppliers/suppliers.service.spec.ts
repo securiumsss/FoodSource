@@ -78,6 +78,27 @@ describe('SuppliersService', () => {
     expect(ids((await catalog.findAll({ region: 'Москва и МО' })).items)).toEqual(['area', 'federal']);
   });
 
+  it('finds catalog positions with reordered words and keeps product prices distinct in comparison', async () => {
+    const sample = ['sup-dairy-01', 'sup-dairy-03'].map(id => fixture(id, { category: 'dairy', regions: ['Москва и МО'] }));
+    const store = {
+      listWithWorkspace: () => sample,
+      findWithWorkspace: (id: string) => sample.find(row => row.supplier.id === id),
+    } as unknown as StorageService;
+    const catalog = new SuppliersService(store, new ScoringService());
+    const result = await catalog.findAll({ region: 'Москва и МО', search: '33 % СЛИВКИ 1 л' });
+    expect(ids(result.items)).toEqual(['sup-dairy-01', 'sup-dairy-03']);
+    expect(result.items.find(item => item.id === 'sup-dairy-01')?.matchedProducts).toEqual([
+      { id: 'amanda-33-1l', name: 'Сливки ультрапастеризованные Amanda 33%', pack: '1 л' },
+    ]);
+    expect((await catalog.findAll({ search: 'сливки 133%' })).total).toBe(0);
+    expect((await catalog.findOne('sup-dairy-01')).assortment?.products[0]).toMatchObject({ price: { amount: 430 }, availabilityNote: expect.stringContaining('нет в наличии') });
+    const compared = await catalog.compare(parseCompare({ ids: ['sup-dairy-01', 'sup-dairy-03'], search: 'сливки 33%' }));
+    const row = compared.rows.find(item => item.key === 'matchedProducts');
+    expect(row?.values['sup-dairy-03']).toContain('Цена по запросу');
+    expect(row?.values['sup-dairy-01']).toContain('нет в наличии');
+    expect(row?.bestSupplierIds).toEqual([]);
+  });
+
   it('compares scores, known RUB MOQ, documents and confirmed logistics', async () => {
     const result = await service.compare({ ids: ['b', 'a'], region: 'Санкт-Петербург и ЛО', maxMoqRub: 5000 });
     expect(result.winnerId).toBe('a');

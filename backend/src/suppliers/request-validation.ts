@@ -58,9 +58,10 @@ export function parseQuery(value: unknown, contextOnly = false): SuppliersQueryP
 
 export function parseCompare(value: unknown): CompareRequestDto {
   const input = object(value, 'Body');
-  keys(input, ['ids', 'region', 'maxMoqRub']);
+  keys(input, ['ids', 'region', 'maxMoqRub', 'search']);
   if (!Array.isArray(input.ids) || input.ids.some(id => typeof id !== 'string' || !id.trim() || id !== id.trim())) throw new BadRequestException('ids must be an array of non-empty IDs');
   const result: CompareRequestDto = { ids: input.ids as string[] };
+  if (input.search !== undefined) result.search = text(input.search, 'search');
   if (input.region !== undefined) result.region = text(input.region, 'region');
   if (input.maxMoqRub !== undefined) result.maxMoqRub = number(input.maxMoqRub, 'maxMoqRub', false);
   return result;

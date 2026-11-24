@@ -1,9 +1,15 @@
 import { requiresTemperatureControl } from '@food-suppliers/shared';
-import type { SupplierStatus, SupplierWithEvaluation } from '@food-suppliers/shared';
-import { useLayoutEffect, useRef, type ReactNode, type RefObject } from 'react';
-import { Check, GitCompareArrows, Snowflake, Truck } from 'lucide-react';
+import type { SupplierCategory, SupplierStatus, SupplierWithEvaluation } from '@food-suppliers/shared';
+import { useId, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { ArrowLeft, ArrowRight, Check, GitCompareArrows, Snowflake, Truck } from 'lucide-react';
 import { getVerdictStyle, InlineStatusSelect, StatusBadge } from './ui';
 
+const shortCategory: Record<SupplierCategory, string> = {
+  packaging: 'Упаковка',
+  spices: 'Специи',
+  dairy: 'Молочная',
+  frozen: 'Заморозка',
+};
 const numberFormat = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 20 });
 const moqUnits = { RUB: '₽', KG: 'кг', BOX: 'кор.', PCS: 'шт.' };
 
@@ -42,7 +48,7 @@ interface Props {
   atLimit: boolean;
   savingId: string;
   dimmed: boolean;
-  onOpen: (id: string) => void;
+  onOpen: (id: string, tab?: 'assortment') => void;
   onCompare: (supplier: SupplierWithEvaluation) => void;
   onStatusChange: (id: string, status: SupplierStatus) => void;
 }
@@ -62,6 +68,8 @@ export function SupplierTable({
 }: Props) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLTableSectionElement>(null);
+  const viewportId = useId();
+  const [scrolledRight, setScrolledRight] = useState(false);
 
   useLayoutEffect(() => {
     if (!activeId) return;
@@ -80,16 +88,27 @@ export function SupplierTable({
 
   return (
     <div className={`flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border-y border-line bg-white transition-opacity ${dimmed ? 'opacity-60' : ''}`}>
-      <div ref={viewportRef} className="@container min-h-0 flex-1 overflow-auto overscroll-contain" role="region" aria-label="Таблица поставщиков" tabIndex={0}>
-        <table className="w-full md:min-w-[960px] table-fixed border-collapse text-left">
+      {suppliers.length > 0 && <button
+        type="button"
+        aria-controls={viewportId}
+        className="flex min-h-7 shrink-0 items-center justify-end gap-1.5 border-b border-separator bg-white px-3 text-[11px] font-medium text-brand-ink md:hidden"
+        onClick={() => { const viewport = viewportRef.current; if (viewport) viewport.scrollLeft = scrolledRight ? 0 : viewport.scrollWidth; }}
+      >
+        {scrolledRight && <ArrowLeft size={13} aria-hidden="true" />}
+        {scrolledRight ? 'К началу таблицы' : 'Ещё столбцы'}
+        {!scrolledRight && <ArrowRight size={13} aria-hidden="true" />}
+      </button>}
+      <div id={viewportId} ref={viewportRef} className="@container min-h-0 flex-1 overflow-auto overscroll-contain" role="region" aria-label="Таблица поставщиков" tabIndex={0} onScroll={event => setScrolledRight(event.currentTarget.scrollLeft > 8)}>
+        {/* On mobile the first three columns occupy one viewport; the remaining columns scroll into view. */}
+        <table className="w-full table-fixed border-collapse text-left max-md:w-[calc(100cqw+568px)] md:min-w-[960px]">
           <colgroup>
             <col className="w-10 md:w-[44px]" />
-            <col />
-            <col className="w-[37%] md:w-[clamp(205px,22%,340px)]" />
-            <col className="hidden w-[16%] md:table-column" />
-            <col className="hidden w-[13%] md:table-column" />
-            <col className="hidden w-[118px] md:table-column" />
-            <col className="hidden w-[152px] md:table-column" />
+            <col className="max-md:w-[calc(62cqw-40px)]" />
+            <col className="w-[38cqw] md:w-[clamp(205px,22%,340px)]" />
+            <col className="w-[166px] md:w-[16%]" />
+            <col className="w-[134px] md:w-[13%]" />
+            <col className="w-[118px]" />
+            <col className="w-[150px] md:w-[152px]" />
           </colgroup>
           <thead ref={headerRef} className="sticky top-0 z-10 bg-soft shadow-[inset_0_-1px_0_var(--color-line)]">
             <tr className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">
@@ -98,11 +117,11 @@ export function SupplierTable({
                 <GitCompareArrows size={14} aria-hidden="true" className="mx-auto" />
               </th>
               <th scope="col" className="px-3 py-2.5">Поставщик</th>
-              <th scope="col" className="px-2 py-2.5 md:px-3"><span className="md:hidden">Мин. заказ / цена</span><span className="hidden md:inline">MOQ / Ориентир цены</span></th>
-              <th scope="col" className="hidden px-3 py-2.5 md:table-cell">География и логистика</th>
-              <th scope="col" className="hidden px-3 py-2.5 md:table-cell">Документы</th>
-              <th scope="col" className="hidden px-3 py-2.5 md:table-cell">Оценка</th>
-              <th scope="col" className="hidden px-3 py-2.5 md:table-cell">Статус</th>
+              <th scope="col" className="px-2 py-2.5 md:px-3"><span className="md:hidden">Мин. заказ / цена</span><span className="hidden md:inline">MOQ / Пример цены</span></th>
+              <th scope="col" className="px-3 py-2.5 max-md:border-l max-md:border-line">География и логистика</th>
+              <th scope="col" className="px-3 py-2.5">Документы</th>
+              <th scope="col" className="px-3 py-2.5">Оценка</th>
+              <th scope="col" className="px-3 py-2.5">Статус</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-separator">
@@ -160,7 +179,13 @@ export function SupplierTable({
 
                   <td className="py-3 pr-1.5 align-top md:px-3">
                     <span className="text-[13px] font-semibold text-ink group-hover:text-brand-ink-strong">{s.name}</span>
-                    <p className="mt-0.5 text-[11px] text-muted">{s.city} · {s.categoryLabel}</p>
+                    <p className="mt-0.5 text-[11px] text-muted">{s.city} · <span className="md:hidden">{shortCategory[s.category]}</span><span className="hidden md:inline">{s.categoryLabel}</span></p>
+                    {!!s.matchedProducts?.length && <button
+                      type="button"
+                      className="mt-1 block max-w-full truncate rounded bg-brand-soft px-1.5 py-0.5 text-left text-[10px] font-medium text-brand-ink-strong"
+                      title={s.matchedProducts.map(product => [product.name, product.pack].filter(Boolean).join(' · ')).join('\n')}
+                      onClick={event => { event.stopPropagation(); onOpen(s.id, 'assortment'); }}
+                    >Найдено: {s.matchedProducts[0].name}{s.matchedProducts.length > 1 && ` +${s.matchedProducts.length - 1}`}</button>}
                     <div className="mt-1.5 flex flex-wrap items-center gap-1 md:hidden">
                       <span className={'rounded border px-1.5 py-0.5 text-[10px] font-semibold ' + style.badge}>
                         <span className="num">{s.scoring.total}/100</span> · {style.shortLabel}
@@ -171,13 +196,13 @@ export function SupplierTable({
 
                   <td className="px-2 py-3 align-top md:px-3">
                     <p title={s.moq.label} className="num truncate text-xs font-medium text-ink">{compactMoq(s.moq)}</p>
-                    <p title={s.priceEstimate.label} className="mt-1 flex min-w-0 flex-wrap items-baseline gap-x-1 text-[11px] text-secondary md:flex-nowrap">
+                    <p title={s.priceEstimate.label} className="mt-1 flex min-w-0 items-baseline gap-x-1 text-[11px] text-secondary">
                       <span className="num shrink-0 whitespace-nowrap">{price.amount}</span>
-                      {price.product && <><span aria-hidden="true" className="hidden md:inline">·</span><span className="min-w-0 basis-full break-words md:basis-auto md:truncate">{price.product}</span></>}
+                      {price.product && <><span aria-hidden="true" className="hidden md:inline">·</span><span className="hidden min-w-0 truncate md:inline">{price.product}</span></>}
                     </p>
                   </td>
 
-                  <td className="hidden px-3 py-3 align-top md:table-cell">
+                  <td className="px-3 py-3 align-top max-md:border-l max-md:border-line">
                     <div className="flex flex-wrap gap-1">
                       {s.regions.slice(0, 2).map(region => (
                         <span key={region} className="rounded border border-line bg-soft px-1.5 py-0.5 text-[10px] font-medium text-secondary">
@@ -197,7 +222,7 @@ export function SupplierTable({
                     </div>
                   </td>
 
-                  <td className="hidden px-3 py-3 align-top md:table-cell">
+                  <td className="px-3 py-3 align-top">
                     {compliance.length > 0 ? (
                       <div className="flex flex-wrap gap-1">
                         {compliance.slice(0, 2).map((item, idx) => (
@@ -212,7 +237,7 @@ export function SupplierTable({
                     )}
                   </td>
 
-                  <td className="hidden px-3 py-3 align-top md:table-cell">
+                  <td className="px-3 py-3 align-top">
                     <div className="flex items-center gap-2">
                       <span className="num text-xs font-semibold text-ink">{s.scoring.total}</span>
                       <div className="h-1 w-14 overflow-hidden rounded-full bg-line">
@@ -224,7 +249,7 @@ export function SupplierTable({
                     </p>
                   </td>
 
-                  <td className="hidden px-3 py-3 align-top md:table-cell">
+                  <td className="px-3 py-3 align-top">
                     <InlineStatusSelect
                       status={s.workspace.status}
                       saving={savingId === s.id}

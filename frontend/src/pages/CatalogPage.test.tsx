@@ -329,6 +329,25 @@ describe('Каталог поставщиков', () => {
     await waitFor(() => expect(client.fetchSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ status: undefined })));
   });
 
+  it('открывает найденную позицию в ассортименте и добавляет её с фасовкой в письмо', async () => {
+    const user = userEvent.setup();
+    const product = { id: 'cream', name: 'Сливки 33%', pack: '1 л', price: { kind: 'on_request' as const }, sourceUrl: 'https://supplier.test/cream', checkedAt: '2026-11-24' };
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [{ ...first, matchedProducts: [product] }, second] });
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Сливки'], products: [product] } });
+    render(<CatalogPage />);
+    await user.click(await screen.findByRole('button', { name: 'Найдено: Сливки 33%' }));
+    const drawer = within(await screen.findByRole('dialog'));
+    expect((await drawer.findByRole('tab', { name: 'Ассортимент' })).getAttribute('aria-selected')).toBe('true');
+    const table = await drawer.findByRole('table', { name: '' });
+    expect(within(table).getByText('По запросу')).toBeTruthy();
+    expect(within(table).getByRole('link', { name: 'Товар' }).getAttribute('href')).toBe(product.sourceUrl);
+    await user.click(within(table).getByRole('button', { name: 'В запрос КП: Сливки 33%' }));
+    expect(drawer.getByRole('tab', { name: /Запрос КП/ }).getAttribute('aria-selected')).toBe('true');
+    expect(decodeURIComponent(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href') ?? '')).toContain('Сливки 33% — 1 л');
+    await user.click(drawer.getByRole('button', { name: 'Убрать из запроса: Сливки 33%' }));
+    expect(decodeURIComponent(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href') ?? '')).not.toContain('Сливки 33%');
+  });
+
   it('сохраняет заметку без изменения статуса и показывает индикатор', async () => {
     const user = userEvent.setup();
     vi.mocked(client.updateSupplierWorkspace).mockResolvedValue({ ...detail, workspace: { status: 'contacted', notes: 'Позвонить', updatedAt: '2026-11-23T10:00:00Z' } });

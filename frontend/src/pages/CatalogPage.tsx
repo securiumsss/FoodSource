@@ -10,7 +10,7 @@ import { CatalogToolbar } from '../components/CatalogToolbar';
 import { Header, sidebarId } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
 import { SupplierTable } from '../components/SupplierTable';
-import { SupplierDetailDrawer, type SupplierDrawerHandle } from '../components/SupplierDetailDrawer';
+import { SupplierDetailDrawer, type DrawerTab, type SupplierDrawerHandle } from '../components/SupplierDetailDrawer';
 import { readableError } from '../components/ui';
 
 const emptyByStatus = {
@@ -41,7 +41,7 @@ export function CatalogPage() {
   const drawerRef = useRef<SupplierDrawerHandle>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
   const { detail, loadError, updateWorkspace } = useSupplierDetails(detailId, filters.region, filters.maxMoqRub);
-  const [detailStartTab, setDetailStartTab] = useState<'overview' | 'rfq'>('overview');
+  const [detailStartTab, setDetailStartTab] = useState<DrawerTab>('overview');
   const [compareIds, setCompareIds] = useState<string[] | null>(null);
   const [savingId, setSavingId] = useState('');
   const [refresh, setRefresh] = useState(0);
@@ -78,7 +78,7 @@ export function CatalogPage() {
   }, [saved]);
   const toggleCompare = (supplier: SupplierWithEvaluation) => setSelected(current => current.some(item => item.id === supplier.id) ? current.filter(item => item.id !== supplier.id) : current.length < 4 ? [...current, supplier] : current);
   const items = catalog?.items ?? [];
-  const openDrawer = (id: string, tab?: 'overview' | 'rfq') => {
+  const openDrawer = (id: string, tab?: DrawerTab) => {
     if (detailId === id && !tab) return;
     if (detailId !== null && drawerRef.current?.canSwitchSupplier() === false) return;
     detailReturnFocusRef.current = null;
@@ -167,6 +167,7 @@ export function CatalogPage() {
         loadError={loadError === undefined ? '' : readableError(loadError)}
         initialTab={detailStartTab}
         supplierName={items[detailIndex]?.name}
+        matchedProductIds={items[detailIndex]?.matchedProducts?.map(product => product.id)}
         navigation={detailIndex >= 0 ? {
           position: detailIndex + 1,
           total: items.length,
@@ -182,6 +183,6 @@ export function CatalogPage() {
         onSaved={saved}
       />
     )}
-    {compareIds && <CompareModal ids={compareIds} region={filters.region} maxMoqRub={filters.maxMoqRub} onClose={closeCompare} onOpen={(id, tab) => { closeCompare(); openDrawer(id, tab ?? 'overview'); }} onRemove={removeFromComparison} onStatus={changeStatus} />}
+    {compareIds && <CompareModal ids={compareIds} search={debouncedSearch || undefined} region={filters.region} maxMoqRub={filters.maxMoqRub} onClose={closeCompare} onOpen={(id, tab) => { closeCompare(); openDrawer(id, tab ?? 'overview'); }} onRemove={removeFromComparison} onStatus={changeStatus} />}
   </div></div>;
 }

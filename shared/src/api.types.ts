@@ -47,9 +47,27 @@ export interface SupplierWorkspaceState {
   updatedAt: string | null;
 }
 
+export interface SupplierProduct {
+  id: string;
+  name: string;
+  pack: string | null;
+  price: { kind: 'published'; amount: number; unit: string | null } | { kind: 'on_request' | 'not_published' };
+  priceNote?: string;
+  availabilityNote?: string;
+  sourceUrl: string;
+  checkedAt: string;
+}
+
+export interface SupplierAssortment {
+  catalogUrl: string;
+  groups: string[];
+  products: SupplierProduct[];
+}
+
 export type SupplierWithEvaluation = Supplier & {
   workspace: SupplierWorkspaceState;
   scoring: SupplierScoring;
+  matchedProducts?: Pick<SupplierProduct, 'id' | 'name' | 'pack'>[];
 };
 
 export interface RfqTemplate {
@@ -69,10 +87,11 @@ export interface SuppliersListResponse {
   };
 }
 
-export type SupplierDetailResponse = SupplierWithEvaluation & { rfqTemplate: RfqTemplate };
+export type SupplierDetailResponse = SupplierWithEvaluation & { rfqTemplate: RfqTemplate; assortment?: SupplierAssortment };
 
 export interface CompareRequestDto {
   ids: string[];
+  search?: string;
   region?: string;
   maxMoqRub?: number;
 }

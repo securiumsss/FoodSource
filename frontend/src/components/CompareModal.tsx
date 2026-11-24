@@ -8,6 +8,7 @@ import { useDialog } from './useDialog';
 
 interface Props {
   ids: string[];
+  search?: string;
   region?: string;
   maxMoqRub?: number;
   onClose: () => void;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const rowGroups = [
-  ['regions'], ['moq'], ['price'], ['delivery'], ['temperature'],
+  ['regions'], ['moq'], ['matchedProducts'], ['price'], ['delivery'], ['temperature'],
   ['documents', 'complianceSystems'], ['contacts'], ['pricingNote'],
 ];
 
@@ -33,8 +34,8 @@ function cellValue(row: ComparisonRow, id: string) {
   return row.values[id]?.trim() || 'Не указано';
 }
 
-export function CompareModal({ ids, region, maxMoqRub, onClose, onOpen, onRemove, onStatus }: Props) {
-  const request = useMemo(() => ({ ids, region, maxMoqRub }), [ids, region, maxMoqRub]);
+export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, onRemove, onStatus }: Props) {
+  const request = useMemo(() => ({ ids, region, maxMoqRub, ...(search ? { search } : {}) }), [ids, search, region, maxMoqRub]);
   const [response, setResponse] = useState<{ request: typeof request; result?: CompareResponse; error?: string } | null>(null);
   const [onlyDifferences, setOnlyDifferences] = useState(false);
   const [statusError, setStatusError] = useState('');
@@ -169,7 +170,7 @@ export function CompareModal({ ids, region, maxMoqRub, onClose, onOpen, onRemove
                               <div key={row.key}>
                                 {group.rows.length > 1 && <span className="mb-0.5 block text-[11px] font-medium text-secondary">{row.label}</span>}
                                 <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1">
-                                  <span className="min-w-0 max-w-full [overflow-wrap:anywhere]">{cellValue(row, s.id)}</span>
+                                  <span className="min-w-0 max-w-full whitespace-pre-line [overflow-wrap:anywhere]">{cellValue(row, s.id)}</span>
                                   {row.bestSupplierIds.includes(s.id) && <BestBadge label={row.key === 'delivery' ? 'Своя доставка' : undefined} />}
                                 </div>
                               </div>
@@ -185,7 +186,7 @@ export function CompareModal({ ids, region, maxMoqRub, onClose, onOpen, onRemove
             </>
           )}
         </div>
-        {result && <footer className="shrink-0 border-t border-separator px-4 py-2 text-[11px] text-secondary sm:px-5">Ценовые ориентиры могут относиться к разным товарам или фасовкам.</footer>}
+        {result && <footer className="shrink-0 border-t border-separator px-4 py-2 text-[11px] text-secondary sm:px-5">Примеры цен могут относиться к разным товарам и фасовкам. Наличие и оптовые цены уточняйте у поставщика.</footer>}
       </section>
     </div>
   );
