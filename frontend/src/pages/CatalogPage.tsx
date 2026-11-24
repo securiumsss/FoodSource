@@ -121,6 +121,7 @@ export function CatalogPage() {
   const closeCompare = useCallback(() => setCompareIds(null), []);
   const tableGutters = 'px-4 sm:px-6';
   const sectionTitle = filters.status === 'shortlist' ? 'Шортлист' : filters.status === 'contacted' ? 'Связались' : filters.status === 'rejected' ? 'Отклонённые' : 'Все поставщики';
+  const catalogTitle = catalog?.facets.categories.find(category => category.value === filters.category)?.label ?? sectionTitle;
   return <div className="flex h-dvh flex-col overflow-hidden lg:flex-row">
     <Sidebar
       id={sidebarId}
@@ -135,14 +136,17 @@ export function CatalogPage() {
     />
     <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
       <Header
-        context={catalog?.facets.categories.find(category => category.value === filters.category)?.label ?? sectionTitle}
-        total={catalog?.total}
         sidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(current => !current)}
       />
-    <main className="flex min-h-0 min-w-0 flex-1 flex-col pt-5">
-      <h1 className="sr-only">{sectionTitle}</h1>
+    <main className="flex min-h-0 min-w-0 flex-1 flex-col pt-3 lg:pt-4">
       <div className={'shrink-0 ' + tableGutters}>
+        <div className="mb-2.5 flex items-baseline gap-2.5">
+          <h1 className="min-w-0 text-sm font-semibold text-ink lg:text-base">{catalogTitle}</h1>
+          {catalog && <span className="inline-flex shrink-0 items-baseline gap-2 text-xs text-muted">
+            <span aria-hidden="true">·</span><span className="sr-only">Найдено поставщиков: </span><span className="num">{catalog.total}</span>
+          </span>}
+        </div>
         {selected.length > 0 ? <CompareBar
           selected={selected}
           onRemove={id => setSelected(current => current.filter(s => s.id !== id))}
