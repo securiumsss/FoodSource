@@ -165,6 +165,34 @@ describe('Каталог поставщиков', () => {
     expect((await screen.findByRole('tab', { name: 'Ассортимент' })).getAttribute('aria-selected')).toBe('true');
   });
 
+  it('показывает только покрытие и ставит подтверждённый регион из фильтра первым', async () => {
+    const user = userEvent.setup();
+    const nationwide: SupplierWithEvaluation = {
+      ...first,
+      regions: ['Вся РФ', 'Москва и МО'],
+      delivery: { ...first.delivery, hasOwnDelivery: true, temperatureControlled: true, leadTime: 'Завтра' },
+    };
+    const regional: SupplierWithEvaluation = { ...second, regions: ['Санкт-Петербург и ЛО', 'Отдельные регионы РФ', 'Москва'] };
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [nationwide, regional], facets: {
+      ...list.facets, regions: ['Вся РФ', 'Москва', 'Москва и МО', 'Санкт-Петербург и ЛО'],
+    } });
+    render(<CatalogPage />);
+    const table = within(screen.getByRole('region', { name: 'Таблица поставщиков' }));
+    const column = table.getAllByRole('columnheader').findIndex(header => header.textContent === 'Куда доставляют');
+    const deliveryCell = (name: string) => within(table.getByRole('row', { name: `Открыть карточку поставщика ${name}` })).getAllByRole('cell')[column];
+    await screen.findByText(first.name);
+    expect(deliveryCell(first.name).textContent).toBe('Вся РФ');
+    expect(within(deliveryCell(second.name)).getByTitle('Москва')).toBeTruthy();
+    await user.click(screen.getByRole('button', { name: 'Фильтры' }));
+    await chooseFilter(user, 'Регион', 'Москва');
+    await waitFor(() => expect(client.fetchSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ region: 'Москва' })));
+    expect(Array.from(deliveryCell(first.name).firstElementChild?.children ?? [], tag => tag.textContent)).toEqual(['Москва и МО', 'Вся РФ']);
+    expect(deliveryCell(second.name).firstElementChild?.firstElementChild?.textContent).toBe('Москва');
+    expect(within(deliveryCell(second.name)).getByTitle('Отдельные регионы РФ')).toBeTruthy();
+    await chooseFilter(user, 'Регион', 'Вся РФ');
+    expect(deliveryCell(first.name).textContent).toBe('Вся РФ');
+  });
+
   it('синхронизирует сравнение из дровера с таблицей и соблюдает общий лимит', async () => {
     const user = userEvent.setup();
     const items = [first, second, ...[3, 4, 5].map(n => fixture(String(n), 'Поставщик ' + n))];
@@ -205,9 +233,41 @@ describe('Каталог поставщиков', () => {
     const contacts = within(dialog).getByRole('region', { name: 'Контакты и источники' });
     expect(within(contacts).getByRole('link', { name: 'Официальный сайт' })).toBeTruthy();
     expect(within(contacts).getByRole('link', { name: 'supplier.test/source' })).toBeTruthy();
-    expect(within(dialog).getByText('Условия и доставка').compareDocumentPosition(within(dialog).getByText('Как рассчитан скоринг')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(within(dialog).getByRole('region', { name: 'Заказ' }).compareDocumentPosition(within(dialog).getByText('Как рассчитан скоринг')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(contacts.compareDocumentPosition(within(dialog).getByText('Как рассчитан скоринг')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(within(dialog).getAllByText('Уточнить цену')).toHaveLength(1);
+    const delivery = within(within(dialog).getByRole('region', { name: 'Доставка' }));
+    expect(delivery.getByText('Температурный режим не подтверждён')).toBeTruthy();
+    expect(delivery.getByText('Срок уточняется.')).toBeTruthy();
+  });
+
+  it('показывает заказ, доставку и документы отдельно, раскрывая пояснение к цене по клику', async () => {
+    const user = userEvent.setup();
+    const priceEstimate = { min: 100, max: 100, unit: 'RUB', label: 'Короб — 100 ₽' };
+    const pricingNote = 'Условия первого заказа отличаются от повторных.';
+    const terms = 'Бесплатная доставка от 30 000 ₽.';
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({
+      ...detail, category: 'packaging', priceEstimate, pricingNote, complianceSystems: ['Честный ЗНАК'],
+      delivery: { ...detail.delivery, leadTime: 'На следующий день', terms },
+    });
+    render(<CatalogPage />);
+    await user.click(await screen.findByRole('row', { name: 'Открыть карточку поставщика Первый поставщик' }));
+    const dialog = within(await screen.findByRole('dialog'));
+    const order = within(await dialog.findByRole('region', { name: 'Заказ' }));
+    const disclosure = order.getByText('Пример цены и примечание');
+    const details = disclosure.closest('details');
+    expect(details?.open).toBe(false);
+    expect(order.queryByText('Оптовая цена — по запросу.')).toBeNull();
+    await user.click(disclosure);
+    expect(details?.open).toBe(true);
+    expect(order.getByText(priceEstimate.label)).toBeTruthy();
+    expect(order.getByText(pricingNote)).toBeTruthy();
+    const delivery = within(dialog.getByRole('region', { name: 'Доставка' }));
+    expect(delivery.getByText(terms)).toBeTruthy();
+    expect(delivery.queryByText(/Температурный режим/)).toBeNull();
+    const documents = within(dialog.getByRole('region', { name: 'Документы' }));
+    expect(documents.getByText('На сайте не указаны.')).toBeTruthy();
+    expect(documents.getByText('Честный ЗНАК')).toBeTruthy();
   });
 
   it('переключает открытую карточку по строке, но не сбрасывает несохранённую заметку', async () => {

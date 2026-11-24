@@ -1,7 +1,7 @@
 import { requiresTemperatureControl } from '@food-suppliers/shared';
 import { useEffect, useImperativeHandle, useRef, useState, type KeyboardEvent, type Ref, type RefObject } from 'react';
 import type { SupplierDetailResponse, SupplierWithEvaluation, SupplierWorkspaceState, WorkspaceUpdateDto } from '@food-suppliers/shared';
-import { ArrowDown, ArrowUp, Check, Clipboard, GitCompareArrows, LoaderCircle, Mail, Phone, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Check, ChevronDown, Clipboard, GitCompareArrows, LoaderCircle, Mail, Phone, X } from 'lucide-react';
 import { updateSupplierWorkspace } from '../api/client';
 import { ExternalLink, FactList, getVerdictStyle, InlineStatusSelect, readableError, Regions, ScoreBadge } from './ui';
 import { useDialog } from './useDialog';
@@ -53,16 +53,70 @@ interface Props {
 }
 
 function Tags({ items }: { items: string[] }) {
-  return items.length > 0 ? (
-    <div className="flex flex-wrap gap-1.5">
+  return (
+    <ul className="flex flex-wrap gap-1.5">
       {items.map((item, i) => (
-        <span key={`${item}-${i}`} className="rounded border border-line bg-soft px-2 py-0.5 text-xs text-ink">
+        <li key={`${item}-${i}`} className="rounded border border-line bg-white px-2 py-0.5 text-[11px] text-ink">
           {item}
-        </span>
+        </li>
       ))}
+    </ul>
+  );
+}
+
+function SupplierConditions({ supplier: s }: { supplier: SupplierDetailResponse }) {
+  const hasPrice = s.priceEstimate.min !== null || s.priceEstimate.max !== null;
+  const priceDetails = hasPrice ? (s.pricingNote ? 'Пример цены и примечание' : 'Пример цены') : 'Примечание к заказу';
+  const deliveryFacts = [
+    s.delivery.hasOwnDelivery === true ? 'Своя доставка' : s.delivery.hasOwnDelivery === false ? 'Нет своей доставки' : 'Своя доставка не подтверждена',
+    requiresTemperatureControl(s.category) && (
+      s.delivery.temperatureControlled === true ? 'Температурный режим подтверждён'
+        : s.delivery.temperatureControlled === false ? 'Без температурного режима' : 'Температурный режим не подтверждён'
+    ),
+  ].filter(Boolean);
+  const row = 'grid gap-1.5 px-3.5 py-3 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-x-3';
+  const label = 'text-xs font-semibold text-ink';
+
+  return (
+    <div className="divide-y divide-line rounded-lg border border-line bg-soft text-xs leading-relaxed text-secondary">
+      <section className={row} aria-label="Заказ">
+        <h3 className={label}>Заказ</h3>
+        <div className="min-w-0 space-y-1">
+          <p><span className="font-medium text-ink">Минимальный заказ:</span> {s.moq.label}</p>
+          {!hasPrice && <p>Оптовая цена — по запросу.</p>}
+          {(hasPrice || s.pricingNote) && <details className="group">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1 rounded font-medium text-brand-ink hover:underline [&::-webkit-details-marker]:hidden">
+              <ChevronDown size={13} aria-hidden="true" className="group-open:rotate-180" />
+              {priceDetails}
+            </summary>
+            <div className="mt-1 space-y-1.5 border-l border-line pl-2.5">
+              {hasPrice && <p>{s.priceEstimate.label}</p>}
+              {s.pricingNote && <p>{s.pricingNote}</p>}
+            </div>
+          </details>}
+        </div>
+      </section>
+
+      <section className={row} aria-label="Доставка">
+        <h3 className={label}>Доставка</h3>
+        <div className="min-w-0 space-y-1">
+          <p>{s.delivery.leadTime ? <><span className="font-medium text-ink">Срок:</span> {s.delivery.leadTime}</> : 'Срок уточняется.'}</p>
+          <p>{s.delivery.terms}</p>
+          <ul className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px]">{deliveryFacts.map(fact => <li key={String(fact)}>{fact}</li>)}</ul>
+        </div>
+      </section>
+
+      <section className={row} aria-label="Документы">
+        <h3 className={label}>Документы</h3>
+        <div className="min-w-0 space-y-1.5">
+          {s.documents.length ? <Tags items={s.documents} /> : <p>На сайте не указаны.</p>}
+          {s.complianceSystems.length > 0 && <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <p className="text-[11px]">Системы и стандарты:</p>
+            <Tags items={s.complianceSystems} />
+          </div>}
+        </div>
+      </section>
     </div>
-  ) : (
-    <p className="text-xs text-muted">Не указаны на открытых страницах — уточните при запросе</p>
   );
 }
 
@@ -292,26 +346,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1"><span className="fact-label">Источники</span>{Array.from(new Set([s.sourceUrl, ...s.sourceUrls])).map(url => <ExternalLink key={url} href={url}>{sourceLabel(url)}</ExternalLink>)}</div>
               </section>
 
-              <div className="grid gap-4 rounded-md border border-line bg-soft p-3.5 sm:grid-cols-[3fr_2fr]">
-                <section className="min-w-0">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Условия и доставка</h3>
-                  <dl className="mt-3 grid grid-cols-2 gap-3">
-                    <div><dt className="fact-label">Минимальный заказ</dt><dd className="fact-value">{s.moq.label}</dd></div>
-                    <div><dt className="fact-label">Пример цены</dt><dd className="fact-value">{s.priceEstimate.label}</dd></div>
-                    <div><dt className="fact-label">Срок доставки</dt><dd className="fact-value">{s.delivery.leadTime ?? 'По запросу'}</dd></div>
-                    <div><dt className="fact-label">Своя доставка</dt><dd className="fact-value">{s.delivery.hasOwnDelivery === null ? 'Не подтверждена' : s.delivery.hasOwnDelivery ? 'Да' : 'Нет'}</dd></div>
-                    {requiresTemperatureControl(s.category) && <div><dt className="fact-label">Температурный режим</dt><dd className="fact-value">{s.delivery.temperatureControlled === null ? 'Не подтверждён' : s.delivery.temperatureControlled ? 'Подтверждён' : 'Нет'}</dd></div>}
-                    <div className="col-span-2"><dt className="fact-label">Условия доставки</dt><dd className="fact-value">{s.delivery.terms}</dd></div>
-                  </dl>
-                  {s.pricingNote && <p className="mt-3 border-l-2 border-line pl-2.5 text-[11px] leading-relaxed text-secondary">{s.pricingNote}</p>}
-                </section>
-
-                <section className="min-w-0 space-y-3">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Документы</h3>
-                  <div><p className="fact-label mb-2">Подтверждения</p><Tags items={s.documents} /></div>
-                  <div><p className="fact-label mb-2">Системы и стандарты</p><Tags items={s.complianceSystems} /></div>
-                </section>
-              </div>
+              <SupplierConditions supplier={s} />
 
               <section className="border-t border-separator pt-5">
                 <div className="flex items-baseline justify-between gap-3">

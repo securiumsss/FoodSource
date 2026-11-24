@@ -135,6 +135,7 @@ export function CatalogPage() {
         )}
         <SupplierTable
           suppliers={items}
+          regionFilter={filters.region}
           emptyContent={error ? undefined : loading ? (
             <p role="status" className="text-xs text-secondary">Загрузка поставщиков…</p>
           ) : (

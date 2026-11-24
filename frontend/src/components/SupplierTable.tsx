@@ -1,7 +1,7 @@
-import { requiresTemperatureControl } from '@food-suppliers/shared';
-import type { SupplierCategory, SupplierStatus, SupplierWithEvaluation } from '@food-suppliers/shared';
+import { getDeliveryCoverage } from '@food-suppliers/shared';
+import type { SupplierCategory, SupplierRegion, SupplierStatus, SupplierWithEvaluation } from '@food-suppliers/shared';
 import { useId, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitCompareArrows, Snowflake, Truck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitCompareArrows } from 'lucide-react';
 import { getVerdictStyle, InlineStatusSelect, StatusBadge } from './ui';
 
 const shortCategory: Record<SupplierCategory, string> = {
@@ -51,8 +51,37 @@ function AssortmentPreview({ supplier, onOpen }: { supplier: SupplierWithEvaluat
   );
 }
 
+function DeliveryRegions({ regions, regionFilter }: { regions: SupplierRegion[]; regionFilter?: string }) {
+  const federal = 'Вся РФ';
+  const local = regions.filter(region => region !== federal);
+  const matching = regionFilter && (local.find(region => region === regionFilter)
+    ?? local.find(region => getDeliveryCoverage([region], regionFilter) === 'local'));
+  const prioritized = regions.includes(federal)
+    ? (matching ? [matching, federal] : [federal])
+    : (matching ? [matching, ...local.filter(region => region !== matching)] : local);
+  const visible = prioritized.slice(0, 2);
+  const remaining = prioritized.slice(2);
+
+  if (!visible.length) return <span className="text-[11px] text-muted">Не указаны</span>;
+
+  return (
+    <div className="flex flex-wrap items-center gap-1">
+      {visible.map(region => (
+        <span key={region} className="rounded border border-line bg-soft px-1.5 py-0.5 text-[10px] font-medium text-secondary">
+          {region}
+        </span>
+      ))}
+      {remaining.length > 0 && <span className="num text-[10px] text-muted" title={remaining.join(', ')}>
+        <span aria-hidden="true">+{remaining.length}</span>
+        <span className="sr-only">Также: {remaining.join(', ')}</span>
+      </span>}
+    </div>
+  );
+}
+
 interface Props {
   suppliers: SupplierWithEvaluation[];
+  regionFilter?: string;
   emptyContent?: ReactNode;
   selectedIds: string[];
   activeId: string | null;
@@ -67,6 +96,7 @@ interface Props {
 
 export function SupplierTable({
   suppliers,
+  regionFilter,
   emptyContent,
   selectedIds,
   activeId,
@@ -132,7 +162,7 @@ export function SupplierTable({
               <th scope="col" className="px-3 py-2.5">Поставщик</th>
               <th scope="col" className="px-2 py-2.5 md:px-3">Ассортимент</th>
               <th scope="col" className="px-3 py-2.5 max-md:border-l max-md:border-line">Мин. заказ</th>
-              <th scope="col" className="px-3 py-2.5">География и логистика</th>
+              <th scope="col" className="px-3 py-2.5">Куда доставляют</th>
               <th scope="col" className="px-3 py-2.5">Документы</th>
               <th scope="col" className="px-3 py-2.5">Оценка</th>
               <th scope="col" className="px-3 py-2.5">Статус</th>
@@ -210,23 +240,7 @@ export function SupplierTable({
                   </td>
 
                   <td className="px-3 py-3 align-top">
-                    <div className="flex flex-wrap gap-1">
-                      {s.regions.slice(0, 2).map(region => (
-                        <span key={region} className="rounded border border-line bg-soft px-1.5 py-0.5 text-[10px] font-medium text-secondary">
-                          {region}
-                        </span>
-                      ))}
-                      {s.regions.length > 2 && <span className="num text-[10px] text-muted">+{s.regions.length - 2}</span>}
-                    </div>
-                    <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-secondary">
-                      {s.delivery.hasOwnDelivery === true && (
-                        <span className="inline-flex items-center gap-1" title="Своя доставка"><Truck size={11} className="text-ink" />Своя</span>
-                      )}
-                      {requiresTemperatureControl(s.category) && s.delivery.temperatureControlled === true && (
-                        <span className="inline-flex items-center gap-1" title="Подтверждён температурный режим"><Snowflake size={11} className="text-ink" />Реф</span>
-                      )}
-                      {s.delivery.leadTime && <span title={s.delivery.leadTime} className="truncate text-muted">{s.delivery.leadTime}</span>}
-                    </div>
+                    <DeliveryRegions regions={s.regions} regionFilter={regionFilter} />
                   </td>
 
                   <td className="px-3 py-3 align-top">
