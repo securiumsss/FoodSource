@@ -1,11 +1,11 @@
 import type { SupplierDetailResponse, SupplierProduct } from '@food-suppliers/shared';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Plus, Search } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
+import { CatalogPagination, minimumPageSize, type PageSize } from './CatalogPagination';
 import { ExternalLink } from './ui';
 
 const priceFormat = new Intl.NumberFormat('ru-RU');
 const checkedDate = new Intl.DateTimeFormat('ru-RU', { timeZone: 'UTC' });
-const pageSize = 12;
 const normalize = (value: string) => value.toLocaleLowerCase('ru').replaceAll('ё', 'е').replace(/(?<=\d),(?=\d)/gu, '.');
 const tokens = (value: string) => normalize(value).match(/\p{L}+|\d+(?:\.\d+)?(?:\s*%)?/gu)?.map(token => token.replace(/\s+/gu, '')) ?? [];
 
@@ -21,10 +21,11 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
 }) {
   const [query, setQuery] = useState(initialSearch);
   const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState<PageSize>('20');
   const tableScrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (tableScrollRef.current) tableScrollRef.current.scrollTop = 0;
-  }, [page, query]);
+  }, [page, pageSize, query]);
 
   const { assortment } = supplier;
   if (!assortment) {
@@ -43,13 +44,12 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
     const words = tokens(describeProduct(product));
     return terms.every(term => words.some(word => /^\d/u.test(term) ? word === term || word === term + '%' : word.startsWith(term)));
   }).sort((a, b) => Number(matched.has(b.id)) - Number(matched.has(a.id)));
-  const pageCount = Math.ceil(products.length / pageSize);
+  const size = Number(pageSize);
+  const pageCount = Math.ceil(products.length / size);
   const currentPage = Math.min(page, Math.max(0, pageCount - 1));
-  const start = currentPage * pageSize;
-  const visible = products.slice(start, start + pageSize);
-  const hasPagination = assortment.products.length > pageSize;
-  const resultLabel = products.length === 1 ? '1 позиция'
-    : products.length ? `${start + 1}–${start + visible.length} из ${products.length}` : '0 позиций';
+  const start = currentPage * size;
+  const visible = products.slice(start, start + size);
+  const hasSearch = assortment.products.length > minimumPageSize || Boolean(initialSearch);
   return <section className="flex min-h-0 flex-1 flex-col gap-2.5">
     <div className="shrink-0 space-y-2">
       <div className="flex items-baseline justify-between gap-3 text-xs">
@@ -61,7 +61,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
       </div>}
       {assortment.catalogNote && <p className="text-xs leading-snug text-secondary">{assortment.catalogNote}</p>}
     </div>
-    {(hasPagination || Boolean(initialSearch)) && <label className="relative block shrink-0">
+    {hasSearch && <label className="relative block shrink-0">
       <span className="sr-only">Поиск по ассортименту</span>
       <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
       <input type="search" className="field field-search" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
@@ -98,13 +98,15 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
           </tbody>
         </table>
       </div>
-      <div className="flex min-h-10 shrink-0 items-center justify-between gap-2 border-t border-line bg-soft px-2.5 py-1 text-[11px] text-secondary">
-        <p role="status">{resultLabel}</p>
-        {hasPagination && <div role="group" aria-label="Страницы ассортимента" className="flex gap-1">
-          <button type="button" className="icon-btn disabled:opacity-40" aria-label="Предыдущая страница ассортимента" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}><ChevronLeft size={14} /></button>
-          <button type="button" className="icon-btn disabled:opacity-40" aria-label="Следующая страница ассортимента" disabled={currentPage + 1 >= pageCount} onClick={() => setPage(currentPage + 1)}><ChevronRight size={14} /></button>
-        </div>}
-      </div>
+      <CatalogPagination
+        label="Страницы ассортимента"
+        className="border-t"
+        page={currentPage}
+        size={pageSize}
+        total={products.length}
+        onPageChange={setPage}
+        onSizeChange={next => { setPageSize(next); setPage(0); }}
+      />
     </div>
   </section>;
 }

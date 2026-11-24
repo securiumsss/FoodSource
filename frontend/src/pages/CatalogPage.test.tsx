@@ -509,8 +509,8 @@ describe('Каталог поставщиков', () => {
 
   it('ищет по товару и фасовке в большом ассортименте и разбивает список на страницы', async () => {
     const user = userEvent.setup();
-    const products = Array.from({ length: 14 }, (_, index) => ({
-      id: String(index), name: index === 13 ? 'Паприка копчёная' : `Приправа ${index + 1}`, pack: '0,5 кг',
+    const products = Array.from({ length: 24 }, (_, index) => ({
+      id: String(index), name: index === 23 ? 'Паприка копчёная' : `Приправа ${index + 1}`, pack: '0,5 кг',
       price: { kind: 'not_published' as const }, sourceUrl: 'https://supplier.test/catalog', sourceKind: 'listing' as const, checkedAt: '2026-11-24',
     }));
     vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Специи'], products } });
@@ -522,25 +522,36 @@ describe('Каталог поставщиков', () => {
     expect(within(scrollArea).getAllByRole('columnheader')).toHaveLength(3);
     expect(drawer.getByRole('link', { name: 'На сайте поставщика' }).getAttribute('href')).toBe('https://supplier.test/catalog');
     expect(drawer.queryByText(/Это выборка с сайта/)).toBeNull();
-    expect(within(scrollArea).queryByRole('group', { name: 'Страницы ассортимента' })).toBeNull();
+    const pagination = drawer.getByRole('navigation', { name: 'Страницы ассортимента' });
+    const paging = within(pagination);
+    expect(scrollArea.contains(pagination)).toBe(false);
+    expect(paging.getByRole('button', { name: 'Предыдущая страница' })).toHaveProperty('disabled', true);
     scrollArea.focus();
     await user.keyboard('{ArrowDown}');
     expect(drawer.getByRole('heading', { name: 'Первый поставщик' })).toBeTruthy();
-    expect(drawer.getByText('1–12 из 14')).toBeTruthy();
+    expect(paging.getByText('1–20 из 24')).toBeTruthy();
     expect(drawer.queryByText('Паприка копчёная')).toBeNull();
     scrollArea.scrollTop = 150;
-    await user.click(drawer.getByRole('button', { name: 'Следующая страница ассортимента' }));
+    await user.click(paging.getByRole('button', { name: 'Следующая страница' }));
     expect(scrollArea.scrollTop).toBe(0);
-    expect(drawer.getByText('13–14 из 14')).toBeTruthy();
+    expect(paging.getByText('21–24 из 24')).toBeTruthy();
+    expect(paging.getByRole('button', { name: 'Последняя страница' })).toHaveProperty('disabled', true);
+    paging.getByRole('combobox', { name: 'Записей на странице' }).focus();
+    await user.keyboard('{Enter}');
+    (await screen.findByRole('option', { name: '10' })).focus();
+    await user.keyboard('{Enter}');
+    expect(paging.getByText('1–10 из 24')).toBeTruthy();
+    await user.click(paging.getByRole('button', { name: 'Последняя страница' }));
+    expect(paging.getByText('21–24 из 24')).toBeTruthy();
     const searchBox = drawer.getByRole('searchbox', { name: 'Поиск по ассортименту' });
     await user.type(searchBox, 'xyz');
     expect(within(scrollArea).getAllByRole('columnheader')).toHaveLength(3);
     expect(within(scrollArea).getByText('По вашему запросу ничего не найдено.')).toBeTruthy();
-    expect(drawer.getByText('0 позиций')).toBeTruthy();
+    expect(paging.getByText('0 из 0')).toBeTruthy();
     await user.clear(searchBox);
     await user.type(searchBox, 'паприка 0.5 кг');
-    expect(drawer.getByText('1 позиция')).toBeTruthy();
-    expect(drawer.getByRole('link', { name: 'Перечень' }).getAttribute('href')).toBe(products[13].sourceUrl);
+    expect(paging.getByText('1–1 из 1')).toBeTruthy();
+    expect(drawer.getByRole('link', { name: 'Перечень' }).getAttribute('href')).toBe(products[23].sourceUrl);
     expect(drawer.getByText('Не опубликована')).toBeTruthy();
   });
 

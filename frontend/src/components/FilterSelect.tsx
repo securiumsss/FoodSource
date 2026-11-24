@@ -28,7 +28,7 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
             : 'mt-1 flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-line bg-white px-2.5 py-1.5 text-left text-[13px]! text-ink hover:border-line-strong hover:bg-soft data-[state=open]:border-brand-hover'}
         >
           <span className="min-w-0 truncate"><Select.Value /></span>
-          {compactSuffix && <span aria-hidden="true" className="text-secondary">{compactSuffix}</span>}
+          {compactSuffix && <span aria-hidden="true" className="hidden whitespace-nowrap text-secondary @min-[22rem]:inline">{compactSuffix}</span>}
           <Select.Icon asChild><ChevronDown size={14} className="shrink-0 text-muted" aria-hidden="true" /></Select.Icon>
         </Select.Trigger>
         <Select.Portal>
@@ -38,7 +38,7 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
             side={compactSuffix ? 'top' : 'bottom'}
             sideOffset={4}
             collisionPadding={12}
-            className="z-[45] flex max-h-[min(17rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] flex-col overflow-hidden rounded-lg border border-line bg-white text-[13px] text-ink shadow-lg"
+            className={`flex max-h-[min(17rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] flex-col overflow-hidden rounded-lg border border-line bg-white text-[13px] text-ink shadow-lg ${compactSuffix ? 'z-[60] min-w-20' : 'z-[45]'}`}
           >
             <Select.ScrollUpButton className="flex h-6 shrink-0 items-center justify-center text-muted"><ChevronUp size={14} /></Select.ScrollUpButton>
             <Select.Viewport className="min-h-0 p-1">

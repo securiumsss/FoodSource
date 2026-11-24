@@ -277,12 +277,12 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
         </div>
         <div className="shrink-0 border-b border-line px-5 pt-1 sm:px-6">
           <p className="eyebrow mb-1">{s ? `${s.categoryLabel} · ${s.city}` : 'Карточка поставщика'}</p>
-          <h2 id="detail-title" className="min-w-0 break-words text-lg font-semibold tracking-tight text-ink">
-            {s?.name ?? 'Карточка поставщика'}
-          </h2>
-          <div className="my-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <h2 id="detail-title" className="min-w-0 text-lg font-semibold tracking-tight text-ink [overflow-wrap:anywhere]">
+              {s?.name ?? 'Карточка поставщика'}
+            </h2>
             {s && (
-              <div role="group" aria-label="Действия с поставщиком" className="flex flex-wrap items-center gap-2">
+              <div role="group" aria-label="Действия с поставщиком" className="flex max-w-full flex-wrap items-center gap-2">
                 <ScoreBadge scoring={s.scoring} compact />
                 <InlineStatusSelect
                   status={s.workspace.status}
@@ -305,7 +305,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
               </div>
             )}
           </div>
-          {navigation && hasDraft && <p className="mb-2 text-[11px] text-secondary">Сохраните или отмените изменения, чтобы перейти к другой записи.</p>}
+          {navigation && hasDraft && <p className="mt-2 text-[11px] text-secondary">Сохраните или отмените изменения, чтобы перейти к другой записи.</p>}
 
           {s && (
             <div role="tablist" aria-label="Разделы карточки поставщика" className="mt-4 flex flex-wrap gap-x-3 gap-y-1 sm:gap-x-5">
