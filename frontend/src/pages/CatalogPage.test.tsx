@@ -351,6 +351,42 @@ describe('Каталог поставщиков', () => {
     expect(document.activeElement).toBe(firstRow);
   });
 
+  it('разворачивает дровер без сброса черновика и возвращает фокус в таблицу при закрытии', async () => {
+    vi.stubGlobal('matchMedia', vi.fn((media: string) => ({
+      matches: true, media, addEventListener: vi.fn(), removeEventListener: vi.fn(),
+    })));
+    try {
+      const user = userEvent.setup();
+      render(<CatalogPage />);
+      const row = await screen.findByRole('row', { name: 'Открыть карточку поставщика Первый поставщик' });
+      await user.click(row);
+      const dialog = screen.getByRole('dialog');
+      const panel = within(dialog);
+      await user.click(panel.getByRole('tab', { name: 'Заметки' }));
+      const notes = panel.getByRole<HTMLTextAreaElement>('textbox', { name: 'Заметки менеджера' });
+      await user.type(notes, 'Черновик');
+
+      expect(dialog.getAttribute('aria-modal')).toBeNull();
+      await user.click(panel.getByRole('button', { name: 'Развернуть на весь экран' }));
+      expect(screen.getByRole('dialog')).toBe(dialog);
+      expect(dialog.getAttribute('aria-modal')).toBe('true');
+      const restore = panel.getByRole('button', { name: 'Вернуть боковую панель' });
+      expect(document.activeElement).toBe(restore);
+      expect(panel.getByRole('tab', { name: 'Заметки' }).getAttribute('aria-selected')).toBe('true');
+      expect(notes.value).toBe('Черновик');
+
+      await user.keyboard('{Enter}');
+      expect(dialog.getAttribute('aria-modal')).toBeNull();
+      expect(document.activeElement).toBe(panel.getByRole('button', { name: 'Развернуть на весь экран' }));
+      expect(notes.value).toBe('Черновик');
+      await user.keyboard('{Enter}{Escape}');
+      expect(screen.queryByRole('dialog')).toBeNull();
+      expect(document.activeElement).toBe(row);
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('переключает поставщиков стрелками, не переводя фокус на крестик', async () => {
     const user = userEvent.setup();
     vi.mocked(client.fetchSupplierById).mockImplementation(async id => ({ ...detail, ...(id === 'two' ? second : first) }));
@@ -365,6 +401,8 @@ describe('Каталог поставщиков', () => {
     await user.tab();
     expect(document.activeElement).toBe(within(dialog).getByRole('button', { name: 'Предыдущий поставщик' }));
     await user.tab();
+    await user.tab();
+    expect(document.activeElement).toBe(within(dialog).getByRole('button', { name: 'Развернуть на весь экран' }));
     await user.tab();
     expect(document.activeElement).toBe(close);
     await user.keyboard('{ArrowUp}');

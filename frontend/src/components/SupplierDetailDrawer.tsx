@@ -1,7 +1,7 @@
 import { requiresTemperatureControl } from '@food-suppliers/shared';
 import { useEffect, useImperativeHandle, useRef, useState, type KeyboardEvent, type Ref, type RefObject } from 'react';
 import type { SupplierDetailResponse, SupplierWithEvaluation, SupplierWorkspaceState, WorkspaceUpdateDto } from '@food-suppliers/shared';
-import { ArrowDown, ArrowUp, Check, ChevronDown, Clipboard, GitCompareArrows, LoaderCircle, Mail, Phone, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Check, ChevronDown, Clipboard, GitCompareArrows, LoaderCircle, Mail, Maximize2, Minimize2, Phone, X } from 'lucide-react';
 import { updateSupplierWorkspace } from '../api/client';
 import { ExternalLink, FactList, getVerdictStyle, InlineStatusSelect, readableError, Regions, ScoreBadge } from './ui';
 import { useDialog } from './useDialog';
@@ -137,6 +137,7 @@ function sourceLabel(value: string): string {
 export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', assortmentSearch = '', matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
   const s = detail ?? preview;
   const [tab, setTab] = useState<DrawerTab>(initialTab);
+  const [expanded, setExpanded] = useState(false);
   const [rfqProductIds, setRfqProductIds] = useState<string[]>([]);
   const [draft, setDraft] = useState<{ id: string; notes: string } | null>(null);
   const [error, setError] = useState('');
@@ -144,6 +145,8 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
   const [saved, setSaved] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const docked = useDockedDrawer();
+  const modal = expanded || !docked;
+  const sizeAction = expanded ? 'Вернуть боковую панель' : 'Развернуть на весь экран';
   const notes = draft?.id === id ? draft.notes : s?.workspace.notes ?? '';
   const message = error || loadError;
 
@@ -155,7 +158,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
 
   useEffect(() => { setError(''); setDraft(null); setRfqProductIds([]); }, [id]);
 
-  const dialogRef = useDialog<HTMLElement>(onClose, returnFocusRef, !docked);
+  const dialogRef = useDialog<HTMLElement>(onClose, returnFocusRef, modal);
   useEffect(() => {
     const panel = dialogRef.current;
     if (panel && !panel.contains(document.activeElement)) panel.focus({ preventScroll: true });
@@ -234,10 +237,10 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-graphite/10 sm:bg-transparent lg:pointer-events-none"
+      className={`fixed inset-0 z-50 flex justify-end ${expanded ? '' : 'bg-graphite/10 sm:bg-transparent lg:pointer-events-none'}`}
       onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}
     >
-      <aside ref={dialogRef} role="dialog" aria-modal={!docked || undefined} aria-labelledby="detail-title" tabIndex={-1} data-dialog-initial-focus onKeyDown={handleNavigationKey} className="drawer-panel animate-drawer pointer-events-auto outline-none!">
+      <aside ref={dialogRef} role="dialog" aria-modal={modal || undefined} aria-labelledby="detail-title" tabIndex={-1} data-dialog-initial-focus onKeyDown={handleNavigationKey} className={`drawer-panel animate-drawer pointer-events-auto outline-none! ${expanded ? 'max-w-none border-l-0 shadow-none' : ''}`}>
         <div role="group" aria-label="Управление карточкой" className="flex h-11 shrink-0 items-center px-3 sm:px-4">
           {navigation && (
             <div data-supplier-navigation role="group" aria-label="Навигация по таблице" className="flex items-center gap-0.5">
@@ -259,7 +262,18 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
               ))}
             </div>
           )}
-          <button ref={closeButtonRef} type="button" onClick={onClose} className={drawerToolbarButton + ' ml-auto'} aria-label="Закрыть карточку" title="Закрыть карточку (Esc)"><X size={17} /></button>
+          <div className="ml-auto flex items-center gap-0.5">
+            <button
+              type="button"
+              onClick={event => { event.currentTarget.focus({ preventScroll: true }); setExpanded(value => !value); }}
+              className={drawerToolbarButton + ' hidden sm:grid'}
+              aria-label={sizeAction}
+              title={sizeAction}
+            >
+              {expanded ? <Minimize2 size={17} aria-hidden="true" /> : <Maximize2 size={17} aria-hidden="true" />}
+            </button>
+            <button ref={closeButtonRef} type="button" onClick={onClose} className={drawerToolbarButton} aria-label="Закрыть карточку" title="Закрыть карточку (Esc)"><X size={17} /></button>
+          </div>
         </div>
         <div className="shrink-0 border-b border-line px-5 pt-1 sm:px-6">
           <p className="eyebrow mb-1">{s ? `${s.categoryLabel} · ${s.city}` : 'Карточка поставщика'}</p>
