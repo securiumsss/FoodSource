@@ -64,7 +64,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
     {(hasPagination || Boolean(initialSearch)) && <label className="relative block shrink-0">
       <span className="sr-only">Поиск по ассортименту</span>
       <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-      <input type="search" className="field" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
+      <input type="search" className="field field-search" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
     </label>}
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-line">
       <div ref={tableScrollRef} data-assortment-scroll className="min-h-0 flex-1 overflow-auto overscroll-contain focus-visible:outline-offset-[-2px]" role="region" aria-label="Позиции с сайта поставщика" tabIndex={0}>

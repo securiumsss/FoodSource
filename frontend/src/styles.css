@@ -72,6 +72,11 @@ button:disabled {
   outline-offset: 2px;
 }
 
+.field-search:focus {
+  border-color: var(--color-brand-ink);
+  outline: none;
+}
+
 ::selection {
   background: var(--color-brand-line);
   color: var(--color-ink);

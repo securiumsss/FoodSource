@@ -128,7 +128,7 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
             <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted">
               {!current && result ? <LoaderCircle size={15} aria-label="Обновляем позиции" role="status" className="animate-spin" /> : <Search size={15} aria-hidden="true" />}
             </span>
-            <input type="search" value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field" style={{ paddingInlineStart: '2rem' }} />
+            <input type="search" value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field field-search" style={{ paddingInlineStart: '2rem' }} />
           </label>
         </div>}
         <div key={section} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3 sm:px-5">
