@@ -81,10 +81,19 @@ describe('SuppliersService', () => {
   it('finds catalog positions with reordered words and keeps product prices distinct in comparison', async () => {
     const sample = ['sup-dairy-01', 'sup-dairy-03'].map(id => fixture(id, { category: 'dairy', regions: ['Москва и МО'] }));
     const store = {
-      listWithWorkspace: () => sample,
+      listWithWorkspace: () => [...sample, fixture('no-catalog', { description: 'Оптовая продажа молочных продуктов' })],
       findWithWorkspace: (id: string) => sample.find(row => row.supplier.id === id),
     } as unknown as StorageService;
     const catalog = new SuppliersService(store, new ScoringService());
+    const unfiltered = await catalog.findAll();
+    expect(unfiltered.items.find(item => item.id === 'sup-dairy-01')).toMatchObject({
+      assortmentGroups: ['Молоко и сливки', 'Сливочное масло и спреды', 'Сыры'],
+    });
+    expect(unfiltered.items.find(item => item.id === 'sup-dairy-01')).not.toHaveProperty('matchedProducts');
+    const descriptionMatch = await catalog.findAll({ search: 'молочных продуктов' });
+    expect(ids(descriptionMatch.items)).toEqual(['no-catalog']);
+    expect(descriptionMatch.items[0]).not.toHaveProperty('assortmentGroups');
+    expect(descriptionMatch.items[0]).not.toHaveProperty('matchedProducts');
     const result = await catalog.findAll({ region: 'Москва и МО', search: '33 % СЛИВКИ 1 л' });
     expect(ids(result.items)).toEqual(['sup-dairy-01', 'sup-dairy-03']);
     expect(result.items.find(item => item.id === 'sup-dairy-01')?.matchedProducts).toEqual([

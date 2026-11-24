@@ -23,7 +23,13 @@ export class SuppliersService {
   constructor(private readonly storage: StorageService, private readonly scoring: ScoringService) {}
 
   private evaluate(row: StoredSupplier, context: Pick<SuppliersQueryParams, 'region' | 'maxMoqRub'>): SupplierWithEvaluation {
-    return { ...row.supplier, workspace: row.workspace, scoring: this.scoring.evaluate(row.supplier, context) };
+    const groups = getAssortment(row.supplier.id)?.groups;
+    return {
+      ...row.supplier,
+      workspace: row.workspace,
+      scoring: this.scoring.evaluate(row.supplier, context),
+      ...(groups?.length ? { assortmentGroups: groups } : {}),
+    };
   }
 
   async findAll(query: SuppliersQueryParams = {}): Promise<SuppliersListResponse> {

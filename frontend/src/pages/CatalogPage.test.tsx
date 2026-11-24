@@ -139,25 +139,30 @@ describe('Каталог поставщиков', () => {
     expect(screen.getByLabelText('Активных фильтров: 1')).toBeTruthy();
   });
 
-  it('ставит числа перед длинными подписями и сохраняет исходные условия в подсказках', async () => {
+  it('разделяет ассортимент и минимальный заказ, не выводя цену товара в реестре', async () => {
+    const user = userEvent.setup();
     const moqLabel = 'Доставка по Москве и МО от 1 короба';
     const priceLabel = 'Креветки 90/120 королевские, 400 г — 365 ₽/упаковка';
     const items: SupplierWithEvaluation[] = [
-      { ...first, moq: { amount: 1, unit: 'BOX', label: moqLabel }, priceEstimate: { min: 365, max: 365, unit: 'RUB/упаковка', label: priceLabel } },
+      { ...first, assortmentGroups: ['Креветки', 'Мидии', 'Кальмары', 'Гребешки'], moq: { amount: 1, unit: 'BOX', label: moqLabel }, priceEstimate: { min: 365, max: 365, unit: 'RUB/упаковка', label: priceLabel } },
       { ...second, moq: { amount: null, unit: null, label: 'Минимальный заказ от 0,5 кг одной позиции' } },
       { ...fixture('three', 'Третий поставщик'), moq: { amount: null, unit: null, label: 'Условия различаются: от 500 кг или от 5 тонн' }, priceEstimate: { min: null, max: 270, unit: 'RUB/кг', label: 'Лук-порей — до 270 ₽/кг' } },
     ];
     vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items, total: items.length });
     render(<CatalogPage />);
     await screen.findByText('Первый поставщик');
+    const table = within(screen.getByRole('region', { name: 'Таблица поставщиков' }));
+    expect(table.getAllByRole('columnheader').slice(2, 4).map(header => header.textContent)).toEqual(['Ассортимент', 'Мин. заказ']);
+    expect(table.getAllByText('Позиции не собраны')).toHaveLength(2);
     expect(screen.getByTitle(moqLabel).textContent).toBe('от 1 кор.');
-    expect(screen.getByTitle(priceLabel).firstElementChild?.textContent).toBe('365 ₽/уп');
-    expect(screen.getByTitle(priceLabel).lastElementChild?.textContent).toBe('Креветки 90/120 королевские, 400 г');
     expect(screen.getByTitle(items[1].moq.label).textContent).toBe('от 0,5 кг');
     expect(screen.getByTitle(items[2].moq.label).textContent).toBe('По запросу');
-    expect(screen.getByTitle(items[2].priceEstimate.label).firstElementChild?.textContent).toBe('до 270 ₽/кг');
+    expect(table.queryByTitle(priceLabel)).toBeNull();
+    expect(table.queryByText(/365 ₽/)).toBeNull();
     expect(screen.getByTitle('Выберите до 4 поставщиков для сравнения')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Сравнить Первый поставщик' }).getAttribute('title')).toBe('Добавить к сравнению');
+    await user.click(table.getByRole('button', { name: /Креветки · Мидии · Кальмары.*ещё групп: 1/ }));
+    expect((await screen.findByRole('tab', { name: 'Ассортимент' })).getAttribute('aria-selected')).toBe('true');
   });
 
   it('синхронизирует сравнение из дровера с таблицей и соблюдает общий лимит', async () => {
@@ -332,10 +337,12 @@ describe('Каталог поставщиков', () => {
   it('открывает найденную позицию в ассортименте и добавляет её с фасовкой в письмо', async () => {
     const user = userEvent.setup();
     const product = { id: 'cream', name: 'Сливки 33%', pack: '1 л', price: { kind: 'on_request' as const }, sourceUrl: 'https://supplier.test/cream', checkedAt: '2026-11-24' };
-    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [{ ...first, matchedProducts: [product] }, second] });
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [{ ...first, assortmentGroups: ['Молоко и сливки'], matchedProducts: [product] }, second] });
     vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Сливки'], products: [product] } });
     render(<CatalogPage />);
-    await user.click(await screen.findByRole('button', { name: 'Найдено: Сливки 33%' }));
+    const match = await screen.findByRole('button', { name: 'Найдено: Сливки 33% 1 л' });
+    expect(match.closest('td')?.cellIndex).toBe(2);
+    await user.click(match);
     const drawer = within(await screen.findByRole('dialog'));
     expect((await drawer.findByRole('tab', { name: 'Ассортимент' })).getAttribute('aria-selected')).toBe('true');
     const table = await drawer.findByRole('table', { name: '' });

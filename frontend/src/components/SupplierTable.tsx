@@ -1,7 +1,7 @@
 import { requiresTemperatureControl } from '@food-suppliers/shared';
 import type { SupplierCategory, SupplierStatus, SupplierWithEvaluation } from '@food-suppliers/shared';
 import { useId, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
-import { ArrowLeft, ArrowRight, Check, GitCompareArrows, Snowflake, Truck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitCompareArrows, Snowflake, Truck } from 'lucide-react';
 import { getVerdictStyle, InlineStatusSelect, StatusBadge } from './ui';
 
 const shortCategory: Record<SupplierCategory, string> = {
@@ -21,22 +21,34 @@ function compactMoq({ amount, unit, label }: SupplierWithEvaluation['moq']): str
   return bounds.length === 1 ? bounds[0][1].replace(/\s+/gu, ' ') : 'По запросу';
 }
 
-function compactPrice({ min, max, unit, label }: SupplierWithEvaluation['priceEstimate']): { amount: string; product: string } {
-  let amount: string;
-  if (min === null) {
-    if (max === null) return { amount: 'По запросу', product: '' };
-    amount = 'до ' + numberFormat.format(max);
-  } else if (max === null) amount = 'от ' + numberFormat.format(min);
-  else if (min !== max) amount = numberFormat.format(min) + '–' + numberFormat.format(max);
-  else amount = numberFormat.format(min);
+function AssortmentPreview({ supplier, onOpen }: { supplier: SupplierWithEvaluation; onOpen: () => void }) {
+  const { matchedProducts = [], assortmentGroups = [] } = supplier;
+  const match = matchedProducts[0];
+  const groupLimit = 3;
+  if (!match && !assortmentGroups.length) return <span className="text-[11px] text-muted">Позиции не собраны</span>;
 
-  const priceUnit = (unit ?? '').replace(/^RUB(?=\/|$)/i, '₽').replace(/\/упаковка$/iu, '/уп');
-  if (priceUnit) amount += ' ' + priceUnit;
+  const text = match ? `Найдено: ${match.name}` : assortmentGroups.slice(0, groupLimit).join(' · ');
+  const more = match ? matchedProducts.length - 1 : assortmentGroups.length - groupLimit;
+  const title = match
+    ? matchedProducts.map(product => [product.name, product.pack].filter(Boolean).join(' · ')).join('\n')
+    : assortmentGroups.join(' · ');
 
-  // A dash/colon before a price separates the product from price qualifiers (VAT, availability, etc.).
-  const separator = /\s*(?:[—–:]|\s-\s)\s*(?=(?:(?:от|до)\s+)?\d)/iu.exec(label);
-  const product = separator ? label.slice(0, separator.index).trim() : '';
-  return { amount, product };
+  return (
+    <button
+      type="button"
+      title={title}
+      onClick={event => { event.stopPropagation(); onOpen(); }}
+      className={`inline-flex max-w-full items-start gap-1 text-left text-xs hover:underline ${match ? 'font-semibold text-brand-ink-strong' : 'text-secondary hover:text-brand-ink-strong'}`}
+    >
+      <span className="min-w-0">
+        <span className="line-clamp-2 break-words">{text}</span>
+        {(match?.pack || more > 0) && <span className="mt-0.5 block truncate text-[11px] font-normal text-secondary">
+          {[match?.pack, more > 0 ? (match ? `ещё совпадения: ${more}` : `ещё групп: ${more}`) : null].filter(Boolean).join(' · ')}
+        </span>}
+      </span>
+      <ArrowUpRight size={12} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-ink" />
+    </button>
+  );
 }
 
 interface Props {
@@ -100,11 +112,12 @@ export function SupplierTable({
       </button>}
       <div id={viewportId} ref={viewportRef} className="@container min-h-0 flex-1 overflow-auto overscroll-contain" role="region" aria-label="Таблица поставщиков" tabIndex={0} onScroll={event => setScrolledRight(event.currentTarget.scrollLeft > 8)}>
         {/* On mobile the first three columns occupy one viewport; the remaining columns scroll into view. */}
-        <table className="w-full table-fixed border-collapse text-left max-md:w-[calc(100cqw+568px)] md:min-w-[960px]">
+        <table className="w-full table-fixed border-collapse text-left max-md:w-[calc(100cqw+688px)] md:min-w-[1080px]">
           <colgroup>
             <col className="w-10 md:w-[44px]" />
-            <col className="max-md:w-[calc(62cqw-40px)]" />
-            <col className="w-[38cqw] md:w-[clamp(205px,22%,340px)]" />
+            <col className="max-md:w-[calc(55cqw-40px)]" />
+            <col className="w-[45cqw] md:w-[clamp(205px,22%,340px)]" />
+            <col className="w-[120px]" />
             <col className="w-[166px] md:w-[16%]" />
             <col className="w-[134px] md:w-[13%]" />
             <col className="w-[118px]" />
@@ -117,8 +130,9 @@ export function SupplierTable({
                 <GitCompareArrows size={14} aria-hidden="true" className="mx-auto" />
               </th>
               <th scope="col" className="px-3 py-2.5">Поставщик</th>
-              <th scope="col" className="px-2 py-2.5 md:px-3"><span className="md:hidden">Мин. заказ / цена</span><span className="hidden md:inline">MOQ / Пример цены</span></th>
-              <th scope="col" className="px-3 py-2.5 max-md:border-l max-md:border-line">География и логистика</th>
+              <th scope="col" className="px-2 py-2.5 md:px-3">Ассортимент</th>
+              <th scope="col" className="px-3 py-2.5 max-md:border-l max-md:border-line">Мин. заказ</th>
+              <th scope="col" className="px-3 py-2.5">География и логистика</th>
               <th scope="col" className="px-3 py-2.5">Документы</th>
               <th scope="col" className="px-3 py-2.5">Оценка</th>
               <th scope="col" className="px-3 py-2.5">Статус</th>
@@ -127,7 +141,7 @@ export function SupplierTable({
           <tbody className="divide-y divide-separator">
             {suppliers.length === 0 && emptyContent && (
               <tr>
-                <td colSpan={7} className="p-0">
+                <td colSpan={8} className="p-0">
                   <div className="sticky left-0 w-[100cqw] px-4 py-10 text-center sm:px-6">
                     {emptyContent}
                   </div>
@@ -139,7 +153,6 @@ export function SupplierTable({
               const isActive = s.id === activeId;
               const style = getVerdictStyle(s.scoring.verdict);
               const compliance = [...s.documents, ...s.complianceSystems];
-              const price = compactPrice(s.priceEstimate);
 
               return (
                 <tr
@@ -180,12 +193,6 @@ export function SupplierTable({
                   <td className="py-3 pr-1.5 align-top md:px-3">
                     <span className="text-[13px] font-semibold text-ink group-hover:text-brand-ink-strong">{s.name}</span>
                     <p className="mt-0.5 text-[11px] text-muted">{s.city} · <span className="md:hidden">{shortCategory[s.category]}</span><span className="hidden md:inline">{s.categoryLabel}</span></p>
-                    {!!s.matchedProducts?.length && <button
-                      type="button"
-                      className="mt-1 block max-w-full truncate rounded bg-brand-soft px-1.5 py-0.5 text-left text-[10px] font-medium text-brand-ink-strong"
-                      title={s.matchedProducts.map(product => [product.name, product.pack].filter(Boolean).join(' · ')).join('\n')}
-                      onClick={event => { event.stopPropagation(); onOpen(s.id, 'assortment'); }}
-                    >Найдено: {s.matchedProducts[0].name}{s.matchedProducts.length > 1 && ` +${s.matchedProducts.length - 1}`}</button>}
                     <div className="mt-1.5 flex flex-wrap items-center gap-1 md:hidden">
                       <span className={'rounded border px-1.5 py-0.5 text-[10px] font-semibold ' + style.badge}>
                         <span className="num">{s.scoring.total}/100</span> · {style.shortLabel}
@@ -195,14 +202,14 @@ export function SupplierTable({
                   </td>
 
                   <td className="px-2 py-3 align-top md:px-3">
-                    <p title={s.moq.label} className="num truncate text-xs font-medium text-ink">{compactMoq(s.moq)}</p>
-                    <p title={s.priceEstimate.label} className="mt-1 flex min-w-0 items-baseline gap-x-1 text-[11px] text-secondary">
-                      <span className="num shrink-0 whitespace-nowrap">{price.amount}</span>
-                      {price.product && <><span aria-hidden="true" className="hidden md:inline">·</span><span className="hidden min-w-0 truncate md:inline">{price.product}</span></>}
-                    </p>
+                    <AssortmentPreview supplier={s} onOpen={() => onOpen(s.id, 'assortment')} />
                   </td>
 
                   <td className="px-3 py-3 align-top max-md:border-l max-md:border-line">
+                    <p title={s.moq.label} className="num truncate text-xs font-medium text-ink">{compactMoq(s.moq)}</p>
+                  </td>
+
+                  <td className="px-3 py-3 align-top">
                     <div className="flex flex-wrap gap-1">
                       {s.regions.slice(0, 2).map(region => (
                         <span key={region} className="rounded border border-line bg-soft px-1.5 py-0.5 text-[10px] font-medium text-secondary">

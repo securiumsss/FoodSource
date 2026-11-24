@@ -67,6 +67,7 @@ export interface SupplierAssortment {
 export type SupplierWithEvaluation = Supplier & {
   workspace: SupplierWorkspaceState;
   scoring: SupplierScoring;
+  assortmentGroups?: string[];
   matchedProducts?: Pick<SupplierProduct, 'id' | 'name' | 'pack'>[];
 };
 
