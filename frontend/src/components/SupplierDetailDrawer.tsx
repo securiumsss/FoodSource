@@ -2,7 +2,7 @@ import { requiresTemperatureControl } from '@food-suppliers/shared';
 import { useEffect, useImperativeHandle, useRef, useState, type KeyboardEvent, type Ref, type RefObject } from 'react';
 import type { SupplierDetailResponse, SupplierWithEvaluation, SupplierWorkspaceState, WorkspaceUpdateDto } from '@food-suppliers/shared';
 import { ArrowDown, ArrowUp, Check, Clipboard, GitCompareArrows, LoaderCircle, Mail, Phone, X } from 'lucide-react';
-import { fetchSupplierById, updateSupplierWorkspace } from '../api/client';
+import { updateSupplierWorkspace } from '../api/client';
 import { ExternalLink, FactList, getVerdictStyle, InlineStatusSelect, readableError, Regions, ScoreBadge } from './ui';
 import { useDialog } from './useDialog';
 
@@ -31,6 +31,8 @@ const drawerToolbarButton = 'grid h-9 w-9 place-items-center rounded text-second
 interface Props {
   ref?: Ref<SupplierDrawerHandle>;
   id: string;
+  supplier: SupplierDetailResponse | null;
+  loadError: string;
   initialTab?: DrawerTab;
   supplierName?: string;
   navigation?: {
@@ -41,8 +43,6 @@ interface Props {
     onNavigate: (id: string) => void;
   };
   returnFocusRef?: RefObject<HTMLElement | null>;
-  region?: string;
-  maxMoqRub?: number;
   selected: boolean;
   atLimit: boolean;
   onCompare: (supplier: SupplierWithEvaluation) => void;
@@ -77,16 +77,16 @@ function sourceLabel(value: string): string {
   }
 }
 
-export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplierName, navigation, returnFocusRef, region, maxMoqRub, selected, atLimit, onCompare, onClose, onSaved }: Props) {
-  const [supplier, setSupplier] = useState<SupplierDetailResponse | null>(null);
+export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialTab = 'overview', supplierName, navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
   const [tab, setTab] = useState<DrawerTab>(initialTab);
-  const [notes, setNotes] = useState('');
+  const [draft, setDraft] = useState<{ id: string; notes: string } | null>(null);
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
-  const loadedWorkspaceId = useRef<string | null>(null);
   const docked = useDockedDrawer();
+  const notes = draft?.id === id ? draft.notes : s?.workspace.notes ?? '';
+  const message = error || loadError;
 
   useEffect(() => {
     setCopiedKey(null);
@@ -94,24 +94,7 @@ export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplie
     setTab(initialTab);
   }, [id, initialTab]);
 
-  useEffect(() => {
-    let active = true;
-    setError('');
-    fetchSupplierById(id, { region, maxMoqRub })
-      .then(result => {
-        if (!active) return;
-        setSupplier(current => current?.id === id ? { ...result, workspace: current.workspace } : result);
-        // Re-evaluating scores after a filter change must not overwrite workspace drafts.
-        if (loadedWorkspaceId.current !== id) {
-          loadedWorkspaceId.current = id;
-          setNotes(result.workspace.notes);
-        }
-      })
-      .catch(reason => {
-        if (active) setError(readableError(reason));
-      });
-    return () => { active = false; };
-  }, [id, region, maxMoqRub]);
+  useEffect(() => { setError(''); setDraft(null); }, [id]);
 
   const dialogRef = useDialog<HTMLElement>(onClose, returnFocusRef, !docked);
   useEffect(() => {
@@ -126,9 +109,8 @@ export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplie
     setError('');
     try {
       const result = await updateSupplierWorkspace(id, update);
-      setSupplier(current => (current ? { ...current, workspace: result.workspace } : current));
-      if (update.notes !== undefined) setNotes(result.workspace.notes);
       onSaved(id, result.workspace);
+      if (update.notes !== undefined) setDraft(null);
       setSaved(true);
     } catch (reason) {
       setError(readableError(reason));
@@ -148,8 +130,7 @@ export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplie
     }
   }
 
-  const s = supplier?.id === id ? supplier : null;
-  const hasDraft = Boolean(s && notes !== s.workspace.notes);
+  const hasDraft = draft?.id === id && notes !== s?.workspace.notes;
   const navigationBlocked = saving || hasDraft;
   useImperativeHandle(ref, () => ({
     canSwitchSupplier: () => {
@@ -279,8 +260,8 @@ export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplie
         </div>
 
         <div key={id} className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6">
-          {error && <div role="alert" className="mb-4 rounded-md border border-rose-200 bg-rose-50 px-3 py-2.5 text-xs text-rose-800">{error}</div>}
-          {!s && !error && <div className="flex min-h-52 items-center justify-center gap-2 text-xs text-muted"><LoaderCircle size={16} className="animate-spin" />Загружаем карточку...</div>}
+          {message && <div role="alert" className="mb-4 rounded-md border border-rose-200 bg-rose-50 px-3 py-2.5 text-xs text-rose-800">{message}</div>}
+          {!s && !message && <div className="flex min-h-52 items-center justify-center gap-2 text-xs text-muted"><LoaderCircle size={16} className="animate-spin" />Загружаем карточку...</div>}
 
           {s && tab === 'overview' && (
             <div className="space-y-6">
@@ -355,8 +336,8 @@ export function SupplierDetailDrawer({ ref, id, initialTab = 'overview', supplie
 
           {s && tab === 'workspace' && (
             <div className="space-y-5">
-              <div><label htmlFor="workspace-notes" className="filter-label">Заметки менеджера</label><textarea id="workspace-notes" className="field mt-2 min-h-36 resize-y" maxLength={2000} disabled={saving} value={notes} onChange={event => { setNotes(event.target.value); setSaved(false); }} placeholder="Договорённости, вопросы и следующие шаги" /><p className="mt-1 text-right text-[11px] text-muted">{notes.length} / 2000</p></div>
-              <div className="flex items-center gap-3"><button type="button" className="btn-primary" disabled={saving} onClick={() => void save({ notes })}>{saving && <LoaderCircle size={14} className="animate-spin" />}Сохранить изменения</button>{hasDraft && <button type="button" className="btn-secondary" disabled={saving} onClick={() => { setNotes(s.workspace.notes); closeButtonRef.current?.focus({ preventScroll: true }); }}>Отменить изменения</button>}{saved && <span role="status" className="inline-flex items-center gap-1 text-xs text-positive"><Check size={14} />Сохранено</span>}</div>
+              <div><label htmlFor="workspace-notes" className="filter-label">Заметки менеджера</label><textarea id="workspace-notes" className="field mt-2 min-h-36 resize-y" maxLength={2000} disabled={saving} value={notes} onChange={event => { setDraft(event.target.value === s.workspace.notes ? null : { id, notes: event.target.value }); setSaved(false); }} placeholder="Договорённости, вопросы и следующие шаги" /><p className="mt-1 text-right text-[11px] text-muted">{notes.length} / 2000</p></div>
+              <div className="flex items-center gap-3"><button type="button" className="btn-primary" disabled={saving} onClick={() => void save({ notes })}>{saving && <LoaderCircle size={14} className="animate-spin" />}Сохранить изменения</button>{hasDraft && <button type="button" className="btn-secondary" disabled={saving} onClick={() => { setDraft(null); closeButtonRef.current?.focus({ preventScroll: true }); }}>Отменить изменения</button>}{saved && <span role="status" className="inline-flex items-center gap-1 text-xs text-positive"><Check size={14} />Сохранено</span>}</div>
             </div>
           )}
 

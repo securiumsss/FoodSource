@@ -1,10 +1,11 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, render, renderHook, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { CompareResponse, SupplierDetailResponse, SupplierWithEvaluation, SuppliersListResponse } from '@food-suppliers/shared';
 import { CatalogPage } from './CatalogPage';
 import * as client from '../api/client';
+import { useSupplierDetails } from '../api/useSupplierDetails';
 
 vi.mock('../api/client', () => ({ fetchSuppliers: vi.fn(), fetchSupplierById: vi.fn(), updateSupplierWorkspace: vi.fn(), compareSuppliers: vi.fn() }));
 
@@ -252,6 +253,68 @@ describe('Каталог поставщиков', () => {
     await user.keyboard('{ArrowUp}');
     await within(dialog).findByRole('heading', { name: 'Первый поставщик' });
     expect(document.activeElement).toBe(dialog);
+  });
+
+  it('сразу показывает знакомую карточку при возврате и повторном открытии', async () => {
+    const user = userEvent.setup();
+    let finishRefresh!: (response: SupplierDetailResponse) => void;
+    const refresh = new Promise<SupplierDetailResponse>(resolve => { finishRefresh = resolve; });
+    const fetchDetail = vi.mocked(client.fetchSupplierById);
+    fetchDetail.mockResolvedValueOnce(detail).mockResolvedValueOnce({ ...detail, ...second }).mockReturnValue(refresh);
+    render(<CatalogPage />);
+    const firstRow = await screen.findByRole('row', { name: 'Открыть карточку поставщика Первый поставщик' });
+    await user.click(firstRow);
+    const drawer = within(screen.getByRole('dialog'));
+    await drawer.findByText('Как рассчитан скоринг');
+    await user.keyboard('{ArrowDown}');
+    await drawer.findByRole('combobox', { name: 'Статус для Второй поставщик' });
+    await user.keyboard('{ArrowUp}');
+    expect(drawer.getByText('Как рассчитан скоринг')).toBeTruthy();
+    expect(drawer.queryByText('Загружаем карточку...')).toBeNull();
+    expect(fetchDetail).toHaveBeenCalledTimes(3);
+
+    await user.keyboard('{Escape}');
+    await user.click(firstRow);
+    expect(within(screen.getByRole('dialog')).getByText('Как рассчитан скоринг')).toBeTruthy();
+    expect(fetchDetail).toHaveBeenCalledTimes(3);
+    await act(async () => { finishRefresh({ ...detail, description: 'Обновлённое описание' }); });
+    expect(within(screen.getByRole('dialog')).getByText('Обновлённое описание')).toBeTruthy();
+  });
+
+  it('разделяет кэш по региону и MOQ, не затирая сохранённую заметку старым ответом', async () => {
+    let finishRefresh!: (response: SupplierDetailResponse) => void;
+    const refresh = new Promise<SupplierDetailResponse>(resolve => { finishRefresh = resolve; });
+    const fetchDetail = vi.mocked(client.fetchSupplierById);
+    fetchDetail
+      .mockResolvedValueOnce(detail)
+      .mockResolvedValueOnce({ ...detail, scoring: { ...detail.scoring, total: 80 } })
+      .mockResolvedValueOnce({ ...detail, scoring: { ...detail.scoring, total: 77 } })
+      .mockReturnValueOnce(refresh)
+      .mockRejectedValueOnce(new Error('Нет сети'));
+    const unfiltered = { region: undefined, maxMoqRub: undefined };
+    const moscow = { ...unfiltered, region: 'Москва и МО' };
+    const capped = { ...moscow, maxMoqRub: 1000 };
+    const { result, rerender } = renderHook(
+      ({ region, maxMoqRub }: { region?: string; maxMoqRub?: number }) => useSupplierDetails('one', region, maxMoqRub),
+      { initialProps: unfiltered as { region?: string; maxMoqRub?: number } },
+    );
+    await waitFor(() => expect(result.current.detail?.scoring.total).toBe(60));
+    rerender(moscow);
+    expect(result.current.detail).toBeNull();
+    await waitFor(() => expect(result.current.detail?.scoring.total).toBe(80));
+    rerender(capped);
+    expect(result.current.detail).toBeNull();
+    await waitFor(() => expect(result.current.detail?.scoring.total).toBe(77));
+    rerender(moscow);
+    expect(result.current.detail?.scoring.total).toBe(80);
+    act(() => result.current.updateWorkspace('one', { ...first.workspace, status: 'shortlist', notes: 'Позвонить' }));
+    await act(async () => { finishRefresh({ ...detail, scoring: { ...detail.scoring, total: 81 } }); });
+    expect(result.current.detail?.scoring.total).toBe(81);
+    expect(result.current.detail?.workspace).toMatchObject({ status: 'shortlist', notes: 'Позвонить' });
+    await act(async () => { rerender(capped); });
+    expect(result.current.detail?.scoring.total).toBe(77);
+    expect(result.current.detail?.workspace.notes).toBe('Позвонить');
+    expect(result.current.loadError).toBeUndefined();
   });
 
   it('переключает рабочие списки в сайдбаре', async () => {

@@ -3,6 +3,7 @@ import { requiresTemperatureControl } from '@food-suppliers/shared';
 import type { SupplierStatus, SuppliersListResponse, SuppliersQueryParams, SupplierWithEvaluation, SupplierWorkspaceState } from '@food-suppliers/shared';
 import { ArrowRight, SearchX } from 'lucide-react';
 import { fetchSuppliers, updateSupplierWorkspace } from '../api/client';
+import { useSupplierDetails } from '../api/useSupplierDetails';
 import { CompareBar } from '../components/CompareBar';
 import { CompareModal } from '../components/CompareModal';
 import { CatalogToolbar } from '../components/CatalogToolbar';
@@ -39,6 +40,7 @@ export function CatalogPage() {
   const detailReturnFocusRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<SupplierDrawerHandle>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
+  const { detail, loadError, updateWorkspace } = useSupplierDetails(detailId, filters.region, filters.maxMoqRub);
   const [detailStartTab, setDetailStartTab] = useState<'overview' | 'rfq'>('overview');
   const [compareIds, setCompareIds] = useState<string[] | null>(null);
   const [savingId, setSavingId] = useState('');
@@ -64,10 +66,11 @@ export function CatalogPage() {
     return next;
   });
   const saved = useCallback((id: string, workspace: SupplierWorkspaceState) => {
+    updateWorkspace(id, workspace);
     setCatalog(current => current && ({ ...current, items: current.items.map(s => s.id === id ? { ...s, workspace } : s) }));
     setSelected(current => current.map(s => s.id === id ? { ...s, workspace } : s));
     setRefresh(n => n + 1);
-  }, []);
+  }, [updateWorkspace]);
   const changeStatus = useCallback(async (id: string, status: SupplierStatus) => {
     setSavingId(id); setError('');
     try { const result = await updateSupplierWorkspace(id, { status }); saved(id, result.workspace); }
@@ -160,6 +163,8 @@ export function CatalogPage() {
       <SupplierDetailDrawer
         ref={drawerRef}
         id={detailId}
+        supplier={detail}
+        loadError={loadError === undefined ? '' : readableError(loadError)}
         initialTab={detailStartTab}
         supplierName={items[detailIndex]?.name}
         navigation={detailIndex >= 0 ? {
@@ -170,8 +175,6 @@ export function CatalogPage() {
           onNavigate: id => { setDetailStartTab('overview'); setDetailId(id); },
         } : undefined}
         returnFocusRef={detailReturnFocusRef}
-        region={filters.region}
-        maxMoqRub={filters.maxMoqRub}
         selected={selected.some(s => s.id === detailId)}
         atLimit={selected.length >= 4}
         onCompare={toggleCompare}
