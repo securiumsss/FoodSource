@@ -15,7 +15,7 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
 
   return (
     <div className="min-w-0">
-      <label id={id + '-label'} htmlFor={id} className={compactSuffix ? 'sr-only' : 'filter-label'}>{label}</label>
+      <label id={id + '-label'} htmlFor={id} className={compactSuffix ? 'sr-only' : 'filter-label block'}>{label}</label>
       <Select.Root value={value} onValueChange={next => {
         const option = options.find(item => item.value === next);
         if (option) onChange(option.value);

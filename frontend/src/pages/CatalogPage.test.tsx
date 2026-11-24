@@ -131,7 +131,7 @@ describe('Каталог поставщиков', () => {
     expect(screen.getByLabelText('Активных фильтров: 1')).toBeTruthy();
     await user.click(screen.getByLabelText('Своя доставка'));
     expect(screen.getByLabelText('Активных фильтров: 2')).toBeTruthy();
-    await user.type(screen.getByLabelText('Лимит на минимальный заказ, ₽'), '0');
+    await user.type(screen.getByRole('spinbutton', { name: 'Лимит минимального заказа, ₽' }), '0');
     expect(screen.getByLabelText('Активных фильтров: 3')).toBeTruthy();
   });
 
@@ -165,8 +165,9 @@ describe('Каталог поставщиков', () => {
     await user.click(filters);
     await chooseFilter(user, 'Регион', 'Вся РФ');
     await user.click(screen.getByLabelText('Своя доставка'));
-    await user.click(screen.getByRole('button', { name: /до 25\s000 ₽/ }));
-    await user.click(screen.getByLabelText('Включать поставщиков без известного минимума в рублях'));
+    expect(screen.queryByRole('button', { name: /до 25\s000 ₽/ })).toBeNull();
+    await user.type(screen.getByRole('spinbutton', { name: 'Лимит минимального заказа, ₽' }), '25000');
+    await user.click(screen.getByLabelText('Включать поставщиков без минимума в ₽'));
     await user.keyboard('{Escape}');
     expect(filters.getAttribute('aria-expanded')).toBe('false');
     expect(document.activeElement).toBe(filters);
@@ -175,7 +176,8 @@ describe('Каталог поставщиков', () => {
     })));
 
     const chips = screen.getByRole('list', { name: 'Применённые фильтры' });
-    expect(search.compareDocumentPosition(chips) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(search.parentElement?.contains(chips)).toBe(true);
+    expect(chips.compareDocumentPosition(search) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const removeRegion = within(chips).getByRole('button', { name: 'Удалить фильтр: Регион: Вся РФ' });
     await user.click(within(chips).getByRole('button', { name: /Удалить фильтр: MOQ до 25\s000 ₽/ }));
     expect(within(chips).getByRole('button', { name: 'Удалить фильтр: Своя доставка' })).toBeTruthy();

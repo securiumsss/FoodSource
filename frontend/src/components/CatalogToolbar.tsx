@@ -41,7 +41,13 @@ export function CatalogToolbar({ filters, facets, search, onSearchChange, onClea
               {chips.length === 0 && hasCustomSort && <span className="h-1.5 w-1.5 rounded-full bg-brand" title="Изменена сортировка" aria-label="Изменена сортировка" />}
             </button>
           </Popover.Trigger>
-          <div className="flex min-w-0 flex-1 items-center gap-2 px-2.5 sm:px-3">
+          <div className="flex min-w-0 flex-1 items-center gap-1.5 px-2.5 sm:gap-2 sm:px-3">
+            {chips.length > 0 && (
+              <InlineFilterChips
+                chips={chips}
+                onRemove={chip => { onChange(chip.clear); filterButton.current?.focus(); }}
+              />
+            )}
             <Search size={16} aria-hidden="true" className="shrink-0 text-muted" />
             <label htmlFor="supplier-search" className="sr-only">Поиск</label>
             <input
@@ -61,12 +67,6 @@ export function CatalogToolbar({ filters, facets, search, onSearchChange, onClea
             ><X size={15} aria-hidden="true" /></button>}
           </div>
         </div>
-        {chips.length > 0 && (
-          <InlineFilterChips
-            chips={chips}
-            onRemove={chip => { onChange(chip.clear); filterButton.current?.focus(); }}
-          />
-        )}
       </div>
 
       <Popover.Portal>
