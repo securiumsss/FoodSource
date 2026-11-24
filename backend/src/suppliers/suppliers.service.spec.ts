@@ -6,6 +6,7 @@ import type { Supplier } from '@food-suppliers/shared';
 import { ScoringService } from '../scoring/scoring.service';
 import { projectRoot } from '../storage/database';
 import { StorageService, type StoredSupplier } from '../storage/storage.service';
+import { getAssortment } from './assortment';
 import { parseCompare, parseQuery, parseWorkspaceUpdate } from './request-validation';
 import { SuppliersService } from './suppliers.service';
 
@@ -78,6 +79,36 @@ describe('SuppliersService', () => {
     expect(ids((await catalog.findAll({ region: 'Москва и МО' })).items)).toEqual(['area', 'federal']);
   });
 
+  it('covers every seeded supplier with traceable catalog positions and valid prices', () => {
+    for (const supplier of seed) {
+      const catalog = getAssortment(supplier.id);
+      expect(catalog?.groups.length).toBeGreaterThan(0);
+      expect(catalog?.products.length).toBeGreaterThan(0);
+      const host = (url: string) => new URL(url).hostname.replace(/^www\./u, '');
+      expect(host(catalog!.catalogUrl)).toBe(host(supplier.website!));
+      expect(new Set(catalog!.products.map(product => product.id)).size).toBe(catalog!.products.length);
+      for (const product of catalog!.products) {
+        expect(product.name.trim()).not.toBe('');
+        expect(new URL(product.sourceUrl).protocol).toBe('https:');
+        expect(host(product.sourceUrl)).toBe(host(supplier.website!));
+        expect(Number.isFinite(Date.parse(product.checkedAt))).toBe(true);
+        if (product.price.kind === 'published') {
+          expect(Number.isFinite(product.price.amount)).toBe(true);
+          expect(product.price.amount).toBeGreaterThan(0);
+        }
+      }
+    }
+  });
+
+  it('reports the exact number of matching catalog positions without sending all rows to the registry', async () => {
+    const source = fixture('sup-spice-01', { category: 'spices', description: 'Оптовые поставки' });
+    const mock = { listWithWorkspace: () => [source] } as unknown as StorageService;
+    const response = await new SuppliersService(mock, new ScoringService()).findAll({ search: 'перец' });
+    expect(response.total).toBe(1);
+    expect(response.items[0].matchedProductCount).toBeGreaterThan(3);
+    expect(response.items[0].matchedProducts).toHaveLength(3);
+  });
+
   it('finds catalog positions with reordered words and keeps product prices distinct in comparison', async () => {
     const sample = ['sup-dairy-01', 'sup-dairy-03'].map(id => fixture(id, { category: 'dairy', regions: ['Москва и МО'] }));
     const store = {
@@ -87,7 +118,7 @@ describe('SuppliersService', () => {
     const catalog = new SuppliersService(store, new ScoringService());
     const unfiltered = await catalog.findAll();
     expect(unfiltered.items.find(item => item.id === 'sup-dairy-01')).toMatchObject({
-      assortmentGroups: ['Молоко и сливки', 'Сливочное масло и спреды', 'Сыры'],
+      assortmentGroups: ['Молоко и сливки', 'Сливочное масло и спреды', 'Сыры', 'Сгущённое молоко'],
     });
     expect(unfiltered.items.find(item => item.id === 'sup-dairy-01')).not.toHaveProperty('matchedProducts');
     const descriptionMatch = await catalog.findAll({ search: 'молочных продуктов' });

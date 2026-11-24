@@ -55,6 +55,7 @@ export interface SupplierProduct {
   priceNote?: string;
   availabilityNote?: string;
   sourceUrl: string;
+  sourceKind?: 'listing';
   checkedAt: string;
 }
 
@@ -62,12 +63,14 @@ export interface SupplierAssortment {
   catalogUrl: string;
   groups: string[];
   products: SupplierProduct[];
+  catalogNote?: string;
 }
 
 export type SupplierWithEvaluation = Supplier & {
   workspace: SupplierWorkspaceState;
   scoring: SupplierScoring;
   assortmentGroups?: string[];
+  matchedProductCount?: number;
   matchedProducts?: Pick<SupplierProduct, 'id' | 'name' | 'pack'>[];
 };
 

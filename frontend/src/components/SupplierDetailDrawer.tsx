@@ -381,7 +381,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
             </div>
           )}
 
-          {s && tab === 'assortment' && <SupplierAssortmentPanel supplier={s} matches={matchedProductIds} onRequest={productId => {
+          {s && tab === 'assortment' && <SupplierAssortmentPanel key={s.id} supplier={s} matches={matchedProductIds} onRequest={productId => {
             setRfqProductIds(current => current.includes(productId) ? current : [...current, productId]);
             setCopiedKey(null);
             setTab('rfq');

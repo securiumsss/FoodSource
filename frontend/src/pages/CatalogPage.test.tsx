@@ -415,6 +415,27 @@ describe('Каталог поставщиков', () => {
     expect(decodeURIComponent(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href') ?? '')).not.toContain('Сливки 33%');
   });
 
+  it('ищет по товару и фасовке в большом ассортименте и разбивает список на страницы', async () => {
+    const user = userEvent.setup();
+    const products = Array.from({ length: 14 }, (_, index) => ({
+      id: String(index), name: index === 13 ? 'Паприка копчёная' : `Приправа ${index + 1}`, pack: '0,5 кг',
+      price: { kind: 'not_published' as const }, sourceUrl: 'https://supplier.test/catalog', sourceKind: 'listing' as const, checkedAt: '2026-11-24',
+    }));
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Специи'], products } });
+    render(<CatalogPage />);
+    await user.click(await screen.findByRole('row', { name: 'Открыть карточку поставщика Первый поставщик' }));
+    const drawer = within(await screen.findByRole('dialog'));
+    await user.click(await drawer.findByRole('tab', { name: 'Ассортимент' }));
+    expect(drawer.getByText('1–12 из 14')).toBeTruthy();
+    expect(drawer.queryByText('Паприка копчёная')).toBeNull();
+    await user.click(drawer.getByRole('button', { name: 'Следующая страница ассортимента' }));
+    expect(drawer.getByText('13–14 из 14')).toBeTruthy();
+    await user.type(drawer.getByRole('searchbox', { name: 'Поиск по ассортименту' }), 'паприка 0.5 кг');
+    expect(drawer.getByText('1 позиция')).toBeTruthy();
+    expect(drawer.getByRole('link', { name: 'Перечень' }).getAttribute('href')).toBe(products[13].sourceUrl);
+    expect(drawer.getByText('Не опубликована')).toBeTruthy();
+  });
+
   it('сохраняет заметку без изменения статуса и показывает индикатор', async () => {
     const user = userEvent.setup();
     vi.mocked(client.updateSupplierWorkspace).mockResolvedValue({ ...detail, workspace: { status: 'contacted', notes: 'Позвонить', updatedAt: '2026-11-23T10:00:00Z' } });

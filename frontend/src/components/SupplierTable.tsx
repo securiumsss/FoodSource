@@ -28,7 +28,7 @@ function AssortmentPreview({ supplier, onOpen }: { supplier: SupplierWithEvaluat
   if (!match && !assortmentGroups.length) return <span className="text-[11px] text-muted">Позиции не собраны</span>;
 
   const text = match ? `Найдено: ${match.name}` : assortmentGroups.slice(0, groupLimit).join(' · ');
-  const more = match ? matchedProducts.length - 1 : assortmentGroups.length - groupLimit;
+  const more = match ? (supplier.matchedProductCount ?? matchedProducts.length) - 1 : assortmentGroups.length - groupLimit;
   const title = match
     ? matchedProducts.map(product => [product.name, product.pack].filter(Boolean).join(' · ')).join('\n')
     : assortmentGroups.join(' · ');

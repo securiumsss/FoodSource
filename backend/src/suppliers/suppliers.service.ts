@@ -43,7 +43,7 @@ export class SuppliersService {
     for (const { workspace } of all) statusCounts[workspace.status]++;
     const needle = query.search?.trim().toLocaleLowerCase('ru');
 
-    const matchesBySupplier = new Map<string, NonNullable<SupplierWithEvaluation['matchedProducts']>>();
+    const matchesBySupplier = new Map<string, Pick<SupplierWithEvaluation, 'matchedProducts' | 'matchedProductCount'>>();
     const filtered = all.filter(({ supplier: s, workspace }) => {
       if (query.category !== undefined && s.category !== query.category) return false;
       if (query.region !== undefined && !getDeliveryCoverage(s.regions, query.region)) return false;
@@ -63,15 +63,17 @@ export class SuppliersService {
           .join('\n').toLocaleLowerCase('ru');
         const matches = findProducts(s.id, needle);
         if (!matches.length && !haystack.includes(needle)) return false;
-        if (matches.length) matchesBySupplier.set(s.id, matches.slice(0, 3).map(({ id, name, pack }) => ({ id, name, pack })));
+        if (matches.length) matchesBySupplier.set(s.id, {
+          matchedProductCount: matches.length,
+          matchedProducts: matches.slice(0, 3).map(({ id, name, pack }) => ({ id, name, pack })),
+        });
       }
       return true;
     });
 
     const items = filtered.map(row => {
       const evaluated = this.evaluate(row, query);
-      const matchedProducts = matchesBySupplier.get(evaluated.id);
-      return matchedProducts ? { ...evaluated, matchedProducts } : evaluated;
+      return { ...evaluated, ...matchesBySupplier.get(evaluated.id) };
     });
     items.sort((a, b) => {
       switch (query.sortBy ?? 'score') {

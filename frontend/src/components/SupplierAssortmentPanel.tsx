@@ -1,9 +1,13 @@
 import type { SupplierDetailResponse, SupplierProduct } from '@food-suppliers/shared';
-import { Plus } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight, Plus, Search } from 'lucide-react';
 import { ExternalLink } from './ui';
 
 const priceFormat = new Intl.NumberFormat('ru-RU');
 const checkedDate = new Intl.DateTimeFormat('ru-RU', { timeZone: 'UTC' });
+const pageSize = 12;
+const normalize = (value: string) => value.toLocaleLowerCase('ru').replaceAll('ё', 'е').replace(/(?<=\d),(?=\d)/gu, '.');
+const tokens = (value: string) => normalize(value).match(/\p{L}+|\d+(?:\.\d+)?(?:\s*%)?/gu)?.map(token => token.replace(/\s+/gu, '')) ?? [];
 
 export function describeProduct(product: SupplierProduct): string {
   return [product.name, product.pack].filter(Boolean).join(' — ');
@@ -14,6 +18,8 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
   matches: string[];
   onRequest: (id: string) => void;
 }) {
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(0);
   const { assortment } = supplier;
   if (!assortment) {
     return <section className="space-y-3 text-xs text-secondary">
@@ -24,29 +30,46 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
     </section>;
   }
 
-  const products = [...assortment.products].sort((a, b) => Number(matches.includes(b.id)) - Number(matches.includes(a.id)));
+  const matched = new Set(matches);
+  const terms = tokens(query);
+  const products = assortment.products.filter(product => {
+    if (!terms.length) return true;
+    const words = tokens(describeProduct(product));
+    return terms.every(term => words.some(word => /^\d/u.test(term) ? word === term || word === term + '%' : word.startsWith(term)));
+  }).sort((a, b) => Number(matched.has(b.id)) - Number(matched.has(a.id)));
+  const pageCount = Math.ceil(products.length / pageSize);
+  const currentPage = Math.min(page, Math.max(0, pageCount - 1));
+  const start = currentPage * pageSize;
+  const visible = products.slice(start, start + pageSize);
+  const resultLabel = products.length === 1 ? '1 позиция'
+    : products.length ? `${start + 1}–${start + visible.length} из ${products.length}` : 'В собранных позициях ничего не нашлось.';
   return <section className="space-y-4">
     <div className="space-y-2">
       <h3 className="text-sm font-semibold text-ink">Ассортимент поставщика</h3>
       <div className="flex flex-wrap gap-1.5">
         {assortment.groups.map(group => <span key={group} className="rounded border border-line bg-soft px-2 py-1 text-xs text-secondary">{group}</span>)}
       </div>
-      <ExternalLink href={assortment.catalogUrl}>Открыть каталог поставщика</ExternalLink>
+      <ExternalLink href={assortment.catalogUrl}>Ассортимент на сайте поставщика</ExternalLink>
     </div>
     <div className="space-y-2">
-      <h4 className="text-xs font-semibold text-ink">Позиции из открытого каталога</h4>
-      <p className="text-xs leading-relaxed text-secondary">Это часть ассортимента, а не полный прайс. Перед заказом подтвердите наличие и оптовую цену.</p>
-      <div className="overflow-x-auto rounded-lg border border-line" role="region" aria-label="Позиции из открытого каталога" tabIndex={0}>
+      <h4 className="text-xs font-semibold text-ink">Позиции с сайта поставщика</h4>
+      <p className="text-xs leading-relaxed text-secondary">{assortment.catalogNote ?? 'Это выборка с сайта, а не полный прайс. Перед заказом подтвердите наличие и оптовую цену.'}</p>
+      {assortment.products.length > pageSize && <label className="relative block">
+        <span className="sr-only">Поиск по ассортименту</span>
+        <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+        <input type="search" className="field" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
+      </label>}
+      {products.length > 0 && <div className="overflow-x-auto rounded-lg border border-line" role="region" aria-label="Позиции с сайта поставщика" tabIndex={0}>
         <table className="w-full min-w-[290px] text-left text-xs">
           <thead className="bg-soft text-muted">
             <tr><th scope="col" className="px-2.5 py-2">Товар / фасовка</th><th scope="col" className="px-2.5 py-2">Цена на сайте</th><th scope="col" className="px-2.5 py-2">Источник</th></tr>
           </thead>
           <tbody className="divide-y divide-separator">
-            {products.map(product => <tr key={product.id} className={matches.includes(product.id) ? 'bg-brand-soft/60' : undefined}>
+            {visible.map(product => <tr key={product.id} className={matched.has(product.id) ? 'bg-brand-soft/60' : undefined}>
               <td className="px-2.5 py-3 align-top">
                 <p className="font-semibold text-ink">{product.name}</p>
                 {product.pack && <p className="mt-1 text-[11px] text-secondary">{product.pack}</p>}
-                <button type="button" aria-label={`В запрос КП: ${product.name}`} onClick={() => onRequest(product.id)} className="mt-1 inline-flex min-h-7 items-center gap-1 rounded text-[11px] font-semibold text-brand-ink hover:text-brand-ink-strong"><Plus size={12} aria-hidden="true" />В запрос КП</button>
+                <button type="button" aria-label={`В запрос КП: ${product.name}`} aria-description={product.pack ?? undefined} onClick={() => onRequest(product.id)} className="mt-1 inline-flex min-h-7 items-center gap-1 rounded text-[11px] font-semibold text-brand-ink hover:text-brand-ink-strong"><Plus size={12} aria-hidden="true" />В запрос КП</button>
               </td>
               <td className="px-2.5 py-3 align-top text-secondary">
                 {product.price.kind === 'published' ? <>
@@ -57,13 +80,20 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
                 {product.availabilityNote && <p className="mt-1 text-[11px] text-caution">{product.availabilityNote}</p>}
               </td>
               <td className="px-2.5 py-3 align-top">
-                <ExternalLink href={product.sourceUrl}>Товар</ExternalLink>
+                <ExternalLink href={product.sourceUrl}>{product.sourceKind === 'listing' ? 'Перечень' : 'Товар'}</ExternalLink>
                 <time dateTime={product.checkedAt} title="Дата проверки" className="mt-1 block whitespace-nowrap text-[10px] text-muted">{checkedDate.format(new Date(product.checkedAt))}</time>
               </td>
             </tr>)}
           </tbody>
         </table>
-      </div>
+      </div>}
+      {assortment.products.length > pageSize && <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-secondary">
+        <p role="status">{resultLabel}</p>
+        {pageCount > 1 && <div role="group" aria-label="Страницы ассортимента" className="flex gap-1">
+          <button type="button" className="icon-btn disabled:opacity-40" aria-label="Предыдущая страница ассортимента" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}><ChevronLeft size={14} /></button>
+          <button type="button" className="icon-btn disabled:opacity-40" aria-label="Следующая страница ассортимента" disabled={currentPage + 1 >= pageCount} onClick={() => setPage(currentPage + 1)}><ChevronRight size={14} /></button>
+        </div>}
+      </div>}
     </div>
   </section>;
 }
