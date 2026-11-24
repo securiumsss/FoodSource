@@ -13728,31 +13728,33 @@
       {
         "id": "205a2aa3b10afc39",
         "name": "Перец красный кубик замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 188,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/perets-krasnyi-kubik",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "d72baded91a50be6",
         "name": "Перец кубик (микс) меланж замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 130,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/perets-kubik-mix-melanj",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f41ff4b83a9c45dc",
         "name": "Кукуруза початок замороженный Индия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13763,7 +13765,7 @@
       {
         "id": "0b5dfdf9912881ba",
         "name": "Кукуруза початок замороженный Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13774,31 +13776,33 @@
       {
         "id": "3f54d9a740352eff",
         "name": "Фасоль",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 145,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/fasol",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "cb472d3ddea754b5",
         "name": "Имбирь",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 480,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/imbir",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "248eab65fa6e1162",
         "name": "Цветная капуста",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13809,7 +13813,7 @@
       {
         "id": "f8aff0fd19c4a7af",
         "name": "Брокколи",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13820,7 +13824,7 @@
       {
         "id": "18868bcec0baa841",
         "name": "Чеснок Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13831,43 +13835,46 @@
       {
         "id": "0c2d19806b04063f",
         "name": "Перец красный",
-        "pack": null,
+        "pack": "9 кг",
         "price": {
           "kind": "published",
           "amount": 187,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/perets-krasnyi",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "2471eb4ddd52e4ce",
         "name": "Перец (микс) меланж",
-        "pack": null,
+        "pack": "6,5 кг",
         "price": {
           "kind": "published",
           "amount": 149,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/perets-miks-melanzh",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "25649aca30bf9048",
         "name": "Перец (микс) меланж Россия",
-        "pack": null,
+        "pack": "9 кг",
         "price": {
           "kind": "published",
           "amount": 130,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/perets-miks-melanzh-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "4f62fa3e0c1c0cd8",
         "name": "Брюссельская капуста",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13878,31 +13885,46 @@
       {
         "id": "bf8d890209bd95b4",
         "name": "Клюква замороженная дикая Россия",
-        "pack": null,
+        "pack": "10 кг",
+        "price": {
+          "kind": "published",
+          "amount": 360,
+          "unit": "кг"
+        },
+        "sourceUrl": "https://umpuls.ru/products/klyukva-dikaia-rossiia",
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
+      },
+      {
+        "id": "8ccaa7bf0ac0af40",
+        "name": "Клюква замороженная дикая Россия",
+        "pack": "25 кг",
         "price": {
           "kind": "published",
           "amount": 355,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/klyukva-dikaia-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f76498b773e72f71",
         "name": "Арония черноплодная рябина замороженная",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 185,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/aroniya-chernoplodnaya-ryabina",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0ebde1eff4f483a1",
         "name": "Бузина",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13913,79 +13935,111 @@
       {
         "id": "944484e5ba61a29a",
         "name": "Брусника замороженная - Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 465,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/brusnika-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0cd1060ce485d04c",
         "name": "Смородина черная замороженная",
-        "pack": null,
+        "pack": "10 кг",
+        "price": {
+          "kind": "published",
+          "amount": 465,
+          "unit": "кг"
+        },
+        "sourceUrl": "https://umpuls.ru/products/smorodina-chernaya",
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
+      },
+      {
+        "id": "c267dbecf0d13ba7",
+        "name": "Смородина черная замороженная",
+        "pack": "25 кг",
         "price": {
           "kind": "published",
           "amount": 463,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/smorodina-chernaya",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f21d76a4a33d78dc",
         "name": "Облепиха замороженная - Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 175,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/oblepiha-kitai",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "e5d889369964e669",
         "name": "Черника дикорастущая замороженная РФ механика",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 585,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/chernika-rf",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "ee67a045b7c2343b",
         "name": "Облепиха РФ",
-        "pack": null,
+        "pack": "25 кг",
         "price": {
           "kind": "published",
           "amount": 175,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/oblepiha-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
+      },
+      {
+        "id": "9675532506a75ec5",
+        "name": "Облепиха РФ",
+        "pack": "10 кг",
+        "price": {
+          "kind": "published",
+          "amount": 185,
+          "unit": "кг"
+        },
+        "sourceUrl": "https://umpuls.ru/products/oblepiha-rossiia",
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f3842264eed421f3",
         "name": "Вишня бк Сербия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 330,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vishnya-bk-serbiya",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "c0670faa7a46da76",
         "name": "Голубика лесная замороженная Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -13996,91 +14050,98 @@
       {
         "id": "4ab2fcba75cbd4c1",
         "name": "Черника дикорастущая замороженная РФ электронная очистка",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 660,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/chernika-rf-elektronnaya-ochistka",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "400dc914d9ec1176",
         "name": "Вишня Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 375,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vishnya-kitay",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "511dbcabe08a9e5e",
         "name": "Клубника",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 140,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/klubnika",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "6989647f5019b987",
         "name": "Малина",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 565,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/malina",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "40e0e488516357a7",
         "name": "Ежевика",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 270,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/ezhevika",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "af28769bb71ca99c",
         "name": "Черная смородина",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 470,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/chernaia-smorodina",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0684c7c6eec30675",
         "name": "Клюква садовая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 268,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/kliukva-sadovaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "563feebabaa90289",
         "name": "Калина",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14091,43 +14152,46 @@
       {
         "id": "63a394b2db7d5ffa",
         "name": "Жимолость",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 530,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/zhimolost",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "838cd7a24523938f",
         "name": "Крыжовник",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 355,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/kryzhovnik",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "6831f0072b991a1c",
         "name": "Морошка",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 3500,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/moroshka",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0ad152b9e6c1ef86",
         "name": "Земляника дикорастущая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14138,139 +14202,150 @@
       {
         "id": "68182302c0ef0ab7",
         "name": "Голубика садовая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 270,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/golubika-sadovaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "664d040ec1ff0131",
         "name": "Черника садовая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 275,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/chernika-sadovaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "b8e30433e5f4be5f",
         "name": "Малина Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 475,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/malina-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f7f76a06f64b9cab",
         "name": "Ежевика Сербия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 300,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/ezhevika-serbiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "ba52bdac77280b1e",
         "name": "Вишня Узбекистан",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 235,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vishnia-uzbekistan",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "c64c9d9fd617e8e5",
         "name": "Вишня Узбекистан Без косточки",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 355,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vishnia-uzbekistan-bez-kostochki",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "c18b177acf05b481",
         "name": "Клубника Египет",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 175,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/klubnika-egipet",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "3dc9f12790445a99",
         "name": "Малина Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 470,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/malina-kitai",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "1efe7024b850ea37",
         "name": "Облепиха дикорастущая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 205,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/oblepikha-dikorastushchaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "52f6ac6cef03da2d",
         "name": "Брусника дикорастущая",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 450,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/brusnika-dikorastushchaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "7ff98b94f38c047a",
         "name": "Рябина Красная",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 285,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/riabina-krasnaia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "b4749915ec3b6a6e",
         "name": "Смородина красная",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14281,50 +14356,54 @@
       {
         "id": "65c6c1f6dc7b3d65",
         "name": "Вишня",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 385,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vishnia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "29f50c7cc0e8fa80",
         "name": "Лайм замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 390,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/laym",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "1d9dca92ee53cdcf",
         "name": "Грейпфрут замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 195,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/grejpfrut",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "611a20fe0d610ba7",
         "name": "Яблоко кубик Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 190,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/yabloko-kubik-rossiya",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0e9036da851dffe3",
@@ -14340,7 +14419,7 @@
       {
         "id": "a7fbb6c5970c7d76",
         "name": "Маракуя без косточки кубик Вьетнам",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14351,67 +14430,72 @@
       {
         "id": "73945f370d8f63f0",
         "name": "Манго слайсы Египет",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 195,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/mango-slaysy-egipet",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "9740fb0f53d63fc5",
         "name": "Замороженные бананы РФ",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 265,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/banan-rf",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "4f8fa51f5a8ecf75",
         "name": "Мандарин дольки",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 288,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/mandarin-dolki",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "2fb5d2c675918aa8",
         "name": "Ананас (куб) Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 275,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/ananas-kubik-kitay",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "5dc6c1ca072aac43",
         "name": "Авокадо",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 500,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/avokado",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "15577007b128d522",
         "name": "Маракуйя с косточкой кубик Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14422,79 +14506,85 @@
       {
         "id": "ae987fcafd9ceac0",
         "name": "Слива",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 200,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/sliva",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "79f218cacdb8b514",
         "name": "Персик",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 185,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/persik",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "ea7921efbfb6d9c6",
         "name": "Киви",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 195,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/kivi",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "20af1d99eb6d0446",
         "name": "Груша",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 185,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/grusha",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "696f675204716fc9",
         "name": "Гранат",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 170,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/granat",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "a2a7fb3f66607140",
         "name": "Инжир",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 165,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/inzhir",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "72348f7f71b30d86",
         "name": "Абрикос",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14505,7 +14595,7 @@
       {
         "id": "3b91f6d1d48ebbd0",
         "name": "Дыня",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14516,31 +14606,33 @@
       {
         "id": "4b5774b1f81f6780",
         "name": "Апельсин",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 190,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/apelsin",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "078b3911d0c39fc2",
         "name": "Виноград",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 155,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/vinograd",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "dca89ac029ba67b8",
         "name": "Папайя",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14551,31 +14643,33 @@
       {
         "id": "b6bde5191dc8b3c1",
         "name": "Лимон",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 160,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/limon",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "b00da27997f421e0",
         "name": "Ананас",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 200,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/ananas",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "cdb160117372e855",
         "name": "Персик Сербия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14586,43 +14680,46 @@
       {
         "id": "58dcd00c5377a386",
         "name": "Абрикос Узбекистан",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 165,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/abrikos-uzbekistan",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0a20b9cae347d45f",
         "name": "Абрикос Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 220,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/abrikos-kitai",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "20cf6dc1ca33a49a",
         "name": "Апельсин Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 200,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/apelsin-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "6935b7517f28ca26",
         "name": "Персик Китай",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14633,19 +14730,20 @@
       {
         "id": "143dad2161e2f41d",
         "name": "Яблоко с кожурой",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 165,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/iabloko-s-kozhuroi",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "730b943aa10b15bf",
         "name": "Маракуя",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14656,14 +14754,15 @@
       {
         "id": "b590e7fecf2c27e2",
         "name": "Мандарин",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 480,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/mandarin",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "86cff4d6170630b1",
@@ -14679,7 +14778,7 @@
       {
         "id": "d62e79a4294c096d",
         "name": "Белые грибы",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14690,19 +14789,20 @@
       {
         "id": "e61de56ce63668f7",
         "name": "Шампиньоны",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 85,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/shampinony",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "703c3cc2c9d0e7a5",
         "name": "Опята",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14713,7 +14813,7 @@
       {
         "id": "2b7924e47fd227b2",
         "name": "Белый гриб",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14724,7 +14824,7 @@
       {
         "id": "8ff8ece9ff40a34c",
         "name": "Белый гриб Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14735,7 +14835,7 @@
       {
         "id": "2f614987315b77f2",
         "name": "Шампиньоны Беларусь",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14746,7 +14846,7 @@
       {
         "id": "046702f96a664f52",
         "name": "Шпинат резаный замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14757,7 +14857,7 @@
       {
         "id": "2b5a816df42358b1",
         "name": "Рукола",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14768,14 +14868,15 @@
       {
         "id": "369ae759bb6fcfc1",
         "name": "Лук зеленый резаный замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 390,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/luk-zelen-rezany-zamorozh",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f0595a38a20df3d2",
@@ -14791,19 +14892,20 @@
       {
         "id": "0f10e4aa0db884be",
         "name": "Мята замороженная",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 1450,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/myata-zamorozh",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "7595edd2f0c98341",
         "name": "Петрушка",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14814,19 +14916,20 @@
       {
         "id": "5269f9ba09d5e68e",
         "name": "Лук Порей замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 270,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/luk-porey",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "eb91eb0f6fa707e5",
         "name": "Укроп",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14837,19 +14940,20 @@
       {
         "id": "073681e9cca20b70",
         "name": "Базилик зеленый замороженный измельчённый",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 1800,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/bazilik-zeleny",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "39c797da03adb1ec",
         "name": "Розмарин",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14860,7 +14964,7 @@
       {
         "id": "2fcf2a23996efa2c",
         "name": "Прованские травы",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14871,55 +14975,59 @@
       {
         "id": "282d12af0fe18d92",
         "name": "Чеснок дольки чищенный резанный замороженный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 330,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/chesnok-dolki",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "f69efe58e4d79cb5",
         "name": "Кинза",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 550,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/kinza",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "27551f3b06a6b9a2",
         "name": "Тархун",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 1400,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/tarkhun",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "8fd3cfc976892fe4",
         "name": "Щавель",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 330,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/shchavel",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "0d48a69c83088d21",
         "name": "Микс Базилик Петрушка",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14930,7 +15038,7 @@
       {
         "id": "cdcc904b707da57c",
         "name": "Базилик зеленый Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14941,7 +15049,7 @@
       {
         "id": "996f46998e82e170",
         "name": "Базилик зеленый Россия Порционный (таблетка 4гр.)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14952,19 +15060,20 @@
       {
         "id": "ec55e6fa65984089",
         "name": "Кинза Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 560,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/kinza-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "4034ee42c73eb9de",
         "name": "Кинза Россия порционная (таблетка 4гр.)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14975,7 +15084,7 @@
       {
         "id": "e74da80fd8b69af4",
         "name": "Петрушка Россия",
-        "pack": null,
+        "pack": "7 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14986,7 +15095,7 @@
       {
         "id": "905030e4db8fc76c",
         "name": "Петрушка Россия порционная (таблетка 4гр.)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -14997,7 +15106,7 @@
       {
         "id": "76aaa40f6c61af30",
         "name": "Тархун Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -15008,19 +15117,20 @@
       {
         "id": "e65ec692f2a57093",
         "name": "Укроп Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 300,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/ukrop-rossiia",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "2a30d1936fab26ec",
         "name": "Укроп Россия Порционный (таблетка 4гр.)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -15031,7 +15141,18 @@
       {
         "id": "f55bdc9e72838add",
         "name": "Шпинат Россия",
-        "pack": null,
+        "pack": "10 кг · Измельчённый (порционный)",
+        "price": {
+          "kind": "on_request"
+        },
+        "sourceUrl": "https://umpuls.ru/products/shpinat-rossiia",
+        "checkedAt": "2026-11-24",
+        "availabilityNote": "На сайте: под заказ"
+      },
+      {
+        "id": "89d95725d08b4f26",
+        "name": "Шпинат Россия",
+        "pack": "10 кг · Измельчённый",
         "price": {
           "kind": "on_request"
         },
@@ -15042,7 +15163,7 @@
       {
         "id": "da001eed25fbf88c",
         "name": "Шпинат Россия Листовой (порционный)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -15053,19 +15174,20 @@
       {
         "id": "7a527ac0b763c442",
         "name": "Шпинат Россия Резаный (порционный)",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 150,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/shpinat-rossiia-rezanyi-portsionnyi-",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "79b71f4af98f00cd",
         "name": "Щавель Россия",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -15076,7 +15198,7 @@
       {
         "id": "e774591d7e326542",
         "name": "Щавель Россия Шайба 22-28гр",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "on_request"
         },
@@ -15087,26 +15209,28 @@
       {
         "id": "c52f3568beefea06",
         "name": "Мята",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 1500,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/miata",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       },
       {
         "id": "572847d0f762cff6",
         "name": "Базилик красный",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 2000,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://umpuls.ru/products/bazilik-krasnyi",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "Цена зависит от объёма"
       }
     ]
   },

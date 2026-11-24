@@ -7,6 +7,8 @@ import { promisify } from 'node:util';
 const { JSDOM } = createRequire(new URL('../frontend/package.json', import.meta.url))('jsdom');
 const curl = promisify(execFile);
 const checkedAt = process.env.ASSORTMENT_CHECKED_AT ?? new Date().toISOString().slice(0, 10);
+const onlyUmpuls = process.argv.includes('--umpuls');
+const umpulsId = 'sup-frozen-02';
 const target = new URL('../backend/src/suppliers/assortment.snapshot.json', import.meta.url);
 const seed = JSON.parse(await readFile(new URL('../data/suppliers.seed.json', import.meta.url), 'utf8'));
 const pages = new Map();
@@ -148,7 +150,40 @@ const vostList = slug => fromLinks(`${vost}/${slug}/`, 'a.product-title', (a, na
   return { pack: packFrom(name), price: published(rubles(text(a.closest('.ut2-gl__item'), '.ty-price'))) };
 }, 10);
 
-const jobs = [
+const umpulsProduct = async ({ id, name, sourceUrl }) => {
+  const page = await doc(sourceUrl);
+  const priceBox = page.querySelector('.buybox__price');
+  if (!priceBox) throw new Error('Missing Umpuls product price block: ' + sourceUrl);
+  const detail = text(priceBox, 'i');
+  const match = detail.match(/^(?:за\s+|\/\s*)(кг|шт\.?|уп\.?)\s*(?:·|$)/iu);
+  const unit = match ? ({ 'кг': 'кг', 'шт': 'шт.', 'уп': 'уп.' }[match[1].toLowerCase().replace(/\.$/u, '')]) : null;
+  const priceNote = /цена зависит от объ[её]ма/iu.test(detail) ? 'Цена зависит от объёма' : null;
+  const underOrder = /под заказ/iu.test(clean(priceBox.textContent));
+  const variants = [...page.querySelectorAll('.packs__list .pack[data-pack]')];
+  const packLabel = variant => clean(variant?.dataset.pack).replace(/(кг|г|л)\.$/u, '$1');
+  const byPack = Map.groupBy(variants, packLabel);
+  return (variants.length ? variants : [null]).map((variant, index) => {
+    const size = packLabel(variant);
+    const variantLabel = byPack.get(size)?.length > 1 ? text(variant, 'small') : '';
+    const pack = [size, variantLabel].filter(Boolean).join(' · ') || null;
+    const amount = variant?.hasAttribute('data-price') ? number(variant.dataset.price)
+      : variants.length < 2 ? rubles(text(priceBox, 'b')) : null;
+    const price = underOrder || (amount === null && variant?.dataset.price === '0') ? onRequest : published(amount, unit);
+    return row(name, sourceUrl, {
+      id: index === 0 ? id : undefined, pack, price,
+      ...(priceNote && price.kind === 'published' ? { priceNote } : {}),
+      ...(underOrder ? { availabilityNote: 'На сайте: под заказ' } : {}),
+    });
+  });
+};
+
+const collectUmpuls = () => collect(umpulsId, ump + '/shop', ['Замороженные овощи', 'Ягоды и фрукты', 'Грибы', 'Зелень'], [
+  Promise.all(['ovoshchi', 'yagody', 'frukty', 'griby', 'zelen'].map(path => fromLinks(ump + '/shop/' + path, '.pcard__title')))
+    .then(sections => [...new Map(sections.flat().map(product => [product.sourceUrl, product])).values()])
+    .then(products => Promise.all(products.map(umpulsProduct))).then(variants => variants.flat()),
+]);
+
+const jobs = onlyUmpuls ? [collectUmpuls()] : [
   collect('sup-pack-01', `${rona}/catalog/`, ['Вакуумные пакеты', 'Одноразовая посуда', 'Пищевые контейнеры', 'Пищевая плёнка', 'Столовые приборы'], ronaPages.map(path => fromLinks(rona + path, '.item-title a', a => ({
     price: published(number(text(a.closest('.item_info'), '.price_value'))),
   }), 12))),
@@ -212,15 +247,7 @@ const jobs = [
       nameOverride: text(a, '.name'), price: published(number(a.closest('li[data-price]')?.dataset.price)),
     }))),
   ]),
-  collect('sup-frozen-02', `${ump}/shop`, ['Замороженные овощи', 'Ягоды и фрукты', 'Грибы', 'Зелень'], [
-    ...['ovoshchi', 'yagody', 'frukty', 'griby', 'zelen'].map(path => fromLinks(`${ump}/shop/${path}`, '.pcard__title', a => {
-      const card = a.closest('.pcard');
-      const display = text(card, '.pcard__price');
-      const pack = clean(card?.dataset.pack);
-      return { pack: /\d/u.test(pack) ? pack : null, price: /под заказ/iu.test(display) ? onRequest
-        : published(rubles(display), /\/\s*кг/u.test(display) ? 'кг' : null), ...(/под заказ/iu.test(display) ? { availabilityNote: 'На сайте: под заказ' } : {}) };
-    })),
-  ]),
+  collectUmpuls(),
   collect('sup-frozen-03', `${afina}#catalog`, ['Замороженные ягоды', 'Фрукты', 'Овощи'], [
     fromLinks(afina, '#catalog a', (a, name) => ({ nameOverride: `${name} (заморозка)`, price: onRequest })),
   ]),
@@ -246,7 +273,8 @@ if (failure.length) {
   for (const result of failure) console.error(result.reason.message);
   throw new Error('Snapshot not written: one or more sources could not be verified.');
 }
-const snapshot = Object.fromEntries(results.map(result => result.value));
+const refreshed = Object.fromEntries(results.map(result => result.value));
+const snapshot = onlyUmpuls ? { ...JSON.parse(await readFile(target, 'utf8')), ...refreshed } : refreshed;
 if (seed.length !== Object.keys(snapshot).length || seed.some(supplier => !snapshot[supplier.id])) throw new Error('Supplier coverage does not match the seed');
-console.table(seed.map(({ id, name }) => ({ name, groups: snapshot[id].groups.length, positions: snapshot[id].products.length, priced: snapshot[id].products.filter(p => p.price.kind === 'published').length })));
+console.table(seed.filter(({ id }) => !onlyUmpuls || id === umpulsId).map(({ id, name }) => ({ name, groups: snapshot[id].groups.length, positions: snapshot[id].products.length, priced: snapshot[id].products.filter(p => p.price.kind === 'published').length })));
 if (process.argv.includes('--write')) await writeFile(target, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');

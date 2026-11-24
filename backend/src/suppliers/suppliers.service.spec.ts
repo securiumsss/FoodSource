@@ -100,6 +100,21 @@ describe('SuppliersService', () => {
     }
   });
 
+  it('keeps Umpuls price units separate from order pack sizes', () => {
+    const products = getAssortment('sup-frozen-02')!.products;
+    expect(products.find(product => product.id === '205a2aa3b10afc39')).toMatchObject({
+      pack: '10 кг',
+      price: { kind: 'published', amount: 188, unit: 'кг' },
+      priceNote: 'Цена зависит от объёма',
+      sourceUrl: 'https://umpuls.ru/products/perets-krasnyi-kubik',
+    });
+    expect(products.filter(product => product.price.kind === 'published').every(product => product.price.kind === 'published' && product.price.unit === 'кг')).toBe(true);
+    expect(products.find(product => product.sourceUrl.endsWith('/kukuroza-pochatok-kitay'))).toMatchObject({ pack: '10 кг', price: { kind: 'on_request' } });
+    const spinach = products.filter(product => product.sourceUrl.endsWith('/shpinat-rossiia'));
+    expect(spinach).toHaveLength(2);
+    expect(new Set(spinach.map(product => product.pack)).size).toBe(2);
+  });
+
   it('reports the exact number of matching catalog positions without sending all rows to the registry', async () => {
     const source = fixture('sup-spice-01', { category: 'spices', description: 'Оптовые поставки' });
     const mock = { listWithWorkspace: () => [source] } as unknown as StorageService;
