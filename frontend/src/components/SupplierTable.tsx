@@ -241,13 +241,11 @@ export function SupplierTable({
                       disabled={!isSelected && atLimit}
                       title={!isSelected && atLimit ? 'Можно сравнить не более 4 поставщиков' : isSelected ? 'Убрать из сравнения' : 'Добавить к сравнению'}
                       onClick={event => { event.stopPropagation(); onCompare(s); }}
-                      className={`mt-0.5 inline-flex h-8 w-8 md:h-4 md:w-4 items-center justify-center rounded border transition-colors ${
-                        isSelected
-                          ? 'border-graphite bg-graphite text-white'
-                          : 'border-muted bg-white text-transparent hover:border-graphite'
-                      }`}
+                      className="group/compare mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded md:h-4 md:w-4"
                     >
-                      <Check size={11} />
+                      <span aria-hidden="true" className={`grid size-[18px] place-items-center rounded border transition-colors md:size-4 ${
+                        isSelected ? 'border-graphite bg-graphite text-white' : 'border-muted bg-white text-transparent group-hover/compare:border-graphite'
+                      }`}><Check size={11} /></span>
                     </button>
                   </td>
 

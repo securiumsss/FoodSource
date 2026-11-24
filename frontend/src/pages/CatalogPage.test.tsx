@@ -736,11 +736,15 @@ describe('Каталог поставщиков', () => {
     const smallPack = { ...pack, id: 'paprika-5', pack: 'Пакет 5 кг', price: { kind: 'published' as const, amount: 3225, unit: 'уп.' } };
     const unknown = { ...smallPack, id: 'paprika-1', pack: 'Пакет 1 кг', price: { kind: 'on_request' as const } };
     const assortment = { catalogUrl: 'https://supplier.test/catalog', groups: ['Специи'], products: [pack, smallPack, unknown] };
+    const notAvailable = { ...pack, id: 'unavailable', name: 'Паприка копчёная — нет в наличии', price: { ...pack.price, amount: 100 }, availabilityNote: 'Нет в наличии' };
+    const belowMinimum = { ...pack, id: 'below-minimum', name: 'Паприка копчёная — ниже минимума', price: { ...pack.price, amount: 20 } };
+    const cheapest = { ...pack, id: 'cheapest', name: 'Паприка копчёная — выгодная фасовка', price: { ...pack.price, amount: 390 } };
+    const similar = { ...pack, id: 'similar', name: 'Паприка без подтверждённого помола', price: { ...pack.price, amount: 200 } };
     vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, facets: { ...list.facets, regions: ['Москва', 'Вся РФ'] } });
     vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment });
     vi.mocked(client.compareSuppliers).mockResolvedValue({
       suppliers: [first, second], winnerId: 'one', winnerReason: '', rows: [],
-      assortments: { one: { ...assortment, shown: assortment.products, total: 3, matchingTotal: 3 }, two: null },
+      assortments: { one: { ...assortment, shown: [smallPack, pack, unknown, notAvailable, belowMinimum, cheapest], similar: [similar], total: 7, matchingTotal: 6 }, two: null },
     });
     render(<CatalogPage />);
     await screen.findByText(first.name);
@@ -752,10 +756,13 @@ describe('Каталог поставщиков', () => {
     for (const supplier of [first, second]) await user.click(screen.getByRole('button', { name: 'Сравнить ' + supplier.name }));
     await user.click(screen.getByRole('button', { name: 'Сравнить (2)' }));
     const modal = within(await screen.findByRole('dialog', { name: 'Сравнение поставщиков' }));
-    await modal.findByText('Совпадений: 3');
+    await modal.findByText('Совпадений: 6');
     await user.type(modal.getByRole('textbox', { name: 'Нужный объём' }), '20');
-    expect(modal.getByText('1 уп. · 25 кг (с запасом)')).toBeTruthy();
-    expect(modal.getByText(/≈ 12\s125 ₽/)).toBeTruthy();
+    const ordered = modal.getByRole('article', { name: `Ассортимент: ${first.name}` }).textContent!;
+    const positions = ['Подходят по расчёту', cheapest.name, '≈ 12\u00a0125 ₽', '≈ 12\u00a0900 ₽', 'Нужно уточнить', notAvailable.name, belowMinimum.name, 'Похожие позиции', similar.name].map(text => ordered.indexOf(text));
+    expect(positions.every((position, index) => position >= 0 && (index === 0 || position > positions[index - 1]))).toBe(true);
+    const packRow = within(modal.getByText(/≈ 12\s125 ₽/).closest('li')!);
+    expect(packRow.getByText('1 уп. · 25 кг (с запасом)')).toBeTruthy();
     expect(modal.getByText('4 уп. · 20 кг')).toBeTruthy();
     expect(modal.getByText(/≈ 12\s900 ₽/)).toBeTruthy();
     expect(modal.getByText('Недостаточно данных для расчёта на этот объём')).toBeTruthy();

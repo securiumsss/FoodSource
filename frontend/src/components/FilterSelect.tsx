@@ -10,9 +10,10 @@ interface Props<Value extends string> {
   compactSuffix?: string;
   hideLabel?: boolean;
   inDialog?: boolean;
+  triggerClassName?: string;
 }
 
-export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix, hideLabel, inDialog }: Props<Value>) {
+export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix, hideLabel, inDialog, triggerClassName = '' }: Props<Value>) {
   const id = useId();
 
   return (
@@ -25,9 +26,9 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
         <Select.Trigger
           id={id}
           aria-labelledby={id + '-label'}
-          className={compactSuffix
+          className={(compactSuffix
             ? 'flex min-h-9 items-center gap-1.5 rounded-md px-1.5 text-xs font-medium text-ink hover:bg-soft sm:gap-2 sm:px-2'
-            : 'mt-1 flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-line bg-white px-2.5 py-1.5 text-left text-[13px]! text-ink hover:border-line-strong hover:bg-soft data-[state=open]:border-brand-hover'}
+            : 'mt-1 flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-line bg-white px-2.5 py-1.5 text-left text-[13px]! text-ink hover:border-line-strong hover:bg-soft data-[state=open]:border-brand-hover') + ' ' + triggerClassName}
         >
           <span className="min-w-0 truncate"><Select.Value /></span>
           {compactSuffix && <span aria-hidden="true" className="hidden whitespace-nowrap text-secondary @min-[22rem]:inline">{compactSuffix}</span>}

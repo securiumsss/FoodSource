@@ -65,10 +65,16 @@ export function estimatePurchase(product: Pick<SupplierProduct, 'pack' | 'price'
   return { packs, purchased: { amount, unit: pack.unit }, surplus: totalSize > requested, cost };
 }
 
-export function unmetMinimum(moq: SupplierWithEvaluation['moq'], estimate: NonNullable<ReturnType<typeof estimatePurchase>>) {
+export function minimumCheck(moq: SupplierWithEvaluation['moq'], estimate: NonNullable<ReturnType<typeof estimatePurchase>>) {
   const { amount, unit } = moq;
-  if (amount === null) return;
-  if (unit === 'RUB' && estimate.cost < amount) return formatEstimateCost(amount);
-  if (((unit === 'KG' && estimate.purchased.unit === 'kg') || (unit === 'PCS' && estimate.purchased.unit === 'pcs'))
-    && estimate.purchased.amount < amount) return formatPurchaseQuantity({ amount, unit: estimate.purchased.unit });
+  if (amount === null) return { known: false };
+  if (unit === 'RUB') return { known: true, missing: estimate.cost < amount ? formatEstimateCost(amount) : undefined };
+  if ((unit === 'KG' && estimate.purchased.unit === 'kg') || (unit === 'PCS' && estimate.purchased.unit === 'pcs')) {
+    return { known: true, missing: estimate.purchased.amount < amount ? formatPurchaseQuantity({ amount, unit: estimate.purchased.unit }) : undefined };
+  }
+  return { known: false };
+}
+
+export function unmetMinimum(moq: SupplierWithEvaluation['moq'], estimate: NonNullable<ReturnType<typeof estimatePurchase>>) {
+  return minimumCheck(moq, estimate).missing;
 }

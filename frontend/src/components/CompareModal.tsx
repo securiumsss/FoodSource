@@ -147,12 +147,13 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
                   aria-describedby={invalidQuantity || quantity ? 'compare-quantity-help' : undefined} className="field field-search num mt-1 min-h-9 py-1.5!" />
               </label>
               <div className="w-18 shrink-0">
-                <FilterSelect label="Единица объёма" hideLabel inDialog value={quantityUnit} options={purchaseUnitOptions} onChange={setQuantityUnit} />
+                <FilterSelect label="Единица объёма" hideLabel inDialog triggerClassName="focus-visible:border-brand-ink focus-visible:outline-none!" value={quantityUnit} options={purchaseUnitOptions} onChange={setQuantityUnit} />
               </div>
             </div>
           </div>
           {(invalidQuantity || quantity) && <p id="compare-quantity-help" className={`mt-1.5 text-[11px] ${invalidQuantity ? 'text-caution' : 'text-secondary'}`}>
             {invalidQuantity ? (quantityUnit === 'pcs' ? 'Укажите от 1 до 1 000 000 штук.' : 'Укажите число от 0,001 до 1 000 000.') : 'Ориентир по цене товара без доставки. Считаем целыми упаковками.'}
+            {quantity && displayedQuery && ' Перед сравнением цен проверьте, что это один и тот же товар.'}
           </p>}
         </div>}
         <div key={section} role={section === 'assortment' ? 'region' : undefined} aria-label={section === 'assortment' ? 'Позиции в сравнении' : undefined} tabIndex={section === 'assortment' ? 0 : undefined} className={`min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-3 sm:px-5 ${section === 'assortment' ? 'mt-3 focus-visible:outline-offset-[-2px]' : 'pt-3'}`}>

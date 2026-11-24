@@ -173,6 +173,9 @@ describe('SuppliersService', () => {
     expect(response.items.find(item => item.id === 'sup-spice-05')).toMatchObject({ matchedProductCount: 4, matchedProductsApproximate: true });
     const compared = await service.compare({ ids: rows.map(row => row.supplier.id), search: `${search} 25 кг` });
     expect(compared.assortments['sup-spice-05']).toMatchObject({ matchingApproximate: true, matchingTotal: 1, shown: [{ pack: '25 кг', price: { kind: 'published', amount: 11576, unit: 'уп.' } }] });
+    const broad = (await service.compare({ ids: rows.map(row => row.supplier.id), search: 'паприка' })).assortments['sup-spice-01']!;
+    expect(broad.shown.length).toBeGreaterThan(5);
+    expect(broad.shown).toHaveLength(broad.matchingTotal!);
     expect((await service.findAll({ search: `${search} 99 кг` })).items).toHaveLength(0);
     expect((await service.findAll({ search: '...' })).items).toHaveLength(0);
   });

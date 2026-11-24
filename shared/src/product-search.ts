@@ -8,13 +8,11 @@ const matchesWord = (word: string, term: string) => /^\d/u.test(term)
   ? word === term || word === `${term}%`
   : word.startsWith(term);
 
-export function searchProducts(products: SupplierProduct[], query?: string) {
-  if (!query?.trim()) return { products, approximate: false };
+export function findProductMatches(products: SupplierProduct[], query: string) {
   const terms = [...new Set(tokens(query))];
-  if (!terms.length) return { products: [], approximate: false };
-
   const exact: SupplierProduct[] = [];
   const similar: SupplierProduct[] = [];
+  if (!terms.length) return { exact, similar };
   const seen = new Set<string>();
   for (const product of products) {
     const name = tokens(product.name);
@@ -32,5 +30,11 @@ export function searchProducts(products: SupplierProduct[], query?: string) {
     seen.add(identity);
     (missing.length ? similar : exact).push(product);
   }
+  return { exact, similar };
+}
+
+export function searchProducts(products: SupplierProduct[], query?: string) {
+  if (!query?.trim()) return { products, approximate: false };
+  const { exact, similar } = findProductMatches(products, query);
   return exact.length ? { products: exact, approximate: false } : { products: similar, approximate: similar.length > 0 };
 }

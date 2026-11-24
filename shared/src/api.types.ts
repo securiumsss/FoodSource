@@ -112,8 +112,10 @@ export interface ComparisonAssortment {
   catalogUrl: string;
   groups: string[];
   total: number;
-  /** Matches when searching, otherwise the first positions in the snapshot. */
+  /** All primary matches when searching, otherwise a preview of the snapshot. */
   shown: SupplierProduct[];
+  /** Fallback matches when primary matches also exist. */
+  similar?: SupplierProduct[];
   matchingTotal: number | null;
   matchingApproximate?: boolean;
 }

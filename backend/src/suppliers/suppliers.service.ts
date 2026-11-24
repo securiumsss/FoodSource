@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { getDeliveryCoverage, requiresTemperatureControl, searchProducts } from '@food-suppliers/shared';
+import { findProductMatches, getDeliveryCoverage, requiresTemperatureControl, searchProducts } from '@food-suppliers/shared';
 import type {
   CompareRequestDto, CompareResponse, ComparisonAssortment, ComparisonRow, SupplierCategory, SupplierDetailResponse,
   SupplierStatus, SuppliersListResponse, SuppliersQueryParams, SupplierWithEvaluation, WorkspaceUpdateDto,
@@ -144,11 +144,12 @@ export class SuppliersService {
     const assortments = Object.fromEntries(suppliers.map((s): [string, ComparisonAssortment | null] => {
       const catalog = getAssortment(s.id);
       if (!catalog) return [s.id, null];
-      const { products: matching, approximate } = searchProducts(catalog.products, search);
+      const matches = search ? findProductMatches(catalog.products, search) : null;
+      const matching = matches && (matches.exact.length ? matches.exact : matches.similar);
       return [s.id, {
         catalogUrl: catalog.catalogUrl, groups: catalog.groups, total: catalog.products.length,
-        matchingTotal: search ? matching.length : null, shown: matching.slice(0, 5),
-        ...(approximate ? { matchingApproximate: true } : {}),
+        matchingTotal: matching?.length ?? null, shown: matching ?? catalog.products.slice(0, 5),
+        ...(matches?.similar.length ? (matches.exact.length ? { similar: matches.similar } : { matchingApproximate: true }) : {}),
       }];
     }));
     const rows: ComparisonRow[] = [
