@@ -1,0 +1,1156 @@
+[
+  {
+    "id": "sup-pack-01",
+    "name": "РОНА упаковка",
+    "category": "packaging",
+    "categoryLabel": "Упаковка и одноразовая тара",
+    "description": "Производит и поставляет одноразовую посуду, пищевую упаковку и расходные материалы. Принимает заявки на изготовление по техническому заданию.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО"
+    ],
+    "website": "https://ronapack.ru/",
+    "sourceUrl": "https://ronapack.ru/help/delivery/",
+    "contacts": {
+      "phone": "+7 (499) 450-37-77",
+      "email": "shop@ronapack.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 3000,
+      "unit": "RUB",
+      "label": "от 3 000 ₽"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимальный заказ 3 000 ₽; бесплатная доставка от 15 000 ₽ в пределах МКАД. Цены конкретных позиций и документы уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Бесплатно в пределах МКАД при заказе от 15 000 ₽; остальные условия уточняйте."
+    },
+    "pros": [
+      "Собственное производство",
+      "Возможна упаковка по техническому заданию",
+      "Минимальный заказ 3 000 ₽"
+    ],
+    "cons": [
+      "Бесплатная доставка по МКАД только от 15 000 ₽",
+      "Вид сертификатов на странице не указан"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://ronapack.ru/help/delivery/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-pack-02",
+    "name": "Юнипак",
+    "category": "packaging",
+    "categoryLabel": "Упаковка и одноразовая тара",
+    "description": "Оптовый поставщик упаковочных материалов, в том числе пищевой плёнки, вакуумных пакетов и лотков. Работает с доставкой по Санкт-Петербургу и отправкой в другие регионы.",
+    "city": "Разметелево",
+    "regions": [
+      "Санкт-Петербург и ЛО",
+      "Вся РФ"
+    ],
+    "website": "https://unipakspb.ru/",
+    "sourceUrl": "https://unipakspb.ru/delivery",
+    "contacts": {
+      "phone": "+7 (812) 324-22-08",
+      "email": "sales@unipakspb.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "Уточнять: на сайте указаны разные условия"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Страница доставки указывает минимум 15 000 ₽ и бесплатную доставку по СПб от 20 000 ₽; страница каталога противоречит ей (5 000 ₽ и 15 000 ₽). Уточняйте условия, цены и сертификаты.",
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка по Санкт-Петербургу, отправка в регионы России или самовывоз; по СПб бесплатно от 20 000 ₽."
+    },
+    "pros": [
+      "Ассортимент упаковочных материалов",
+      "Отправка в регионы России",
+      "Доступен самовывоз"
+    ],
+    "cons": [
+      "Разные страницы сайта указывают разные минимумы",
+      "Порог бесплатной доставки требует уточнения"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://unipakspb.ru/delivery",
+      "https://unipakspb.ru/contacts"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-pack-03",
+    "name": "АйПиДжи Москва",
+    "category": "packaging",
+    "categoryLabel": "Упаковка и одноразовая тара",
+    "description": "Производитель пищевой одноразовой тары, контейнеров, посуды и кондитерской упаковки. Разрабатывает индивидуальные проекты упаковки для бизнеса.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО",
+      "Санкт-Петербург и ЛО",
+      "Вся РФ"
+    ],
+    "website": "https://ipg-upakovka.ru/",
+    "sourceUrl": "https://ipg-upakovka.ru/",
+    "contacts": {
+      "phone": "+7 (495) 122-22-72",
+      "email": "info@ipg-upakovka.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "Упаковочная единица; количество уточняется"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Для типовых SKU минимум зависит от позиции и региона и может составлять одну упаковочную единицу; брендирование согласуется отдельно. Цены и виды сертификатов уточняйте. Упаковочная единица не приравнена к коробке или штуке: её состав зависит от SKU. Производитель сообщает о декларации соответствия на пищевую упаковку; документы на нужную продукцию уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Поставки по России со складов, включая Москву и Санкт-Петербург; сроки и стоимость уточняйте."
+    },
+    "pros": [
+      "Пищевые контейнеры и упаковка для готовой еды",
+      "Возможны индивидуальные проекты",
+      "Склады в нескольких городах"
+    ],
+    "cons": [
+      "Минимальная партия зависит от позиции и региона",
+      "Условия брендирования согласуются отдельно"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://ipg-upakovka.ru/",
+      "https://ipg-upakovka.ru/proizvodstvo-upakovki"
+    ],
+    "documents": [
+      "Декларация соответствия"
+    ],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-pack-04",
+    "name": "Бумажная Посуда СПб",
+    "category": "packaging",
+    "categoryLabel": "Упаковка и одноразовая тара",
+    "description": "Производит бумажную пищевую упаковку и одноразовую посуду в Санкт-Петербурге. В ассортименте упаковка для фастфуда и контейнеры для горячих и холодных продуктов.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург"
+    ],
+    "website": "https://ptllc.ru/",
+    "sourceUrl": "https://ptllc.ru/",
+    "contacts": {
+      "phone": "+7 (812) 635-06-43",
+      "email": "sales@ptllc.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 1,
+      "unit": "BOX",
+      "label": "от 1 коробки позиции"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимум — одна коробка выбранной позиции. Цены, доставку и документы на конкретную продукцию уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Есть собственный склад в Санкт-Петербурге и самовывоз; условия доставки уточняйте."
+    },
+    "pros": [
+      "Заказ от одной коробки",
+      "Производство и склад в Санкт-Петербурге",
+      "Возможно изготовление с дизайном клиента"
+    ],
+    "cons": [
+      "Общая стоимость заказа зависит от выбранной позиции",
+      "Документы на конкретную продукцию требуют уточнения"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://ptllc.ru/",
+      "https://ptllc.ru/catalogn/supnitsy-salatniki/chasha-sup-mor-belyy-500ml-/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-pack-05",
+    "name": "МОСПАРИТЕТ",
+    "category": "packaging",
+    "categoryLabel": "Упаковка и одноразовая тара",
+    "description": "Торговая компания предлагает одноразовую упаковку, в том числе подложки и крышки для контейнеров. Каталог содержит цены и минимальные партии отдельных товаров.",
+    "city": "Москва",
+    "regions": [
+      "Москва"
+    ],
+    "website": "https://www.mosparitet.ru/",
+    "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka",
+    "contacts": {
+      "phone": "+7 (495) 955-94-61",
+      "email": "info@mosparitet.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "Зависит от позиции"
+    },
+    "priceEstimate": {
+      "min": 0.63,
+      "max": 0.63,
+      "unit": "RUB/шт",
+      "label": "Подложка А10/С11 — 0,63 ₽/шт, ожидается"
+    },
+    "pricingNote": "Пример — подложка А10/С11, минимум 500 шт., на странице отмечена как ожидаемая. Общий минимум заказа и сертификаты не указаны; наличие и цену нужно подтвердить.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": "На следующий день после оформления заказа",
+      "terms": "На странице заявлена бесплатная доставка по Москве от 5 000 ₽."
+    },
+    "pros": [
+      "Цены и партии отдельных SKU опубликованы",
+      "Склад в Москве",
+      "На странице заявлена доставка на следующий день"
+    ],
+    "cons": [
+      "Пример товара отмечен как ожидаемый",
+      "Минимальная партия зависит от SKU"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-spice-01",
+    "name": "Свежее поле",
+    "category": "spices",
+    "categoryLabel": "Специи, пряности и пищевые ингредиенты",
+    "description": "Производит специи, приправы и смеси в Ивантеевке. Продаёт весовые специи и фасованные продукты для производств, розницы и HoReCa.",
+    "city": "Ивантеевка",
+    "regions": [
+      "Москва и МО",
+      "Вся РФ"
+    ],
+    "website": "https://freshfield.ru/",
+    "sourceUrl": "https://freshfield.ru/opt",
+    "contacts": {
+      "phone": "+7 (993) 889-84-01",
+      "email": "sales@freshfield.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 25,
+      "unit": "KG",
+      "label": "Весовые позиции от 25 кг; банки от коробки 24 шт."
+    },
+    "priceEstimate": {
+      "min": 98,
+      "max": 98,
+      "unit": "RUB/кг",
+      "label": "Кориандр молотый в мешке — 98 ₽/кг с НДС по оптовому прайсу"
+    },
+    "pricingNote": "Оптовый прайс указывает 98 ₽/кг, тогда как другая страница сайта указывает 75 ₽/кг. Цена требует подтверждения. Для весовых товаров и банок действуют разные минимумы; сайт публикует ISO 22000:2018.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Самовывоз в Ивантеевке или доставка до транспортной компании для отправки в регионы."
+    },
+    "pros": [
+      "Опубликованы примеры цен с НДС",
+      "На сайте представлены сертификаты ISO",
+      "Образцы по запросу"
+    ],
+    "cons": [
+      "Весовые специи от 25 кг",
+      "Наличие и стоимость партии требуют подтверждения"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://freshfield.ru/opt",
+      "https://freshfield.ru/opt/price"
+    ],
+    "documents": [
+      "ISO 22000"
+    ],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-spice-02",
+    "name": "Horazm",
+    "category": "spices",
+    "categoryLabel": "Специи, пряности и пищевые ингредиенты",
+    "description": "Поставляет оптом сушёные овощи, специи и приправы. Работает с поставками разных объёмов по России.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург",
+      "Вся РФ"
+    ],
+    "website": "https://www.horazm.ru/",
+    "sourceUrl": "https://www.horazm.ru/",
+    "contacts": {
+      "phone": "+7 (812) 376-40-34",
+      "email": null,
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 50,
+      "unit": "KG",
+      "label": "от 50 кг"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "На главной указано от 55 ₽/кг для группы приправ и специй без привязки к конкретному товару; в числовую цену не включено. Документы и цену конкретной позиции уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": "от 3 рабочих дней",
+      "terms": "Поставки по России; бесплатная доставка по Санкт-Петербургу от 100 кг."
+    },
+    "pros": [
+      "Специи и сушёные овощи в одном ассортименте",
+      "Поставки по России",
+      "Бесплатная доставка по СПб от 100 кг"
+    ],
+    "cons": [
+      "Минимальный заказ 50 кг",
+      "Конкретная цена зависит от товара"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://www.horazm.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-spice-03",
+    "name": "Gurmadze",
+    "category": "spices",
+    "categoryLabel": "Специи, пряности и пищевые ингредиенты",
+    "description": "Производит специи, приправы и масла для ресторанов, кафе и кулинарных производств. В ассортименте грузинские приправы, перцы, семена и сушёные травы.",
+    "city": "Москва",
+    "regions": [
+      "Москва",
+      "Вся РФ"
+    ],
+    "website": "https://gurmadze.ru/",
+    "sourceUrl": "https://gurmadze.ru/opt",
+    "contacts": {
+      "phone": "+7 (495) 128-46-36",
+      "email": "hello@gurmadze.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 5000,
+      "unit": "RUB",
+      "label": "от 5 000 ₽"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимум 5 000 ₽; прайс отправляют по запросу. Вид сертификатов на странице оптовых продаж не указан.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка по Москве и в регионы России; стоимость и сроки уточняйте."
+    },
+    "pros": [
+      "Смеси для ресторанов и производств",
+      "Фасовка 500–1 000 г",
+      "Доставка по России"
+    ],
+    "cons": [
+      "Минимальный заказ 5 000 ₽",
+      "Оптовый прайс предоставляется по запросу"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://gurmadze.ru/opt",
+      "https://gurmadze.ru/opt/sushenaya-zelen"
+    ],
+    "documents": [],
+    "complianceSystems": [
+      "ЭДО"
+    ]
+  },
+  {
+    "id": "sup-spice-04",
+    "name": "ТД Заря",
+    "category": "spices",
+    "categoryLabel": "Специи, пряности и пищевые ингредиенты",
+    "description": "Торговый дом продаёт оптом специи, приправы и пищевые добавки различных производителей. В каталоге есть фасованные травы, паприка и смеси.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург и ЛО",
+      "Отдельные регионы РФ"
+    ],
+    "website": "https://td-zarya.ru/",
+    "sourceUrl": "https://td-zarya.ru/",
+    "contacts": {
+      "phone": "8 (800) 350-06-01",
+      "email": "zarya.plyus@bk.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Цену, общий MOQ и сертификаты уточняйте. Сайт называет минимальный объём для доставки по СПб и ЛО, но не для всех заказов.",
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка своим транспортом по СПб и ЛО, в отдельные регионы — через транспортные компании; стоимость и минимальный объём уточняйте."
+    },
+    "pros": [
+      "В ассортименте специи и приправы",
+      "Собственная доставка по СПб и ЛО",
+      "Поставки для кафе и ресторанов"
+    ],
+    "cons": [
+      "Минимальный объём доставки устанавливается индивидуально",
+      "Цена по запросу"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://td-zarya.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-spice-05",
+    "name": "Паприка-Корица",
+    "category": "spices",
+    "categoryLabel": "Специи, пряности и пищевые ингредиенты",
+    "description": "Оптовый поставщик специй, пряностей и смесей. Офис и склад находятся в Ижевске, заказы отправляются по России.",
+    "city": "Ижевск",
+    "regions": [
+      "Вся РФ"
+    ],
+    "website": "https://spetsii-optom.ru/",
+    "sourceUrl": "https://spetsii-optom.ru/",
+    "contacts": {
+      "phone": "+7 (967) 555-79-25",
+      "email": "info@paprika-korica.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 0.5,
+      "unit": "KG",
+      "label": "от 0,5 кг одной позиции"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимум 0,5 кг одной позиции. Упомянуты декларации соответствия без указания конкретного техрегламента; цену с точной единицей продажи уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Отправка из Ижевска по России; стоимость доставки рассчитывается индивидуально."
+    },
+    "pros": [
+      "Минимум 0,5 кг одной позиции",
+      "Отправка по России",
+      "Декларации и удостоверения качества по запросу"
+    ],
+    "cons": [
+      "Склад находится в Ижевске",
+      "Срок и стоимость доставки рассчитываются отдельно"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://spetsii-optom.ru/"
+    ],
+    "documents": [
+      "Декларация соответствия"
+    ],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-dairy-01",
+    "name": "Восторг",
+    "category": "dairy",
+    "categoryLabel": "Молочная продукция оптом",
+    "description": "Оптовый поставщик продуктов для HoReCa и производств. В каталоге есть сливочное масло, сыры, молоко и сливки, а также замороженные фрукты и овощи.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО",
+      "Отдельные регионы РФ"
+    ],
+    "website": "https://vosttorg.ru/",
+    "sourceUrl": "https://vosttorg.ru/",
+    "contacts": {
+      "phone": "+7 (499) 499-66-88",
+      "email": "zakaz@osttorg.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": 265,
+      "max": 265,
+      "unit": "RUB/кг",
+      "label": "Сгущённое молоко Рогачёв 8,5%, коробка 20 кг — 265 ₽/кг"
+    },
+    "pricingNote": "Пример акционной цены конкретного товара; для оптовых клиентов сайт предлагает запросить прайс. MOQ не указан. ФГИС Меркурий и Честный ЗНАК — системы учёта, а не сертификаты.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка по Москве и МО; в регионы отправка транспортными компаниями."
+    },
+    "pros": [
+      "Широкий молочный ассортимент",
+      "На сайте указаны Меркурий и Честный ЗНАК",
+      "Есть отправка в регионы"
+    ],
+    "cons": [
+      "MOQ на странице не указан",
+      "Акционная цена может измениться"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://vosttorg.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": [
+      "ФГИС Меркурий",
+      "Честный ЗНАК"
+    ]
+  },
+  {
+    "id": "sup-dairy-02",
+    "name": "Агропарк СПБ",
+    "category": "dairy",
+    "categoryLabel": "Молочная продукция оптом",
+    "description": "Поставляет молоко, сливки, масло, сыры и другие молочные продукты магазинам и предприятиям общепита. Предлагает регулярные отгрузки по договору.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург и ЛО"
+    ],
+    "website": "https://agroparkspb.ru/",
+    "sourceUrl": "https://agroparkspb.ru/molochnaya-produktsiya",
+    "contacts": {
+      "phone": "+7 (812) 409-32-05",
+      "email": "sale@agroparkspb.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "Оптовый объём, уточняется"
+    },
+    "priceEstimate": {
+      "min": 258,
+      "max": 258,
+      "unit": "RUB/упаковка",
+      "label": "Адыгейский сыр Молзавод Новый, 300 г — 258 ₽/упаковка"
+    },
+    "pricingNote": "Пример цены фасованного сыра; условия оптовой цены и минимальный объём уточняйте. Упомянуты документы и сертификаты без названия конкретного вида.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": true,
+      "leadTime": "до 24 часов",
+      "terms": "Доставка по СПб и ЛО в согласованный интервал с температурным режимом; стоимость индивидуальная. Есть самовывоз."
+    },
+    "pros": [
+      "Опубликованы цены отдельных товаров",
+      "Транспортировка с температурным режимом",
+      "Есть регулярные поставки и самовывоз"
+    ],
+    "cons": [
+      "Минимальный оптовый объём не конкретизирован",
+      "Стоимость доставки рассчитывается индивидуально"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://agroparkspb.ru/molochnaya-produktsiya"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-dairy-03",
+    "name": "РС Лайн",
+    "category": "dairy",
+    "categoryLabel": "Молочная продукция оптом",
+    "description": "Поставляет молочную продукцию российских производителей для сетей и дистрибьюторов. У компании офис в Москве и склад в Одинцово.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО",
+      "Вся РФ"
+    ],
+    "website": "https://rs-line.ru/",
+    "sourceUrl": "https://rs-line.ru/",
+    "contacts": {
+      "phone": "+7 (495) 225-30-73",
+      "email": "info@rs-line.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Оптовый прайс по запросу. На главной странице указано, что первый заказ возможен на любую сумму, а в ответе на вопрос о минимуме — от 30 000 ₽; условия противоречат друг другу и требуют уточнения. Честный ЗНАК — система маркировки, а не сертификат.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": "На следующий день; условия уточняйте",
+      "terms": "Заявлена доставка по РФ; бесплатная доставка от 30 000 ₽ согласно сайту."
+    },
+    "pros": [
+      "Поставки по всей РФ",
+      "На сайте упомянута маркировка Честный ЗНАК",
+      "Склад в Одинцово"
+    ],
+    "cons": [
+      "Оптовый прайс по запросу",
+      "Порог бесплатной доставки 30 000 ₽"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://rs-line.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": [
+      "Честный ЗНАК"
+    ]
+  },
+  {
+    "id": "sup-dairy-04",
+    "name": "Милко",
+    "category": "dairy",
+    "categoryLabel": "Молочная продукция оптом",
+    "description": "Производитель и оптовый поставщик сливочного масла и сыров для профессиональных покупателей. На странице HoReCa указана минимальная партия для сыра и масла.",
+    "city": "Курск",
+    "regions": [
+      "Москва",
+      "Санкт-Петербург",
+      "Вся РФ"
+    ],
+    "website": "https://milco.group/",
+    "sourceUrl": "https://milco.group/molochnaya-produkciya-dlya-horeca",
+    "contacts": {
+      "phone": "8 (800) 100-11-51",
+      "email": null,
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 600,
+      "unit": "KG",
+      "label": "Сыр и масло: от 600 кг"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимум 600 кг относится к сыру и маслу. Цены, сроки и наличие уточняются у менеджера. На странице заявлено применение системы ХАССП; наличие отдельного сертификата не установлено.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка в Москву, Санкт-Петербург и другие регионы России; адрес и сроки согласуются."
+    },
+    "pros": [
+      "Производитель масла и сыров",
+      "Заявлена доставка по России",
+      "Указана минимальная партия для сыра и масла"
+    ],
+    "cons": [
+      "Крупная минимальная партия 600 кг",
+      "Цена и сроки по запросу"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://milco.group/molochnaya-produkciya-dlya-horeca"
+    ],
+    "documents": [],
+    "complianceSystems": [
+      "ХАССП"
+    ]
+  },
+  {
+    "id": "sup-dairy-05",
+    "name": "Калининская продуктовая база",
+    "category": "dairy",
+    "categoryLabel": "Молочная продукция оптом",
+    "description": "Продуктовая база в Санкт-Петербурге поставляет молочную продукцию, сыр и масло наряду с бакалеей и замороженными продуктами. Предлагает смешанные заказы разных категорий.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург и ЛО"
+    ],
+    "website": "https://kalinbaza.ru/",
+    "sourceUrl": "https://kalinbaza.ru/",
+    "contacts": {
+      "phone": "+7 (812) 509-12-10",
+      "email": "sale@kalinbaza.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 1,
+      "unit": "BOX",
+      "label": "от 1 коробки; зависит от состава заказа"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Сайт заявляет заказы от одной коробки; конкретная минимальная партия и условия зависят от состава заказа. Отдел продаж готовит актуальный прайс; виды сертификатов не перечислены.",
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": true,
+      "leadTime": null,
+      "terms": "Доставка по Санкт-Петербургу и Ленинградской области; отгрузка со склада возможна в день заказа."
+    },
+    "pros": [
+      "Смешанный заказ по одному договору",
+      "Доставка по СПб и ЛО",
+      "Отгрузка со склада может быть в день заказа"
+    ],
+    "cons": [
+      "Цены и минимальная партия согласуются индивидуально",
+      "Регионы за пределами СПб и ЛО не подтверждены"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://kalinbaza.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-01",
+    "name": "FS Trade",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Поставляет оптом ягоды, овощи, фрукты и грибы глубокой заморозки. Указаны фасовки для общественного питания и сырьё для производств.",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург",
+      "Вся РФ"
+    ],
+    "website": "https://fs-trade.ru/",
+    "sourceUrl": "https://fs-trade.ru/",
+    "contacts": {
+      "phone": "+7 (812) 507-94-48",
+      "email": "office@fs-trade.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "Уточнять: на сайте указаны разные условия"
+    },
+    "priceEstimate": {
+      "min": 220,
+      "max": null,
+      "unit": "RUB/кг",
+      "label": "Клубника — от 220 ₽/кг, новость от 24.11.2025"
+    },
+    "pricingNote": "Цена клубники из новости о поступлении от 24.11.2025; актуальность и наличие уточняйте. На странице встречаются противоречивые условия по MOQ: 500 кг и 5–10 тонн. Сайт упоминает сертификацию без конкретного вида.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": "По СПб заявлено в течение 24 часов",
+      "terms": "Сайт заявляет бесплатную доставку по СПб и варианты доставки в регионы России; условия уточняйте."
+    },
+    "pros": [
+      "Более 200 наименований",
+      "Поставки во все регионы РФ",
+      "Указан пример цены клубники"
+    ],
+    "cons": [
+      "На сайте противоречивые данные о минимальной партии",
+      "Цена из новости требует подтверждения"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://fs-trade.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-02",
+    "name": "Импульс",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Производит и поставляет быстрозамороженные ягоды, овощи, фрукты, зелень и грибы. Отгрузка осуществляется со склада в Жуковском.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО",
+      "Вся РФ"
+    ],
+    "website": "https://umpuls.ru/",
+    "sourceUrl": "https://umpuls.ru/shop",
+    "contacts": {
+      "phone": "+7 (495) 798-48-18",
+      "email": null,
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 1,
+      "unit": "BOX",
+      "label": "Доставка по Москве и МО от 1 короба"
+    },
+    "priceEstimate": {
+      "min": 270,
+      "max": 270,
+      "unit": "RUB/кг",
+      "label": "Лук-порей замороженный, Россия — 270 ₽/кг"
+    },
+    "pricingNote": "Цена отдельного товара из каталога; актуальную цену подтверждают отделом продаж. Одна коробка указана как минимум доставки по Москве и МО; минимум для других регионов уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": true,
+      "leadTime": null,
+      "terms": "По Москве и МО бесплатно собственным транспортом от одного короба; в регионы — транспортными компаниями в рефрижераторных секциях при −18 °C."
+    },
+    "pros": [
+      "Доставка по Москве и МО от одного короба",
+      "Температурный режим −18 °C для региональных отправок",
+      "На сайте упомянут сертификат ISO 22000"
+    ],
+    "cons": [
+      "Актуальность цены требует подтверждения",
+      "Минимум для регионов не указан"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://umpuls.ru/shop"
+    ],
+    "documents": [
+      "ISO 22000"
+    ],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-03",
+    "name": "АФИНА",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Импортирует и оптом поставляет замороженные ягоды, фрукты и овощи для производств, дистрибуции и общепита. Центральный склад расположен в Жуковском.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО",
+      "Вся РФ"
+    ],
+    "website": "https://www.afinafrozen.ru/",
+    "sourceUrl": "https://www.afinafrozen.ru/",
+    "contacts": {
+      "phone": null,
+      "email": "afinafrozenfood@gmail.com",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Объём и цену согласуют индивидуально. Сайт упоминает декларации и протоколы на продукцию без уточнения вида деклараций.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Доставка до склада клиента по России семь дней в неделю; самовывоз со склада в Жуковском круглосуточно по согласованию."
+    },
+    "pros": [
+      "Импорт и поставки по России",
+      "Круглосуточный самовывоз по согласованию",
+      "Декларации и протоколы на продукцию"
+    ],
+    "cons": [
+      "Минимальный объём не указан",
+      "Цена и партия согласуются индивидуально"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://www.afinafrozen.ru/"
+    ],
+    "documents": [
+      "Декларация на продукцию"
+    ],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-04",
+    "name": "Агро-Трейд",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Дистрибьютор замороженных овощей, ягод, грибов и фруктов. Выпускает продукцию под собственными торговыми марками, в том числе «Вкусная удача».",
+    "city": "Санкт-Петербург",
+    "regions": [
+      "Санкт-Петербург",
+      "Вся РФ"
+    ],
+    "website": "https://postavkaoptom.ru/",
+    "sourceUrl": "https://postavkaoptom.ru/",
+    "contacts": {
+      "phone": "+7 (812) 448-12-75",
+      "email": "info@postavkaoptom.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "Минимальную партию, стоимость и конкретные сертификаты необходимо уточнять.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Компания заявляет собственную логистику и поставки по России; условия уточняйте."
+    },
+    "pros": [
+      "Замороженные овощи, ягоды и грибы",
+      "Собственные торговые марки",
+      "Заявлены поставки по России"
+    ],
+    "cons": [
+      "Минимальный заказ не указан",
+      "Цена и условия доставки требуют подтверждения"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://postavkaoptom.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-05",
+    "name": "ЭданФуд",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Поставляет замороженные овощи, ягоды и кукурузу, а также сыр и бакалею для кафе, магазинов и производств. Склад находится в Москве.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО"
+    ],
+    "website": "https://edanfood.ru/",
+    "sourceUrl": "https://edanfood.ru/",
+    "contacts": {
+      "phone": "+7 (977) 425-07-08",
+      "email": "info@edanfood.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "priceEstimate": {
+      "min": null,
+      "max": null,
+      "unit": null,
+      "label": "По запросу"
+    },
+    "pricingNote": "На сайте заявлено от 50 ₽/кг для группы ягод и овощей без указания конкретной позиции; числовая цена не заполнена. Прайс, MOQ и сертификаты уточняйте.",
+    "delivery": {
+      "hasOwnDelivery": null,
+      "temperatureControlled": null,
+      "leadTime": null,
+      "terms": "Москва и область; доставка по графику, условия уточняйте."
+    },
+    "pros": [
+      "Склад в Москве",
+      "Ассортимент для кафе, магазинов и производств",
+      "Актуальный прайс обещают в день обращения"
+    ],
+    "cons": [
+      "Цену конкретной позиции нужно запросить",
+      "Минимальный заказ не указан"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23",
+    "sourceUrls": [
+      "https://edanfood.ru/"
+    ],
+    "documents": [],
+    "complianceSystems": []
+  },
+  {
+    "id": "sup-frozen-06",
+    "name": "Премьер Айс",
+    "category": "frozen",
+    "categoryLabel": "Замороженные продукты оптом",
+    "description": "Оптовый поставщик замороженных продуктов и овощей для кафе, ресторанов и других профессиональных покупателей. Предлагает доставку по Москве и Московской области.",
+    "city": "Москва",
+    "regions": [
+      "Москва и МО"
+    ],
+    "website": "https://pr-ice.ru/",
+    "sourceUrl": "https://pr-ice.ru/",
+    "sourceUrls": [
+      "https://pr-ice.ru/",
+      "https://pr-ice.ru/zamorozka-optom",
+      "https://pr-ice.ru/catalog/moreprodukty"
+    ],
+    "contacts": {
+      "phone": "8 (800) 550-05-69",
+      "email": "info@premierice.ru",
+      "telegramOrWhatsapp": null
+    },
+    "moq": {
+      "amount": 10000,
+      "unit": "RUB",
+      "label": "Минимальный заказ от 10 000 ₽"
+    },
+    "priceEstimate": {
+      "min": 365,
+      "max": 365,
+      "unit": "RUB/упаковка",
+      "label": "Креветки 90/120 королевские, 400 г — 365 ₽/упаковка"
+    },
+    "pricingNote": "Минимальный заказ 10 000 ₽ указан на сайте; поставка формируется коробками. Пример цены относится к одной позиции; цену и наличие подтверждает менеджер. Данные о сертификатах не указаны.",
+    "documents": [],
+    "complianceSystems": [],
+    "delivery": {
+      "hasOwnDelivery": true,
+      "temperatureControlled": true,
+      "leadTime": "Обычно 1–2 рабочих дня после подтверждения",
+      "terms": "Доставка собственными рефрижераторами при −18 °C по Москве и области; условия оплаты доставки уточняйте."
+    },
+    "pros": [
+      "Минимальный заказ указан на сайте",
+      "Доставка рефрижераторами по Москве и области",
+      "Опубликованы цены отдельных товаров"
+    ],
+    "cons": [
+      "Минимальный заказ 10 000 ₽",
+      "Поставка формируется коробками"
+    ],
+    "defaultStatus": "new",
+    "defaultNotes": "",
+    "collectedAt": "2026-11-23"
+  }
+]

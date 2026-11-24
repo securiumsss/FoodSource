@@ -1,0 +1,34 @@
+{
+  "name": "food-suppliers-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run build --workspace=shared && concurrently --kill-others-on-fail --names backend,frontend \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "dev:backend": "npm run build --workspace=shared && npm run dev --workspace=backend",
+    "dev:frontend": "npm run build --workspace=shared && npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=shared && npm run build --workspace=frontend && npm run build --workspace=backend",
+    "build:vercel": "npm run build && node scripts/build-vercel.mjs",
+    "db:migrate": "npm run build --workspace=shared && npm run build --workspace=backend && node scripts/migrate-postgres.mjs",
+    "start": "cross-env NODE_ENV=production npm run start --workspace=backend",
+    "test": "npm run build --workspace=shared && npm run test --workspace=backend && npm run test --workspace=frontend",
+    "validate:seed": "node scripts/validate-seed.mjs",
+    "validate:seed:local": "node scripts/validate-seed.mjs --skip-http"
+  },
+  "devDependencies": {
+    "@vercel/nft": "^1.11.12",
+    "concurrently": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "typescript": "^5.9.2"
+  },
+  "overrides": {
+    "jsdom": "^26.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
