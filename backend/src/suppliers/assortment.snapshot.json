@@ -12,11 +12,11 @@
       {
         "id": "029a6a40a0149429",
         "name": "Пакет вакуумный ПЭТ/ПЭ 110*160мм 55мкм (10000/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 10 000 шт.",
         "price": {
           "kind": "published",
           "amount": 0.96,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/00_rona_sobstvennoe_proizvodstvo/00_01_vakuumnye_pakety/00_01_01_pakety_vakuumnye_55_mkm/16684/",
         "checkedAt": "2026-11-24"
@@ -24,11 +24,11 @@
       {
         "id": "7bd352792da473fe",
         "name": "Пакет вакуумный ПЭТ/ПЭ 160*210мм 55мкм (6000/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 6 000 шт.",
         "price": {
           "kind": "published",
           "amount": 1.82,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/00_rona_sobstvennoe_proizvodstvo/00_01_vakuumnye_pakety/00_01_01_pakety_vakuumnye_55_mkm/16176/",
         "checkedAt": "2026-11-24"
@@ -36,11 +36,11 @@
       {
         "id": "0ccffd6bb4316701",
         "name": "Пакет вакуумный ПЭТ/ПЭ 200*300мм 55мкм (3000/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 3 000 шт.",
         "price": {
           "kind": "published",
           "amount": 3.24,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/00_rona_sobstvennoe_proizvodstvo/00_01_vakuumnye_pakety/00_01_01_pakety_vakuumnye_55_mkm/16184/",
         "checkedAt": "2026-11-24"
@@ -48,11 +48,11 @@
       {
         "id": "c5c9a85dbda58d87",
         "name": "Пакет вакуумный ПЭТ/ПЭ 250*350мм 55мкм (2000/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 2 000 шт.",
         "price": {
           "kind": "published",
           "amount": 4.73,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/00_rona_sobstvennoe_proizvodstvo/00_01_vakuumnye_pakety/00_01_01_pakety_vakuumnye_55_mkm/16183/",
         "checkedAt": "2026-11-24"
@@ -60,7 +60,7 @@
       {
         "id": "c06977159f1baa6c",
         "name": "Пакет вакуумный ПЭТ/ПЭ 300*400мм 55мкм (1600/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 1 600 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -70,7 +70,7 @@
       {
         "id": "75dc16c80cdfeaa2",
         "name": "Пакет вакуумный ПЭТ/ПЭ 160*250мм 55мкм (5000/100) РОНА",
-        "pack": null,
+        "pack": "Упаковка: 5 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -80,11 +80,11 @@
       {
         "id": "5f23a3e50148a4e9",
         "name": "Контейнер для соуса ПП 50мл с внутр. крышкой круглый d60мм прозр. (1200/80) ВЗЛП арт.1242",
-        "pack": null,
+        "pack": "Упаковка: 1 200 шт.",
         "price": {
           "kind": "published",
           "amount": 1.79,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/02_pishchevaya_upakovka/02_01_konteynery/02_01_04_konteynery_dlya_sousa/16325/",
         "checkedAt": "2026-11-24"
@@ -92,11 +92,11 @@
       {
         "id": "8594d9cbe4a5ad7a",
         "name": "Контейнер для соуса ПП 80мл с внутр.крышкой круглый d71,4мм прозрачный (960/80) ВЗЛП арт. 1252",
-        "pack": null,
+        "pack": "Упаковка: 960 шт.",
         "price": {
           "kind": "published",
           "amount": 2.21,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/02_pishchevaya_upakovka/02_01_konteynery/02_01_04_konteynery_dlya_sousa/16338/",
         "checkedAt": "2026-11-24"
@@ -104,11 +104,11 @@
       {
         "id": "498f5315f1d85646",
         "name": "Контейнер для соуса ПП 50мл с внутренней крышкой круглый d60мм прозрачный (1040/80) Перинт",
-        "pack": null,
+        "pack": "Упаковка: 1 040 шт.",
         "price": {
           "kind": "published",
           "amount": 3.17,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/02_pishchevaya_upakovka/02_01_konteynery/02_01_04_konteynery_dlya_sousa/14846/",
         "checkedAt": "2026-11-24"
@@ -116,7 +116,7 @@
       {
         "id": "ea72674503cd9689",
         "name": "Контейнер для соуса ПП 80мл с внутренней крышкой круглый d71,4мм прозрачный (960/80) Д-Полимер",
-        "pack": null,
+        "pack": "Упаковка: 960 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -126,7 +126,7 @@
       {
         "id": "a8e7ca2a47c71f58",
         "name": "Контейнер для соуса ПП 80мл с внутренней крышкой круглый d71,4мм прозрачный (960/80) Перинт",
-        "pack": null,
+        "pack": "Упаковка: 960 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -136,7 +136,7 @@
       {
         "id": "4b4c44f1ac163853",
         "name": "Контейнер для соуса ПП 50мл с внутренней крышкой круглый d60мм прозрачный (1360/85) Комус",
-        "pack": null,
+        "pack": "Упаковка: 1 360 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -146,7 +146,7 @@
       {
         "id": "d008d28c692fd2da",
         "name": "Контейнер для соуса ПП 80мл с верх. крышкой круглый d71,4мм прозрачный (960/80) ВЗЛП арт. 1256",
-        "pack": null,
+        "pack": "Упаковка: 960 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -156,7 +156,7 @@
       {
         "id": "558d08d23276a2f8",
         "name": "Контейнер для соуса ПП 30мл с внутренней крышкой круглый d47мм прозрачный (1920/80) ВЗЛП арт. 1232",
-        "pack": null,
+        "pack": "Упаковка: 1 920 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -166,7 +166,7 @@
       {
         "id": "39878fdf5a1015f9",
         "name": "Контейнер для соуса ПП 50мл с внутренней крышкой круглый d60мм прозрачный (1200/80) Д-Полимер",
-        "pack": null,
+        "pack": "Упаковка: 1 200 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -176,7 +176,7 @@
       {
         "id": "d7b915ede516544a",
         "name": "Контейнер для соуса ПП 30мл с внутренней крышкой круглый d47мм прозрачный (1760/80) Перинт",
-        "pack": null,
+        "pack": "Упаковка: 1 760 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -186,11 +186,11 @@
       {
         "id": "5ea37cf842d8316a",
         "name": "Стакан бумажный 300-410мл 1-слойный d90мм Coffee Coffee (1000/50) Паперскоп",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 4.5,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_03_stakany_bumazhnye_350_400ml/15754/",
         "checkedAt": "2026-11-24"
@@ -198,11 +198,11 @@
       {
         "id": "91501574f72435b6",
         "name": "Крышка ПП к стакану d90мм закрыв. носик прозрачная (1000/50)",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 2.75,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_05_kryshki_derzhateli_manzhety/01_01_02_05_01_kryshki_dlya_stakanov/15393/",
         "checkedAt": "2026-11-24"
@@ -210,11 +210,11 @@
       {
         "id": "7ac83002a2fdbf64",
         "name": "Стакан бумажный 250-285мл 1-слойный d80мм Coffee Coffee (1000/50) Паперскоп",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 3.27,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_02_stakany_bumazhnye_250_300ml/15260/",
         "checkedAt": "2026-11-24"
@@ -222,11 +222,11 @@
       {
         "id": "7b7bdaf2ee427f06",
         "name": "Крышка ПС к стакану d80мм с закрытым питейником белая (1000/100)",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 1.64,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_05_kryshki_derzhateli_manzhety/01_01_02_05_01_kryshki_dlya_stakanov/14892/",
         "checkedAt": "2026-11-24"
@@ -234,11 +234,11 @@
       {
         "id": "1516c5d936d6e379",
         "name": "Стакан бумажный 400-450мл 1-слойный d90мм Coffee Flavor (400/50) ЭкоПак",
-        "pack": null,
+        "pack": "Упаковка: 400 шт.",
         "price": {
           "kind": "published",
           "amount": 5.08,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_04_stakany_bumazhnye_400_1500ml/16262/",
         "checkedAt": "2026-11-24"
@@ -246,11 +246,11 @@
       {
         "id": "a8aa2ff9bea135bc",
         "name": "Стакан бумажный 350мл 1-слойный d90мм черный (1000/50)",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 5.3,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_03_stakany_bumazhnye_350_400ml/15267/",
         "checkedAt": "2026-11-24"
@@ -258,11 +258,11 @@
       {
         "id": "02e36ac063a7108a",
         "name": "Держатель для 2-х стаканов (150)",
-        "pack": null,
+        "pack": "Упаковка: 150 шт.",
         "price": {
           "kind": "published",
           "amount": 3.63,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_05_kryshki_derzhateli_manzhety/01_01_02_05_02_derzhateli_dlya_stakanov/14889/",
         "checkedAt": "2026-11-24"
@@ -270,11 +270,11 @@
       {
         "id": "ae12bbd902604404",
         "name": "Стакан бумажный 250-280мл 2-слойный d80мм Крафт (500/25) SaaMi",
-        "pack": null,
+        "pack": "Упаковка: 500 шт.",
         "price": {
           "kind": "published",
           "amount": 4.62,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_02_stakany_bumazhnye_250_300ml/16256/",
         "checkedAt": "2026-11-24"
@@ -282,11 +282,11 @@
       {
         "id": "cf299ac3451e81a2",
         "name": "Стакан бумажный 300-410мл 1-слойный d90мм Белый (1000/50) Паперскоп",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 5.08,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_03_stakany_bumazhnye_350_400ml/16773/",
         "checkedAt": "2026-11-24"
@@ -294,11 +294,11 @@
       {
         "id": "2fa15fd9f57eed04",
         "name": "Крышка ПС к стакану d90мм с закрытым питейником черная (1000/100)",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 1.98,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_05_kryshki_derzhateli_manzhety/01_01_02_05_01_kryshki_dlya_stakanov/15907/",
         "checkedAt": "2026-11-24"
@@ -306,11 +306,11 @@
       {
         "id": "251151b000730255",
         "name": "Стакан бумажный 400-450мл 1-слойный d90мм Белый (400/50) ЭкоПак",
-        "pack": null,
+        "pack": "Упаковка: 400 шт.",
         "price": {
           "kind": "published",
           "amount": 4.57,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_04_stakany_bumazhnye_400_1500ml/16263/",
         "checkedAt": "2026-11-24"
@@ -318,11 +318,11 @@
       {
         "id": "cf14bbc24d9f89c2",
         "name": "Стакан бумажный 350-400мл 1-слойный d90мм Coffee Flavor (1000/50) ЭкоПак",
-        "pack": null,
+        "pack": "Упаковка: 1 000 шт.",
         "price": {
           "kind": "published",
           "amount": 4.44,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://ronapack.ru/catalog/01_odnorazovaya_posuda/01_01_stakany_plastikovye_bumazhnye_vps_chashki/01_01_02_bumazhnye_stakany_i_akssesuary/01_01_02_03_stakany_bumazhnye_350_400ml/16765/",
         "checkedAt": "2026-11-24"
@@ -330,11 +330,11 @@
       {
         "id": "7264d1a034e63435",
         "name": "Пленка пищевая ПЭ 45см*250 9мкм 14354-4 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 222.93,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/15487/",
         "checkedAt": "2026-11-24"
@@ -342,11 +342,11 @@
       {
         "id": "5d38365e34f5ae99",
         "name": "Пленка пищевая ПЭ 45см*200 8мкм 14354 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 134.71,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/16027/",
         "checkedAt": "2026-11-24"
@@ -354,11 +354,11 @@
       {
         "id": "7679444cd976fd45",
         "name": "Пленка пищевая ПЭ 30см*200 8мкм 12009 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 70.53,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/16533/",
         "checkedAt": "2026-11-24"
@@ -366,11 +366,11 @@
       {
         "id": "5393face9241b4f7",
         "name": "Пленка пищевая ПЭ 30см*200 7мкм 02509 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 39.89,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/14997/",
         "checkedAt": "2026-11-24"
@@ -378,11 +378,11 @@
       {
         "id": "208b382fc9f9e41d",
         "name": "Пленка пищевая ПЭ 30см*200 9мкм 12009 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 97.58,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/15489/",
         "checkedAt": "2026-11-24"
@@ -390,11 +390,11 @@
       {
         "id": "65ec0f1882422b3f",
         "name": "Пленка пищевая ПЭ 30см*300 9мкм 12959 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 216.37,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/15488/",
         "checkedAt": "2026-11-24"
@@ -402,11 +402,11 @@
       {
         "id": "1bdd82570878e6e7",
         "name": "Пленка пищевая ПЭ 30см*250 7мкм 12809 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "published",
           "amount": 111.83,
-          "unit": null
+          "unit": "рул."
         },
         "sourceUrl": "https://ronapack.ru/catalog/03_upakovochnye_materialy/03_01_plenka/03_01_01_plenka_pishchevaya_pe/16029/",
         "checkedAt": "2026-11-24"
@@ -414,7 +414,7 @@
       {
         "id": "03adc905feba07f7",
         "name": "Пленка пищевая ПЭ 45см*200 8мкм белая (10) Десногорск",
-        "pack": null,
+        "pack": "Упаковка: 10 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -424,7 +424,7 @@
       {
         "id": "917982119446f001",
         "name": "Пленка пищевая ПЭ 30см*200 7мкм 12059 желтая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -434,7 +434,7 @@
       {
         "id": "26391f0e81451a9e",
         "name": "Пленка пищевая ПЭ 45см*200 9мкм 14004 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -444,7 +444,7 @@
       {
         "id": "285a009ef9456540",
         "name": "Пленка пищевая ПЭ 45см*200 9мкм белая (6) PLATINUM ROLL",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -454,7 +454,7 @@
       {
         "id": "ccf701a105087a3a",
         "name": "Пленка пищевая ПЭ 45см*200 7мкм 04554 белая (6)",
-        "pack": null,
+        "pack": "Упаковка: 6 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -546,7 +546,7 @@
       {
         "id": "c9efae13bbd87909",
         "name": "Контейнер К-7",
-        "pack": null,
+        "pack": "Короб: 945 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -556,7 +556,7 @@
       {
         "id": "b8334c5244b8e700",
         "name": "Контейнер К-8",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -566,7 +566,7 @@
       {
         "id": "5731c20954560d18",
         "name": "Контейнер К-10",
-        "pack": null,
+        "pack": "Короб: 1 050 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -576,7 +576,7 @@
       {
         "id": "968f36d683d9ab5f",
         "name": "Контейнер К-11",
-        "pack": null,
+        "pack": "Короб: 440 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -586,7 +586,7 @@
       {
         "id": "0f97dbf4cf041c00",
         "name": "Контейнер К-11В",
-        "pack": null,
+        "pack": "Короб: 440 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -596,7 +596,7 @@
       {
         "id": "dfc26515596cfca4",
         "name": "Контейнер К-11Гл",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -606,7 +606,7 @@
       {
         "id": "a844ce41e68d94fa",
         "name": "Контейнер К-11НН",
-        "pack": null,
+        "pack": "Короб: 440 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -616,7 +616,7 @@
       {
         "id": "2edae7fa2e1d805f",
         "name": "Контейнер К-11ВГл",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -626,7 +626,7 @@
       {
         "id": "886a7d5553f35044",
         "name": "Контейнер К-15",
-        "pack": null,
+        "pack": "Короб: 612 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -636,7 +636,7 @@
       {
         "id": "ddb193cf26b758cb",
         "name": "Контейнер К-15Н",
-        "pack": null,
+        "pack": "Короб: 720 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -646,7 +646,7 @@
       {
         "id": "9b6059ae2a0d6e04",
         "name": "Контейнер К-15ВГл",
-        "pack": null,
+        "pack": "Короб: 612 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -656,7 +656,7 @@
       {
         "id": "78acf74388f50cd3",
         "name": "Контейнер К-16",
-        "pack": null,
+        "pack": "Короб: 640 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -666,7 +666,7 @@
       {
         "id": "f01fd77ae5ca045a",
         "name": "Упаковка для торта Т-106",
-        "pack": null,
+        "pack": "Короб: 450 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -676,7 +676,7 @@
       {
         "id": "bb076b48118ff342",
         "name": "Упаковка для торта Т-228",
-        "pack": null,
+        "pack": "Короб: 220 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -686,7 +686,7 @@
       {
         "id": "b40063c9d2592756",
         "name": "Упаковка для торта Т-228Н",
-        "pack": null,
+        "pack": "Короб: 220 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -696,7 +696,7 @@
       {
         "id": "b15ac3704ab155ea",
         "name": "Упаковка для торта Т-150",
-        "pack": null,
+        "pack": "Короб: 324 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -706,7 +706,7 @@
       {
         "id": "1564ab1e47fb779f",
         "name": "Упаковка для торта Т-170",
-        "pack": null,
+        "pack": "Короб: 120 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -716,7 +716,7 @@
       {
         "id": "f1385a147a5ee3cb",
         "name": "Упаковка для торта Т-170Н",
-        "pack": null,
+        "pack": "Короб: 120 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -726,7 +726,7 @@
       {
         "id": "9cd21cade8a79da3",
         "name": "Упаковка для торта Т-190Н",
-        "pack": null,
+        "pack": "Короб: 100 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -736,7 +736,7 @@
       {
         "id": "de473401c57b57cd",
         "name": "Упаковка для торта Т-216",
-        "pack": null,
+        "pack": "Короб: 160 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -746,7 +746,7 @@
       {
         "id": "52838ea3f2eda2d5",
         "name": "Упаковка для торта Т-216В",
-        "pack": null,
+        "pack": "Короб: 160 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -756,7 +756,7 @@
       {
         "id": "25dc0d1cf0ecec33",
         "name": "Упаковка для торта Т-217",
-        "pack": null,
+        "pack": "Короб: 100 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -766,7 +766,7 @@
       {
         "id": "0944c8366314d191",
         "name": "Упаковка для торта Т-217Гл",
-        "pack": null,
+        "pack": "Короб: 100 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -776,7 +776,7 @@
       {
         "id": "535b6936514964c6",
         "name": "Упаковка для торта Т-237",
-        "pack": null,
+        "pack": "Короб: 80 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -786,7 +786,7 @@
       {
         "id": "5d6f65329b509483",
         "name": "Крышка Р-80 Л",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -796,7 +796,7 @@
       {
         "id": "d551ae0c6aaab18e",
         "name": "Крышка Р-90 Л",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -806,7 +806,7 @@
       {
         "id": "05bf77379f656e31",
         "name": "Крышка Р-80",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -816,7 +816,7 @@
       {
         "id": "c1292316a42b81af",
         "name": "Крышка Р-90",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -846,7 +846,7 @@
       {
         "id": "b72442bcfb802b25",
         "name": "К8060",
-        "pack": null,
+        "pack": "Короб: 4 320 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -856,7 +856,7 @@
       {
         "id": "179ca2fba8356e7b",
         "name": "К-29Н",
-        "pack": null,
+        "pack": "Короб: 960 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -866,7 +866,7 @@
       {
         "id": "f281d6499dba1a04",
         "name": "К-29",
-        "pack": null,
+        "pack": "Короб: 960 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -876,7 +876,7 @@
       {
         "id": "29d3083c2edac8ed",
         "name": "К1008-2Е",
-        "pack": null,
+        "pack": "Короб: 1 200 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -886,7 +886,7 @@
       {
         "id": "eb507daa206e1ad5",
         "name": "К1008-32В",
-        "pack": null,
+        "pack": "Короб: 1 200 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -896,7 +896,7 @@
       {
         "id": "690f606637ebc294",
         "name": "С-19",
-        "pack": null,
+        "pack": "Короб: 420 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -906,7 +906,7 @@
       {
         "id": "49c3f278d0e67478",
         "name": "С-25",
-        "pack": null,
+        "pack": "Короб: 324 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -916,7 +916,7 @@
       {
         "id": "a3ca9438db65d896",
         "name": "К-40-4Е",
-        "pack": null,
+        "pack": "Короб: 400 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -926,7 +926,7 @@
       {
         "id": "818226c3f78d1dbe",
         "name": "Вилка оптимум",
-        "pack": null,
+        "pack": "Короб: 3 300 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -936,7 +936,7 @@
       {
         "id": "131f45deb444e41f",
         "name": "Ложка оптимум",
-        "pack": null,
+        "pack": "Короб: 2 400 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -946,7 +946,7 @@
       {
         "id": "66dfc7aae6eae34d",
         "name": "Нож оптимум",
-        "pack": null,
+        "pack": "Короб: 4 500 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -956,7 +956,7 @@
       {
         "id": "995ffe6a6f678ace",
         "name": "Вилка премиум",
-        "pack": null,
+        "pack": "Короб: 3 300 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -966,7 +966,7 @@
       {
         "id": "8d6d8c73e201d4b3",
         "name": "Ложка премиум",
-        "pack": null,
+        "pack": "Короб: 2 400 шт.",
         "price": {
           "kind": "not_published"
         },
@@ -1179,52 +1179,57 @@
       {
         "id": "ff9d95ab8276774b",
         "name": "Держатель/переноска для стаканов",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/derzhatel-perenoska-dlya-stakanov/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "62b067bbd85ddf81",
         "name": "Переноска для стаканов",
-        "pack": null,
+        "pack": "Короб: 250 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/perenoska-dlya-stakanov-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "8e39701b5a070a49",
         "name": "Стакан для горячих напитков 250 мл,белый",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/stakan-dlya-goryachikh-napitkov-250-ml-belyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "2c7ad41aa4972909",
         "name": "Стакан для горячих напитков 250 мл, крафт",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/stakan-dlya-goryachikh-napitkov-250-ml-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "65e3ee4036881336",
         "name": "Стакан для горячих напитков 250 мл, черный",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/stakan-dlya-goryachikh-napitkov-250-ml-chernyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "984a8931209a5b51",
@@ -1239,22 +1244,24 @@
       {
         "id": "729ab78be3fed07b",
         "name": "Стакан двухслойный для горячих напитков 250 мл,белый",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/stakan-dvukhsloynyy-dlya-goryachikh-napitkov-250-ml-belyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "526c97a22d5c3f2d",
         "name": "Стакан двухслойный для горячих напитков 250 мл, крафт",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/bumazhnye-stakany-perenoski-kryshki/stakan-dvukhsloynyy-dlya-goryachikh-napitkov-250-ml-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "514b66e7e37ac6ea",
@@ -1299,32 +1306,35 @@
       {
         "id": "55dfca7e24ec8441",
         "name": "Ланч-бокс 150x115x50",
-        "pack": null,
+        "pack": "Короб: 400 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/lanch-boks-150x115x50/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "2f287341b66e7bd4",
         "name": "Ланч-бокс 190х150х50",
-        "pack": null,
+        "pack": "Короб: 400 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/lanch-boks-190kh150kh50/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "d73c0fc7cdb79cff",
         "name": "Коробка для конд.изделий (самосборная) 140х140х60",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-samosbornaya-140kh140kh60/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "d889f7aae834ab5b",
@@ -1339,122 +1349,134 @@
       {
         "id": "6f3933b21effaf8e",
         "name": "Коробка для конд.изделий (самосборная) 200х140х80",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-samosbornaya-200kh140kh80/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "7c07e52e7ae1b1e1",
         "name": "Коробка для конд.изделий (самосборная) 215х150х60",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-samosbornaya-215kh150kh60/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "30298ddf38e618aa",
         "name": "Коробка для конд.изделий (белая мелованная) 150х110х75",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-belaya-melovannaya-150kh110kh75/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "23f2f2baebe9dd79",
         "name": "Коробка для конд.изделий (белая мелованная) 200х140х80",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-belaya-melovannaya-200kh140kh80/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "a8c48e81613f12d2",
         "name": "Коробка для конд.изделий (белая мелованная) 215х150х60",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/korobka-dlya-kond-izdeliy-belaya-melovannaya-215kh150kh60/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "dda3083cdfedb75c",
         "name": "Контейнер универс. (самосборный) 260*160*55 , окно,крафт ПЕ",
-        "pack": null,
+        "pack": "Короб: 250 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-konditerskie-izdeliya-lanch-boksy-konteynery-s-oknom/konteyner-univers-samosbornyy-260-160-55-okno-kraft-pe-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "aebc36c33d3bbcee",
         "name": "Салатник 500 мл крафт, с прозрачной крышкой",
-        "pack": null,
+        "pack": "Короб: 300 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/salatnik-500-ml-kraft-s-prozrachnoy-kryshkoy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "97b495fb9bc053c0",
         "name": "Салатник 800 мл крафт, с прозрачной крышкой",
-        "pack": null,
+        "pack": "Короб: 200 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/salatnik-800-ml-kraft-s-prozrachnoy-kryshkoy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=4",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "7d6bead12c2ffab5",
         "name": "Креманка для мороженого/десертов 125 мл",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/kremanka-dlya-morozhenogo-desertov-125-ml/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "dd383feb665b8e73",
         "name": "Крышка бумажная 68 мм с ложкой (1х1000)",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/kryshka-bumazhnaya-68-mm-s-lozhkoy-1kh1000/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "940e5b8d82fc6566",
         "name": "Крышка бумажная 68 мм с ложкой (40х25)",
-        "pack": null,
+        "pack": "Короб: 1 000 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/kryshka-bumazhnaya-68-mm-s-lozhkoy-40kh25/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "61264a9c523bb9d0",
         "name": "Чаша суп/мор.белый 500мл",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/chasha-sup-mor-belyy-500ml-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "9e2935842506927e",
@@ -1469,52 +1491,57 @@
       {
         "id": "33383e50b1acce47",
         "name": "Крышка для чашек (LK2PP/121)",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/kryshka-dlya-chashek-lk2pp-121-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "4914831ec635c17a",
         "name": "Чаша суп/мор.белый 330мл",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/chasha-sup-mor-belyy-330ml/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "918bb9f294460530",
         "name": "Чаша суп/мор.крафт 330мл",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/chasha-sup-mor-kraft-330ml-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "1bd48e73429d267d",
         "name": "Крышка для чашек (LН2PP/114)",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/kryshka-dlya-chashek-ln2pp-114/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "806a845e8ed4a3bd",
         "name": "Чаша салат 750 мл Белая",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/supnitsy-salatniki/chasha-salat-750-ml-belaya/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=1",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "c7a948c8ac00d3f9",
@@ -1529,32 +1556,35 @@
       {
         "id": "66ab99ab79dc777f",
         "name": "Контейнер WOK 450 мл, крафт",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-450-ml-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "48d7d8232667c8d0",
         "name": "Контейнер WOK 450 мл, дизайн",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-450-ml-dizayn/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "6e3a4325c6601044",
         "name": "Контейнер WOK 450 мл, чёрный",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-450-ml-chyernyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "6c0ac7c0a79560eb",
@@ -1569,72 +1599,79 @@
       {
         "id": "0862b7d90f1d7807",
         "name": "Контейнер WOK 750 мл, крафт",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-750-ml-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "fd1a40f849529bed",
         "name": "Контейнер WOK 750 мл, дизайн",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-750-ml-dizayn/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "93a152ea0b8c52b2",
         "name": "Контейнер WOK 750 мл, чёрный",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-750-ml-chyernyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "5ef4b1a3ec44acae",
         "name": "Контейнер WOK 750 мл, крафт 2PE",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-750-ml-kraft-2pe/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "53c7794598b85f8a",
         "name": "Контейнер WOK 750 мл 1PE, белый",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-750-ml-1pe-belyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "37172f8c7c6a3bae",
         "name": "Контейнер WOK 450 мл 1PE, белый",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/konteyner-wok-450-ml-1pe-belyy/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "c7b53fc14feafeb2",
         "name": "WOK-бокс квадратный (склееный), 560 мл, крафт",
-        "pack": null,
+        "pack": "Короб: 400 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/korobki-pod-lapshu-wok-kruglye-kvadratnye/wok-boks-kvadratnyy-skleenyy-560-ml-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=2",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "5522f8c5baf3d582",
@@ -1659,22 +1696,24 @@
       {
         "id": "60597d5d725e6bc7",
         "name": "Тарелка 180 мм, картон, мелованная",
-        "pack": null,
+        "pack": "Короб: 800 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-180-mm-karton-melovannaya/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "f12b6f0920a29a40",
         "name": "Тарелка 180 мм,картон, крафт",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-180-mm-karton-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "aa0b346a47b9c43a",
@@ -1689,72 +1728,79 @@
       {
         "id": "e6d69fe4b7325992",
         "name": "Тарелка 210 мм,картон, крафт",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-210-mm-karton-kraft/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "4eaeaac897e041b2",
         "name": "Тарелка 210 мм,картон, мелованная",
-        "pack": null,
+        "pack": "Короб: 800 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-210-mm-karton-melovannaya/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "91cddeae01250e45",
         "name": "Тарелка 235мм, картон,крафт",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-235mm-karton-kraft-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "fd19a2b5e5f5708f",
         "name": "Тарелка 235 мм, картон, белая/лам",
-        "pack": null,
+        "pack": "Короб: 800 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-235-mm-karton-belaya-lam_1/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "3efe091ac0894413",
         "name": "Тарелка 230 мм глубокая, крафт ламинированная",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-230-mm-glubokaya-kraft-laminirovannaya/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "a4a089441b6819a3",
         "name": "Тарелка 230 мм глубокая, крафт",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-230-mm-glubokaya-kraft-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "c854e4cb50c2ff6e",
         "name": "Тарелка 235 мм Люкс",
-        "pack": null,
+        "pack": "Короб: 800 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/tarelki/tarelka-235-mm-lyuks-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "813af8748d5d1039",
@@ -1779,12 +1825,13 @@
       {
         "id": "69567e58058a635c",
         "name": "Стакан под снеки \"Bon Appetit\" 450/630 мл",
-        "pack": null,
+        "pack": "Короб: 600 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/upakovka-dlya-fastfuda-burgery-popkorn-pitstsa/stakan-pod-sneki-bon-appetit-450-630-ml-/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=3",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "7b202fba8af312e8",
@@ -1839,22 +1886,24 @@
       {
         "id": "7085a2ede10574e0",
         "name": "Стакан для попкорна, дизайн, 1000 мл",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/upakovka-dlya-fastfuda-burgery-popkorn-pitstsa/stakan-dlya-popkorna-dizayn-1000-ml_1/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=5",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       },
       {
         "id": "859fdbb652c69756",
         "name": "Стакан для попкорна, белый, 1000 мл",
-        "pack": null,
+        "pack": "Короб: 500 шт.",
         "price": {
           "kind": "not_published"
         },
-        "sourceUrl": "https://ptllc.ru/catalogn/upakovka-dlya-fastfuda-burgery-popkorn-pitstsa/stakan-dlya-popkorna-belyy-1000-ml/",
-        "checkedAt": "2026-11-24"
+        "sourceUrl": "https://ptllc.ru/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%9E%D0%9E%D0%9E_%D0%91%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%83%D0%B4%D0%B0.pdf#page=5",
+        "checkedAt": "2026-11-24",
+        "sourceKind": "listing"
       }
     ]
   },
@@ -1874,11 +1923,12 @@
         "price": {
           "kind": "published",
           "amount": 0.63,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-a10-s11-500-1-178-135-10",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 500 шт."
       },
       {
         "id": "e77ff3b81384cd3f",
@@ -1887,11 +1937,12 @@
         "price": {
           "kind": "published",
           "amount": 0.63,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/konteynery/kryshka-dlya-konteynera-108-82-tkp",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 1 000 шт."
       },
       {
         "id": "16b0d2cece2c76fb",
@@ -1900,11 +1951,12 @@
         "price": {
           "kind": "published",
           "amount": 0.64,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-m-10-i1-175-85-10-belaya-1-1000",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 1 000 шт."
       },
       {
         "id": "4b39cc48bb26fd4a",
@@ -1913,11 +1965,12 @@
         "price": {
           "kind": "published",
           "amount": 0.67,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-i1-m10-1-500-175h85h10",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 500 шт."
       },
       {
         "id": "a357df0d820d7bcc",
@@ -1926,11 +1979,12 @@
         "price": {
           "kind": "published",
           "amount": 0.85,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-s21-zheltaya-300",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 300 шт."
       },
       {
         "id": "e08888ff8443454b",
@@ -1939,11 +1993,12 @@
         "price": {
           "kind": "published",
           "amount": 0.86,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-t10-d11-225x135x10-450sht",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 450 шт."
       },
       {
         "id": "8e792d56b5eafaae",
@@ -1952,7 +2007,7 @@
         "price": {
           "kind": "published",
           "amount": 0.86,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-v2-133x133x20-1-550",
         "checkedAt": "2026-11-24",
@@ -1965,7 +2020,7 @@
         "price": {
           "kind": "published",
           "amount": 0.89,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/konteynery/kryshka-ip-m-d95-1120",
         "checkedAt": "2026-11-24",
@@ -1978,11 +2033,12 @@
         "price": {
           "kind": "published",
           "amount": 0.89,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/konteynery/kryshka-dlya-konteynera-139-102-ep",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 500 шт."
       },
       {
         "id": "9f4541745161a9f5",
@@ -1991,11 +2047,12 @@
         "price": {
           "kind": "published",
           "amount": 0.9,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://www.mosparitet.ru/catalog/odnorazovaya-upakovka/podlozhka-vspenennaya/podlozhka-a20-s21-a20-300sht",
         "checkedAt": "2026-11-24",
-        "availabilityNote": "На дату проверки на сайте: ожидается"
+        "availabilityNote": "На дату проверки на сайте: ожидается",
+        "priceNote": "Мин. заказ этой позиции: 300 шт."
       }
     ]
   },
@@ -6052,152 +6109,158 @@
       {
         "id": "7f799a0a49589342",
         "name": "Базилик сушеный",
-        "pack": null,
+        "pack": "12 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 180,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/specii-i-pripravy/bazilik-sushenyj/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 180 ₽/кг; от 1 т — 175 ₽/кг."
       },
       {
         "id": "1830d5ff65bd3632",
         "name": "Баклажаны сушеные",
-        "pack": null,
+        "pack": "10/16 кг, коробки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 225,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/baklazhany-sushenye/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 225 ₽/кг; от 1 т — 220 ₽/кг."
       },
       {
         "id": "97163e56a6377d5e",
         "name": "Барбарис сушеный",
-        "pack": null,
+        "pack": "15/25 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 725,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/specii-i-pripravy/barbaris-sushenyj/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 725 ₽/кг; от 1 т — 650 ₽/кг."
       },
       {
         "id": "4d68c79245a6b3d0",
         "name": "Изюм «Афганка»",
-        "pack": null,
+        "pack": "10/15 кг коробка",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 140,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/%d1%81%d1%83%d1%85%d0%be%d1%84%d1%80%d1%83%d0%ba%d1%82%d1%8b-%d0%b8-%d0%be%d1%80%d0%b5%d1%85%d0%b8/izyum-afganka/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 140 ₽/кг; от 1 т — 135 ₽/кг."
       },
       {
         "id": "94895eab10dd4ba9",
         "name": "Кабачки сушеные 5х5",
-        "pack": null,
+        "pack": "20 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 180,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kabachki-sushenye-5x5/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 180 ₽/кг; от 1 т — 170 ₽/кг."
       },
       {
         "id": "435d173fcfe3995c",
         "name": "Капуста сушеная",
-        "pack": null,
+        "pack": "10 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 120,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kapusta-sushenaya-1-sort/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 120 ₽/кг; от 1 т — 115 ₽/кг."
       },
       {
         "id": "3525a9f62a01e07f",
         "name": "Капуста сушеная в/с",
-        "pack": null,
+        "pack": "10/13/15 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 125,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kapusta-sushenaya-v-s/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 125 ₽/кг; от 1 т — 120 ₽/кг."
       },
       {
         "id": "34285a87c255a12d",
         "name": "Картофель сушеный 10х10",
-        "pack": null,
+        "pack": "20/22 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 160,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kartofel-sushenyj-10x10-2/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 160 ₽/кг; от 1 т — 150 ₽/кг."
       },
       {
         "id": "a8919dd0ddaa4dc0",
         "name": "Картофель сушеный 5х5",
-        "pack": null,
+        "pack": "22 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 160,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kartofel-sushenyj-5x5/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 160 ₽/кг; от 1 т — 150 ₽/кг."
       },
       {
         "id": "755b974f5b36529b",
         "name": "Картофель сушеный соломка",
-        "pack": null,
+        "pack": "20 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 160,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/sushenye-ovoshchi/kartofel-sushenyj-solomka/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 160 ₽/кг; от 1 т — 150 ₽/кг."
       },
       {
         "id": "dcda9f628716de6a",
         "name": "Компотная смесь",
-        "pack": null,
+        "pack": "25 кг, полиэтиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 95,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/%d1%81%d1%83%d1%85%d0%be%d1%84%d1%80%d1%83%d0%ba%d1%82%d1%8b-%d0%b8-%d0%be%d1%80%d0%b5%d1%85%d0%b8/kompotnaya-smes-ehkstra/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 95 ₽/кг; от 1 т — 85 ₽/кг."
       },
       {
         "id": "2a72f10dd92c6fa5",
         "name": "Кориандр зерно",
-        "pack": null,
+        "pack": "20/25 кг, полипропиленовые мешки",
         "price": {
-          "kind": "not_published"
+          "kind": "published",
+          "amount": 70,
+          "unit": "кг"
         },
         "sourceUrl": "https://www.horazm.ru/katalog/specii-i-pripravy/koriandr-zerno/",
-        "checkedAt": "2026-11-24"
-      },
-      {
-        "id": "d4aa988fcdb2490c",
-        "name": "2",
-        "pack": null,
-        "price": {
-          "kind": "not_published"
-        },
-        "sourceUrl": "https://www.horazm.ru/katalog/page/2/",
-        "checkedAt": "2026-11-24"
-      },
-      {
-        "id": "6689ad8325cc9c62",
-        "name": "3",
-        "pack": null,
-        "price": {
-          "kind": "not_published"
-        },
-        "sourceUrl": "https://www.horazm.ru/katalog/page/3/",
-        "checkedAt": "2026-11-24"
-      },
-      {
-        "id": "6b9eecc4dd6a4a82",
-        "name": "4",
-        "pack": null,
-        "price": {
-          "kind": "not_published"
-        },
-        "sourceUrl": "https://www.horazm.ru/katalog/page/4/",
-        "checkedAt": "2026-11-24"
+        "checkedAt": "2026-11-24",
+        "priceNote": "От 100 кг — 70 ₽/кг; от 1 т — 55 ₽/кг."
       }
     ]
   },
@@ -6294,7 +6357,7 @@
         "price": {
           "kind": "published",
           "amount": 42.1,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/altaspays_priprava_dlya_morkovi_po_koreyski_30g_1_30/",
         "checkedAt": "2026-11-24"
@@ -6306,7 +6369,7 @@
         "price": {
           "kind": "published",
           "amount": 340,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_abkhazskaya_adzhika_sukhaya_ostraya_350g_banka/",
         "checkedAt": "2026-11-24"
@@ -6318,7 +6381,7 @@
         "price": {
           "kind": "published",
           "amount": 199,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_bazilik_200_g/",
         "checkedAt": "2026-11-24"
@@ -6330,7 +6393,7 @@
         "price": {
           "kind": "published",
           "amount": 400,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_barbaris_krasnyy_250g/",
         "checkedAt": "2026-11-24"
@@ -6342,7 +6405,7 @@
         "price": {
           "kind": "published",
           "amount": 355,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_vanilin/",
         "checkedAt": "2026-11-24"
@@ -6354,7 +6417,7 @@
         "price": {
           "kind": "published",
           "amount": 292,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_vegeta_universalnaya_banka_600g/",
         "checkedAt": "2026-11-24"
@@ -6366,7 +6429,7 @@
         "price": {
           "kind": "published",
           "amount": 290,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_dlya_ryby_400g/",
         "checkedAt": "2026-11-24"
@@ -6378,7 +6441,7 @@
         "price": {
           "kind": "published",
           "amount": 295,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_zira_tselaya_350g/",
         "checkedAt": "2026-11-24"
@@ -6390,7 +6453,7 @@
         "price": {
           "kind": "published",
           "amount": 530,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_imeretinskiy_shafran_100g/",
         "checkedAt": "2026-11-24"
@@ -6402,7 +6465,7 @@
         "price": {
           "kind": "published",
           "amount": 314,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_keyenskiy_ostryy_perets_ekstra_350g/",
         "checkedAt": "2026-11-24"
@@ -6414,7 +6477,7 @@
         "price": {
           "kind": "published",
           "amount": 326,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_karri_nezhnaya_400g/",
         "checkedAt": "2026-11-24"
@@ -6426,7 +6489,7 @@
         "price": {
           "kind": "published",
           "amount": 215,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kitayskaya_sol_500g/",
         "checkedAt": "2026-11-24"
@@ -6438,7 +6501,7 @@
         "price": {
           "kind": "published",
           "amount": 137,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_koriandr_molot_300g/",
         "checkedAt": "2026-11-24"
@@ -6450,7 +6513,7 @@
         "price": {
           "kind": "published",
           "amount": 131.8,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_koriandr_tselyy_250g/",
         "checkedAt": "2026-11-24"
@@ -6462,7 +6525,7 @@
         "price": {
           "kind": "published",
           "amount": 129,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kukuruznyy_krakhmal_400g/",
         "checkedAt": "2026-11-24"
@@ -6474,7 +6537,7 @@
         "price": {
           "kind": "published",
           "amount": 284,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kumin_molot_350gr/",
         "checkedAt": "2026-11-24"
@@ -6486,7 +6549,7 @@
         "price": {
           "kind": "published",
           "amount": 305,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kunzhut_zharenyy_350g/",
         "checkedAt": "2026-11-24"
@@ -6498,7 +6561,7 @@
         "price": {
           "kind": "published",
           "amount": 296,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kurinyy_bulon_550gr/",
         "checkedAt": "2026-11-24"
@@ -6510,7 +6573,7 @@
         "price": {
           "kind": "published",
           "amount": 311,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_kurkuma_mol_premium_350g/",
         "checkedAt": "2026-11-24"
@@ -6522,7 +6585,7 @@
         "price": {
           "kind": "published",
           "amount": 252,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_limon_kislota_mol_600g/",
         "checkedAt": "2026-11-24"
@@ -6534,7 +6597,7 @@
         "price": {
           "kind": "published",
           "amount": 264,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_luk_zharenyy_250g/",
         "checkedAt": "2026-11-24"
@@ -6546,7 +6609,7 @@
         "price": {
           "kind": "published",
           "amount": 222,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_myata_sushenaya_150g/",
         "checkedAt": "2026-11-24"
@@ -6558,7 +6621,7 @@
         "price": {
           "kind": "published",
           "amount": 181,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_oregano_200g/",
         "checkedAt": "2026-11-24"
@@ -6570,7 +6633,7 @@
         "price": {
           "kind": "published",
           "amount": 290,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_paprika_molotaya_kopchennaya_350g/",
         "checkedAt": "2026-11-24"
@@ -6582,7 +6645,7 @@
         "price": {
           "kind": "published",
           "amount": 622,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_dushistyy_goroshek_250g/",
         "checkedAt": "2026-11-24"
@@ -6594,7 +6657,7 @@
         "price": {
           "kind": "published",
           "amount": 267,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_krasnyy_molotyy_paprika_350gr/",
         "checkedAt": "2026-11-24"
@@ -6606,7 +6669,7 @@
         "price": {
           "kind": "published",
           "amount": 575,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_chernyy_goroshek_350g/",
         "checkedAt": "2026-11-24"
@@ -6618,7 +6681,7 @@
         "price": {
           "kind": "published",
           "amount": 564,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_chernyy_droblennyy_300g/",
         "checkedAt": "2026-11-24"
@@ -6630,7 +6693,7 @@
         "price": {
           "kind": "published",
           "amount": 271,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_chili_droblennyy_300g/",
         "checkedAt": "2026-11-24"
@@ -6642,7 +6705,7 @@
         "price": {
           "kind": "published",
           "amount": 206,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_perets_chili_struchkovyy_100gr/",
         "checkedAt": "2026-11-24"
@@ -6654,7 +6717,7 @@
         "price": {
           "kind": "published",
           "amount": 271,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_gruzinskaya_universalnaya_350_g/",
         "checkedAt": "2026-11-24"
@@ -6666,7 +6729,7 @@
         "price": {
           "kind": "published",
           "amount": 260,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_baraniny_300_g/",
         "checkedAt": "2026-11-24"
@@ -6678,7 +6741,7 @@
         "price": {
           "kind": "published",
           "amount": 308,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_grilya_350g/",
         "checkedAt": "2026-11-24"
@@ -6690,7 +6753,7 @@
         "price": {
           "kind": "published",
           "amount": 234,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_koreyskogo_salata_300_g/",
         "checkedAt": "2026-11-24"
@@ -6702,7 +6765,7 @@
         "price": {
           "kind": "published",
           "amount": 323,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/yaaraz_banka_priprava_dlya_myasa_350_g/",
         "checkedAt": "2026-11-24"
@@ -6714,7 +6777,7 @@
         "price": {
           "kind": "published",
           "amount": 323,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_plova_300g/",
         "checkedAt": "2026-11-24"
@@ -6726,7 +6789,7 @@
         "price": {
           "kind": "published",
           "amount": 283,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_farsha_350_g/",
         "checkedAt": "2026-11-24"
@@ -6738,7 +6801,7 @@
         "price": {
           "kind": "published",
           "amount": 275,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_priprava_dlya_shashlyka_300_g/",
         "checkedAt": "2026-11-24"
@@ -6750,7 +6813,7 @@
         "price": {
           "kind": "published",
           "amount": 189,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_provanskya_smes_trav_200g/",
         "checkedAt": "2026-11-24"
@@ -6762,7 +6825,7 @@
         "price": {
           "kind": "published",
           "amount": 295,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_zvezdnaya_letnyaya_300gr/",
         "checkedAt": "2026-11-24"
@@ -6774,7 +6837,7 @@
         "price": {
           "kind": "published",
           "amount": 245.1,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_italyanskaya_250gr/",
         "checkedAt": "2026-11-24"
@@ -6786,7 +6849,7 @@
         "price": {
           "kind": "published",
           "amount": 296,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_italyanskikh_trav_150g_banka/",
         "checkedAt": "2026-11-24"
@@ -6798,7 +6861,7 @@
         "price": {
           "kind": "published",
           "amount": 250.3,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_ovoshchnaya_universalnaya_350_g/",
         "checkedAt": "2026-11-24"
@@ -6810,7 +6873,7 @@
         "price": {
           "kind": "published",
           "amount": 472,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_pertsev_droblenaya_350g/",
         "checkedAt": "2026-11-24"
@@ -6822,7 +6885,7 @@
         "price": {
           "kind": "published",
           "amount": 260,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_priprav_vostochnaya_300_g/",
         "checkedAt": "2026-11-24"
@@ -6834,7 +6897,7 @@
         "price": {
           "kind": "published",
           "amount": 742,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_pyati_pertsev_drob_300g/",
         "checkedAt": "2026-11-24"
@@ -6846,7 +6909,7 @@
         "price": {
           "kind": "published",
           "amount": 554,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_smes_chetyrekh_pertsev_s_koriandorom_300g/",
         "checkedAt": "2026-11-24"
@@ -6858,7 +6921,7 @@
         "price": {
           "kind": "published",
           "amount": 243,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_khmeli_suneli_250g/",
         "checkedAt": "2026-11-24"
@@ -6870,7 +6933,7 @@
         "price": {
           "kind": "published",
           "amount": 373,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_chesnok_granul_350g/",
         "checkedAt": "2026-11-24"
@@ -6882,7 +6945,7 @@
         "price": {
           "kind": "published",
           "amount": 370,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://td-zarya.ru/catalog/pripravy_i_specii/araz_banka_chia_semena_450gr/",
         "checkedAt": "2026-11-24"
@@ -11236,7 +11299,7 @@
         "price": {
           "kind": "published",
           "amount": 68,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/moloko-umnyy-balans-3-2-tba-1l-gost/",
         "checkedAt": "2026-11-24"
@@ -11244,11 +11307,11 @@
       {
         "id": "be34e2c4266b0d2f",
         "name": "Сырный продукт для пиццы Extra Topping 50% Фрэскочиз",
-        "pack": null,
+        "pack": "~1,4 кг",
         "price": {
           "kind": "published",
           "amount": 375,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/mocarella-dlya-piccy-extra-topping-50-freskochiz/",
         "checkedAt": "2026-11-24"
@@ -11260,7 +11323,7 @@
         "price": {
           "kind": "published",
           "amount": 475,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/mozzarella-alti-extra-50-2kg/",
         "checkedAt": "2026-11-24"
@@ -11272,7 +11335,7 @@
         "price": {
           "kind": "published",
           "amount": 620,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/syr-layme-mocarella-40-savushkin-belarus/",
         "checkedAt": "2026-11-24"
@@ -11284,7 +11347,7 @@
         "price": {
           "kind": "published",
           "amount": 645,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/syr-tvorozhnyy-panda-kremchiz-1-5kg-iran/",
         "checkedAt": "2026-11-24"
@@ -11296,7 +11359,7 @@
         "price": {
           "kind": "published",
           "amount": 1620,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/syr-pecorino-sabah-46-ovechiy-6-mesyacev-2-3kg/",
         "checkedAt": "2026-11-24"
@@ -11308,7 +11371,7 @@
         "price": {
           "kind": "published",
           "amount": 1345,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/syr-s-goluboy-blagorodnoy-plesenyu-rokforti-55-krug2-5kg/",
         "checkedAt": "2026-11-24"
@@ -11320,7 +11383,7 @@
         "price": {
           "kind": "published",
           "amount": 2484,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/syr-tvorozhnyj-sabah-69-6kg-iran/",
         "checkedAt": "2026-11-24"
@@ -11332,7 +11395,7 @@
         "price": {
           "kind": "published",
           "amount": 1280,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/syir-parmezan-sabah-43-3mes-3-8kg/",
         "checkedAt": "2026-11-24"
@@ -11344,7 +11407,7 @@
         "price": {
           "kind": "published",
           "amount": 870,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/syir-chedder-krasnyy-oldenburger-45-3-2kg/",
         "checkedAt": "2026-11-24"
@@ -11356,7 +11419,7 @@
         "price": {
           "kind": "published",
           "amount": 125,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/feta-prego-250g-egipet/",
         "checkedAt": "2026-11-24"
@@ -11368,7 +11431,7 @@
         "price": {
           "kind": "published",
           "amount": 260,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-renferli-82-5-400g/",
         "checkedAt": "2026-11-24"
@@ -11380,7 +11443,7 @@
         "price": {
           "kind": "published",
           "amount": 312,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-tradicionnoe-82-5-creme-f-konditer-400-gramm/",
         "checkedAt": "2026-11-24"
@@ -11392,7 +11455,7 @@
         "price": {
           "kind": "published",
           "amount": 440,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-82-5-altayskoe-zoloto-5kg/",
         "checkedAt": "2026-11-24"
@@ -11404,7 +11467,7 @@
         "price": {
           "kind": "published",
           "amount": 2700,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-kupavushka-72-5-5kg/",
         "checkedAt": "2026-11-24"
@@ -11416,7 +11479,7 @@
         "price": {
           "kind": "published",
           "amount": 260,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-tradicionnoe-82-5-altayskoe-zoloto-500-gramm/",
         "checkedAt": "2026-11-24"
@@ -11428,7 +11491,7 @@
         "price": {
           "kind": "published",
           "amount": 585,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-litecream-82-5-5kg/",
         "checkedAt": "2026-11-24"
@@ -11440,7 +11503,7 @@
         "price": {
           "kind": "published",
           "amount": 735,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/maslo-sladko-slivochnoe-babushkina-krynka-82-5-20kg/",
         "checkedAt": "2026-11-24"
@@ -11452,7 +11515,7 @@
         "price": {
           "kind": "published",
           "amount": 2100,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-altayskoe-zoloto-72-5-5kg/",
         "checkedAt": "2026-11-24"
@@ -11464,7 +11527,7 @@
         "price": {
           "kind": "published",
           "amount": 680,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-82-korob-25kg-tehran-pegah-iran/",
         "checkedAt": "2026-11-24"
@@ -11476,7 +11539,7 @@
         "price": {
           "kind": "published",
           "amount": 9,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://vosttorg.ru/maslo-slivochnoe-porcionnoe-82-5-10g-150/",
         "checkedAt": "2026-11-24"
@@ -11495,7 +11558,7 @@
       {
         "id": "90eac260ea1cb714",
         "name": "Кокосовое молоко Aroy-D",
-        "pack": null,
+        "pack": "500 мл",
         "price": {
           "kind": "not_published"
         },
@@ -11505,7 +11568,7 @@
       {
         "id": "e677258ad5013381",
         "name": "Кокосовые сливки Aroy-d Таиланд",
-        "pack": null,
+        "pack": "жестяная банка 560 мл",
         "price": {
           "kind": "not_published"
         },
@@ -12040,7 +12103,7 @@
       {
         "id": "73d42efaf1a7129d",
         "name": "Масло сладкосливочное \"Боговарово\" Премиум 82,5%",
-        "pack": null,
+        "pack": "170 г",
         "price": {
           "kind": "on_request"
         },
@@ -12050,7 +12113,7 @@
       {
         "id": "cf1d4fd8f0b65a48",
         "name": "Масло сладкосливочное Крестьянское \"Боговарово\" 72,5%",
-        "pack": null,
+        "pack": "170 г",
         "price": {
           "kind": "on_request"
         },
@@ -12070,7 +12133,7 @@
       {
         "id": "bb476dcc9d567068",
         "name": "Масло сливочное Крестьянское \"Спозаранку\" ГОСТ 72,5%",
-        "pack": null,
+        "pack": "185 г",
         "price": {
           "kind": "on_request"
         },
@@ -12080,7 +12143,7 @@
       {
         "id": "77e028d00f1ecb27",
         "name": "Масло сливочное Шоколадное \"Боговарово\" 62%",
-        "pack": null,
+        "pack": "180 г",
         "price": {
           "kind": "on_request"
         },
@@ -12142,24 +12205,22 @@
       {
         "id": "65676d2af91fc7ca",
         "name": "Сыр Голландский полутвёрдый",
-        "pack": null,
+        "pack": "0,2 / 3 / 5,5 / 6 кг",
         "price": {
           "kind": "on_request"
         },
-        "sourceUrl": "https://milco.group/molochnye-produkty-optom",
-        "checkedAt": "2026-11-24",
-        "sourceKind": "listing"
+        "sourceUrl": "https://milco.group/cheese_1",
+        "checkedAt": "2026-11-24"
       },
       {
         "id": "bca6b5f93188f77a",
         "name": "Сыр Российский полутвёрдый",
-        "pack": null,
+        "pack": "0,2 / 3 / 5,5 / 6 кг",
         "price": {
           "kind": "on_request"
         },
-        "sourceUrl": "https://milco.group/molochnye-produkty-optom",
-        "checkedAt": "2026-11-24",
-        "sourceKind": "listing"
+        "sourceUrl": "https://milco.group/cheese_2",
+        "checkedAt": "2026-11-24"
       },
       {
         "id": "c0a25971b678a53f",
@@ -12203,7 +12264,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/kefir-bifidok-i-acidofilin/atsidofilin-snejok-25-900-g",
         "checkedAt": "2026-11-24"
@@ -12215,7 +12276,7 @@
         "price": {
           "kind": "published",
           "amount": 34,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/bioyogurt-persik-marakuyya-25-120-g",
         "checkedAt": "2026-11-24"
@@ -12227,7 +12288,7 @@
         "price": {
           "kind": "published",
           "amount": 34,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/bioyogurt-snejok-klubnika-25-120-g",
         "checkedAt": "2026-11-24"
@@ -12239,7 +12300,7 @@
         "price": {
           "kind": "published",
           "amount": 64,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-2-0-130g-stakan-lactica",
         "checkedAt": "2026-11-24"
@@ -12251,7 +12312,7 @@
         "price": {
           "kind": "published",
           "amount": 67,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-lactica-grecheskiy-dvuhsloynyy-s-klubnikoy-130-g",
         "checkedAt": "2026-11-24"
@@ -12263,7 +12324,7 @@
         "price": {
           "kind": "published",
           "amount": 67,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-lactica-grecheskiy-dvuhsloynyy-s-persikom-i-marakuyey-17-130-g",
         "checkedAt": "2026-11-24"
@@ -12275,7 +12336,7 @@
         "price": {
           "kind": "published",
           "amount": 1026,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/grecheskiy-naturalnyy-4-0-pet-vedro-lactica",
         "checkedAt": "2026-11-24"
@@ -12287,7 +12348,7 @@
         "price": {
           "kind": "published",
           "amount": 120,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-dvuhsloynyy-s-injirom-i-kuragoy-190-g",
         "checkedAt": "2026-11-24"
@@ -12299,7 +12360,7 @@
         "price": {
           "kind": "published",
           "amount": 68,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-dvuhsloynyy-s-malinoy-34-120-g",
         "checkedAt": "2026-11-24"
@@ -12311,7 +12372,7 @@
         "price": {
           "kind": "published",
           "amount": 120,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-dvuhsloynyy-s-malinoy-190-g",
         "checkedAt": "2026-11-24"
@@ -12323,7 +12384,7 @@
         "price": {
           "kind": "published",
           "amount": 120,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-dvuhsloynyy-s-myodom-i-gretskim-orehom-3-190-g",
         "checkedAt": "2026-11-24"
@@ -12335,7 +12396,7 @@
         "price": {
           "kind": "published",
           "amount": 120,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-grecheskiy-dvuhsloynyy-s-chernikoy-190-g",
         "checkedAt": "2026-11-24"
@@ -12347,7 +12408,7 @@
         "price": {
           "kind": "published",
           "amount": 68,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/grecheskiy-naturalnyy-4-0-120g",
         "checkedAt": "2026-11-24"
@@ -12359,7 +12420,7 @@
         "price": {
           "kind": "published",
           "amount": 120,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/grecheskiy-naturalnyy-4-0-190g",
         "checkedAt": "2026-11-24"
@@ -12371,7 +12432,7 @@
         "price": {
           "kind": "published",
           "amount": 68,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-dvuhsloynyy-grecheskiy-s-pechyonym-yablokom-i-karamelyu-120-g",
         "checkedAt": "2026-11-24"
@@ -12383,7 +12444,7 @@
         "price": {
           "kind": "published",
           "amount": 68,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-dvuhsloynyy-grecheskiy-s-chernikoy-34-120-g",
         "checkedAt": "2026-11-24"
@@ -12395,7 +12456,7 @@
         "price": {
           "kind": "published",
           "amount": 46,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/klubnika-2-5-200ml-tba-priklyucheniya-djovi",
         "checkedAt": "2026-11-24"
@@ -12407,7 +12468,7 @@
         "price": {
           "kind": "published",
           "amount": 151,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/pitevoy-lesnye-yagody-1-5-900g-kuvshin-snejok",
         "checkedAt": "2026-11-24"
@@ -12419,7 +12480,7 @@
         "price": {
           "kind": "published",
           "amount": 59,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-pit-s-abrikos-i-mango-1-5-260g-pet-butylka-snejok",
         "checkedAt": "2026-11-24"
@@ -12431,7 +12492,7 @@
         "price": {
           "kind": "published",
           "amount": 160,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-pit-s-klubnikoy-1-5-900gr-pet-butylka-snejok",
         "checkedAt": "2026-11-24"
@@ -12443,7 +12504,7 @@
         "price": {
           "kind": "published",
           "amount": 59,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/pitevoy-s-yablokom-i-grushey-1-5-260g-pet-butylka-snejok",
         "checkedAt": "2026-11-24"
@@ -12455,7 +12516,7 @@
         "price": {
           "kind": "published",
           "amount": 160,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-pit-s-abrikosom-i-mango-1-5-900gr-pet-butylka-snejok",
         "checkedAt": "2026-11-24"
@@ -12467,7 +12528,7 @@
         "price": {
           "kind": "published",
           "amount": 59,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/yogurt-pit-s-lesnoy-yagodoy-1-5-260g-pet-butylka-snejok",
         "checkedAt": "2026-11-24"
@@ -12479,7 +12540,7 @@
         "price": {
           "kind": "published",
           "amount": 56,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/kefir-bifidok-i-acidofilin/kefir-snejok-1-400-g",
         "checkedAt": "2026-11-24"
@@ -12491,7 +12552,7 @@
         "price": {
           "kind": "published",
           "amount": 117,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/kefir-bifidok-i-acidofilin/kefir-snejok-1-900-g",
         "checkedAt": "2026-11-24"
@@ -12503,7 +12564,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/kefir-bifidok-i-acidofilin/kefir-snejok-25-900-g",
         "checkedAt": "2026-11-24"
@@ -12515,7 +12576,7 @@
         "price": {
           "kind": "published",
           "amount": 48,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/molochnye-kokteyli-i-napitki/koktejl-molochnyj-prikljuchenija-dzhovi-banan-tetrapak-200-ml",
         "checkedAt": "2026-11-24"
@@ -12527,7 +12588,7 @@
         "price": {
           "kind": "published",
           "amount": 48,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/molochnye-kokteyli-i-napitki/koktejl-molochnyj-prikljuchenija-dzhovi-vanil-tetrapak-200-ml",
         "checkedAt": "2026-11-24"
@@ -12539,7 +12600,7 @@
         "price": {
           "kind": "published",
           "amount": 46,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/molochnye-kokteyli-i-napitki/shokolad-2-5-200ml-tba-priklyucheniya-djovi",
         "checkedAt": "2026-11-24"
@@ -12551,7 +12612,7 @@
         "price": {
           "kind": "published",
           "amount": 107,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/syry-brynza-i-kosichki/krem-syr-lactica-labne-turetskiy-slivochnyy-60-130-g",
         "checkedAt": "2026-11-24"
@@ -12563,7 +12624,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/maslo-slivochnoe-spredy-i-margarin/maslo-traditsionnoe-sladko-slivochnoe-nesol-volgodonskie-traditsii-200g-82-5-mdj",
         "checkedAt": "2026-11-24"
@@ -12575,7 +12636,7 @@
         "price": {
           "kind": "published",
           "amount": 125,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/maslo-slivochnoe-spredy-i-margarin/maslo-derevenskaya-buryonka-sladkoslivochnoe-nesolyonoe-825-180-g",
         "checkedAt": "2026-11-24"
@@ -12587,7 +12648,7 @@
         "price": {
           "kind": "published",
           "amount": 305,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/maslo-slivochnoe-spredy-i-margarin/maslo-ivolga-slivochnoe-825-180-g",
         "checkedAt": "2026-11-24"
@@ -12599,7 +12660,7 @@
         "price": {
           "kind": "published",
           "amount": 344,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/maslo-slivochnoe-spredy-i-margarin/maslo-ichalki-slivochnoe-ichalkovskoe-ekstra-250-g",
         "checkedAt": "2026-11-24"
@@ -12611,7 +12672,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/maslo-slivochnoe-spredy-i-margarin/maslo-slivochnoe-volgodivnye-traditsii-200gr",
         "checkedAt": "2026-11-24"
@@ -12623,7 +12684,7 @@
         "price": {
           "kind": "published",
           "amount": 71,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/alternativnoe-moloko/moloko-lactica-koze-ultrapasterizovannoe-tselnoe-tba-200-ml",
         "checkedAt": "2026-11-24"
@@ -12635,7 +12696,7 @@
         "price": {
           "kind": "published",
           "amount": 131,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/moloch/moloko-minskaya-marka-sterilizovannoe-25-1-l",
         "checkedAt": "2026-11-24"
@@ -12647,7 +12708,7 @@
         "price": {
           "kind": "published",
           "amount": 136,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/moloch/moloko-minskaya-marka-sterilizovannoe-32-1-l",
         "checkedAt": "2026-11-24"
@@ -12659,7 +12720,7 @@
         "price": {
           "kind": "published",
           "amount": 37,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/moloch/ultrapas-3-2-200ml-tba-priklyucheniya-djovi",
         "checkedAt": "2026-11-24"
@@ -12671,7 +12732,7 @@
         "price": {
           "kind": "published",
           "amount": 144,
-          "unit": null
+          "unit": "шт."
         },
         "sourceUrl": "https://kalinbaza.ru/moloko/moloch/moloko-u-past-3-2-1l-tba-sq-snejok",
         "checkedAt": "2026-11-24"
@@ -12705,7 +12766,7 @@
         "price": {
           "kind": "published",
           "amount": 312,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/chernika_sadovaya/",
         "checkedAt": "2026-11-24"
@@ -12717,7 +12778,7 @@
         "price": {
           "kind": "published",
           "amount": 116,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/ryabina_chernoplodnaya/",
         "checkedAt": "2026-11-24"
@@ -12729,7 +12790,7 @@
         "price": {
           "kind": "published",
           "amount": 175,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/reven/",
         "checkedAt": "2026-11-24"
@@ -12741,7 +12802,7 @@
         "price": {
           "kind": "published",
           "amount": 186,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/oblepiha_sadovaya/",
         "checkedAt": "2026-11-24"
@@ -12753,7 +12814,7 @@
         "price": {
           "kind": "published",
           "amount": 255,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/mango_kubik/",
         "checkedAt": "2026-11-24"
@@ -12765,7 +12826,7 @@
         "price": {
           "kind": "published",
           "amount": 320,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/mango_slajsy/",
         "checkedAt": "2026-11-24"
@@ -12811,7 +12872,7 @@
         "price": {
           "kind": "published",
           "amount": 131,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/klubnika_klass_v/",
         "checkedAt": "2026-11-24"
@@ -12853,7 +12914,7 @@
         "price": {
           "kind": "published",
           "amount": 121,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/yabloko_kubik/",
         "checkedAt": "2026-11-24"
@@ -12865,7 +12926,7 @@
         "price": {
           "kind": "published",
           "amount": 266,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/chernika/",
         "checkedAt": "2026-11-24"
@@ -12877,7 +12938,7 @@
         "price": {
           "kind": "published",
           "amount": 270,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/chernaya_smorodina/",
         "checkedAt": "2026-11-24"
@@ -12889,7 +12950,7 @@
         "price": {
           "kind": "published",
           "amount": 102,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/sliva_polovinki/",
         "checkedAt": "2026-11-24"
@@ -12911,7 +12972,7 @@
         "price": {
           "kind": "published",
           "amount": 213,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/persik_kubik/",
         "checkedAt": "2026-11-24"
@@ -12933,7 +12994,7 @@
         "price": {
           "kind": "published",
           "amount": 698,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/malina_ekstra/",
         "checkedAt": "2026-11-24"
@@ -12945,7 +13006,7 @@
         "price": {
           "kind": "published",
           "amount": 510,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/malina_gryz/",
         "checkedAt": "2026-11-24"
@@ -12957,7 +13018,7 @@
         "price": {
           "kind": "published",
           "amount": 147,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/krasnaya_smorodina/",
         "checkedAt": "2026-11-24"
@@ -12969,7 +13030,7 @@
         "price": {
           "kind": "published",
           "amount": 103,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/kompotnaya_smes/",
         "checkedAt": "2026-11-24"
@@ -12981,7 +13042,7 @@
         "price": {
           "kind": "published",
           "amount": 276,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/klyukva_krupnoplodnaya_sadovaya/",
         "checkedAt": "2026-11-24"
@@ -12993,7 +13054,7 @@
         "price": {
           "kind": "published",
           "amount": 367,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/klyukva_dikorastuwaya/",
         "checkedAt": "2026-11-24"
@@ -13015,7 +13076,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/klubnika/",
         "checkedAt": "2026-11-24"
@@ -13027,7 +13088,7 @@
         "price": {
           "kind": "published",
           "amount": 162,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/kivi_kubik/",
         "checkedAt": "2026-11-24"
@@ -13039,7 +13100,7 @@
         "price": {
           "kind": "published",
           "amount": 467,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/ezhevika/",
         "checkedAt": "2026-11-24"
@@ -13061,7 +13122,7 @@
         "price": {
           "kind": "published",
           "amount": 174,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/vishnya_bez_kostochki_20_mm/",
         "checkedAt": "2026-11-24"
@@ -13073,7 +13134,7 @@
         "price": {
           "kind": "published",
           "amount": 166,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/vishnya_bez_kostochki/",
         "checkedAt": "2026-11-24"
@@ -13085,7 +13146,7 @@
         "price": {
           "kind": "published",
           "amount": 230,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/brusnika/",
         "checkedAt": "2026-11-24"
@@ -13097,7 +13158,7 @@
         "price": {
           "kind": "published",
           "amount": 266,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/ananas/",
         "checkedAt": "2026-11-24"
@@ -13109,7 +13170,7 @@
         "price": {
           "kind": "published",
           "amount": 338,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/yagodi/abrikos_polovinki/",
         "checkedAt": "2026-11-24"
@@ -13183,7 +13244,7 @@
         "price": {
           "kind": "published",
           "amount": 624,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/sparzha/",
         "checkedAt": "2026-11-24"
@@ -13225,7 +13286,7 @@
         "price": {
           "kind": "published",
           "amount": 132,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/shpinat_listovoj/",
         "checkedAt": "2026-11-24"
@@ -13237,7 +13298,7 @@
         "price": {
           "kind": "published",
           "amount": 150,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kartofel_fri_6h6_mm_zhulen/",
         "checkedAt": "2026-11-24"
@@ -13249,7 +13310,7 @@
         "price": {
           "kind": "published",
           "amount": 150,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kartofelnye_dolki_bez_specij/",
         "checkedAt": "2026-11-24"
@@ -13261,7 +13322,7 @@
         "price": {
           "kind": "published",
           "amount": 150,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kartofel_fri/",
         "checkedAt": "2026-11-24"
@@ -13273,7 +13334,7 @@
         "price": {
           "kind": "published",
           "amount": 203,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kukuruza_pochatki/",
         "checkedAt": "2026-11-24"
@@ -13285,7 +13346,7 @@
         "price": {
           "kind": "published",
           "amount": 70,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/tykva/",
         "checkedAt": "2026-11-24"
@@ -13297,7 +13358,7 @@
         "price": {
           "kind": "published",
           "amount": 95,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kabachok_kubiki/",
         "checkedAt": "2026-11-24"
@@ -13319,7 +13380,7 @@
         "price": {
           "kind": "published",
           "amount": 125,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/perec_kubiki/",
         "checkedAt": "2026-11-24"
@@ -13331,7 +13392,7 @@
         "price": {
           "kind": "published",
           "amount": 62,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/morkov_kubiki/",
         "checkedAt": "2026-11-24"
@@ -13353,7 +13414,7 @@
         "price": {
           "kind": "published",
           "amount": 70,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/luk_kubiki/",
         "checkedAt": "2026-11-24"
@@ -13365,7 +13426,7 @@
         "price": {
           "kind": "published",
           "amount": 85,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kartofel_kubiki/",
         "checkedAt": "2026-11-24"
@@ -13377,7 +13438,7 @@
         "price": {
           "kind": "published",
           "amount": 73,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/baklazhany_plasty/",
         "checkedAt": "2026-11-24"
@@ -13399,7 +13460,7 @@
         "price": {
           "kind": "published",
           "amount": 122,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/shpinat_listovoj_izmelchennyj/",
         "checkedAt": "2026-11-24"
@@ -13411,7 +13472,7 @@
         "price": {
           "kind": "published",
           "amount": 81,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/tomaty_kubik/",
         "checkedAt": "2026-11-24"
@@ -13423,7 +13484,7 @@
         "price": {
           "kind": "published",
           "amount": 103,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/perec_celyj/",
         "checkedAt": "2026-11-24"
@@ -13435,7 +13496,7 @@
         "price": {
           "kind": "published",
           "amount": 118,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/perec_rezannyj/",
         "checkedAt": "2026-11-24"
@@ -13447,7 +13508,7 @@
         "price": {
           "kind": "published",
           "amount": 90,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/cvetnaya_kapusta/",
         "checkedAt": "2026-11-24"
@@ -13459,7 +13520,7 @@
         "price": {
           "kind": "published",
           "amount": 95,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/fasol_rezannaya/",
         "checkedAt": "2026-11-24"
@@ -13471,7 +13532,7 @@
         "price": {
           "kind": "published",
           "amount": 100,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/ovowi_vesennie/",
         "checkedAt": "2026-11-24"
@@ -13483,7 +13544,7 @@
         "price": {
           "kind": "published",
           "amount": 108,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/morkov_mini/",
         "checkedAt": "2026-11-24"
@@ -13495,7 +13556,7 @@
         "price": {
           "kind": "published",
           "amount": 102,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/meksikanskij_salat/",
         "checkedAt": "2026-11-24"
@@ -13507,7 +13568,7 @@
         "price": {
           "kind": "published",
           "amount": 95,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/lecho/",
         "checkedAt": "2026-11-24"
@@ -13519,7 +13580,7 @@
         "price": {
           "kind": "published",
           "amount": 146,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kukuruza_zerno/",
         "checkedAt": "2026-11-24"
@@ -13531,7 +13592,7 @@
         "price": {
           "kind": "published",
           "amount": 70,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kartofel_brusok/",
         "checkedAt": "2026-11-24"
@@ -13543,7 +13604,7 @@
         "price": {
           "kind": "published",
           "amount": 100,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/goroshek_zelenyj/",
         "checkedAt": "2026-11-24"
@@ -13555,7 +13616,7 @@
         "price": {
           "kind": "published",
           "amount": 113,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/gavajskaya_smes/",
         "checkedAt": "2026-11-24"
@@ -13567,7 +13628,7 @@
         "price": {
           "kind": "published",
           "amount": 140,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/bryusselskaya_kapusta/",
         "checkedAt": "2026-11-24"
@@ -13579,7 +13640,7 @@
         "price": {
           "kind": "published",
           "amount": 143,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/ovoshi_i_smesi/kapusta_brokkoli/",
         "checkedAt": "2026-11-24"
@@ -13621,7 +13682,7 @@
         "price": {
           "kind": "published",
           "amount": 385,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/gribi/lisichki/",
         "checkedAt": "2026-11-24"
@@ -13643,7 +13704,7 @@
         "price": {
           "kind": "published",
           "amount": 422,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/gribi/griby_belye_rezannye_kubik/",
         "checkedAt": "2026-11-24"
@@ -13685,7 +13746,7 @@
         "price": {
           "kind": "published",
           "amount": 91,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/gribi/shampinony_rezannye/",
         "checkedAt": "2026-11-24"
@@ -13697,7 +13758,7 @@
         "price": {
           "kind": "published",
           "amount": 295,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/gribi/opyata/",
         "checkedAt": "2026-11-24"
@@ -13709,7 +13770,7 @@
         "price": {
           "kind": "published",
           "amount": 685,
-          "unit": null
+          "unit": "кг"
         },
         "sourceUrl": "https://fs-trade.ru/shop/gribi/griby_belye/",
         "checkedAt": "2026-11-24"
@@ -15508,7 +15569,7 @@
       {
         "id": "26c8f568bedcff21",
         "name": "Морковь кубиком",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15518,7 +15579,7 @@
       {
         "id": "40f920e0d45fd2fa",
         "name": "Перец меланж",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15528,7 +15589,7 @@
       {
         "id": "8a879e6b3300c444",
         "name": "Спаржа зеленая",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15538,7 +15599,7 @@
       {
         "id": "246949cd67346321",
         "name": "Красный перец",
-        "pack": null,
+        "pack": "Мешок 20 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15548,7 +15609,7 @@
       {
         "id": "2ae64ab10823505d",
         "name": "Замороженная брокколи",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15558,9 +15619,9 @@
       {
         "id": "6d03f1ecfb7eff16",
         "name": "Капуста брокколи",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-ovoschi/svoy-urozhay/kapusta-brokkoli",
         "checkedAt": "2026-11-24"
@@ -15568,9 +15629,9 @@
       {
         "id": "634f82c73c0b5749",
         "name": "Фасоль стручковая",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-ovoschi/svoy-urozhay/fasol",
         "checkedAt": "2026-11-24"
@@ -15578,9 +15639,9 @@
       {
         "id": "9f19cd1eec702306",
         "name": "Цветная капуста",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-ovoschi/svoy-urozhay/cvetnaja-kapusta",
         "checkedAt": "2026-11-24"
@@ -15588,9 +15649,9 @@
       {
         "id": "93e0b1f43a85855d",
         "name": "Шпинат",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-ovoschi/svoy-urozhay/shpinat",
         "checkedAt": "2026-11-24"
@@ -15598,9 +15659,9 @@
       {
         "id": "a1b8581630f7dff5",
         "name": "Кукуруза",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-ovoschi/svoy-urozhay/kukuruza",
         "checkedAt": "2026-11-24"
@@ -15608,7 +15669,7 @@
       {
         "id": "66111d56b4b55b2e",
         "name": "Вишня",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15618,7 +15679,7 @@
       {
         "id": "88f6020be716908e",
         "name": "Малина экстра",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15628,7 +15689,7 @@
       {
         "id": "688188058701603a",
         "name": "Клубника",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15638,7 +15699,7 @@
       {
         "id": "62f7cc762412b79b",
         "name": "Брусника",
-        "pack": null,
+        "pack": "Короб 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15648,7 +15709,7 @@
       {
         "id": "e086d15a9069e657",
         "name": "Клюква",
-        "pack": null,
+        "pack": "Короб 10 кг и 12,5 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15658,9 +15719,9 @@
       {
         "id": "70a6dd24a92ed03b",
         "name": "Вишня без косточки",
-        "pack": null,
+        "pack": "Коробка 7,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-yagody/svoy-urozhay/vishnya",
         "checkedAt": "2026-11-24"
@@ -15668,9 +15729,9 @@
       {
         "id": "008c8347e0d09fec",
         "name": "Клубника",
-        "pack": null,
+        "pack": "Коробка 7,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-yagody/svoy-urozhay/klubnika",
         "checkedAt": "2026-11-24"
@@ -15678,9 +15739,9 @@
       {
         "id": "5ad01bdeef292919",
         "name": "Смородина черная",
-        "pack": null,
+        "pack": "Коробка 7,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-yagody/svoy-urozhay/smorodina-chernaya",
         "checkedAt": "2026-11-24"
@@ -15688,9 +15749,9 @@
       {
         "id": "15c28ae5cdf1595e",
         "name": "Малина",
-        "pack": null,
+        "pack": "Коробка 7,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-yagody/svoy-urozhay/malina",
         "checkedAt": "2026-11-24"
@@ -15700,7 +15761,7 @@
         "name": "Черника",
         "pack": null,
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-yagody/svoy-urozhay/chernika",
         "checkedAt": "2026-11-24"
@@ -15708,7 +15769,7 @@
       {
         "id": "98abecba697c103e",
         "name": "Грибы «Тайны леса»",
-        "pack": null,
+        "pack": "Короб 0.3 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15738,7 +15799,7 @@
       {
         "id": "f61add0a3286271d",
         "name": "Белый гриб",
-        "pack": null,
+        "pack": "Короб 7 кг",
         "price": {
           "kind": "not_published"
         },
@@ -15748,9 +15809,9 @@
       {
         "id": "e6169979585946a2",
         "name": "Белые грибы резаные",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-griby/svoy-urozhay/belye-griby-rezanye",
         "checkedAt": "2026-11-24"
@@ -15758,9 +15819,9 @@
       {
         "id": "c1d9af808360eb21",
         "name": "Опята",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-griby/svoy-urozhay/svoy-urozhay-opyata",
         "checkedAt": "2026-11-24"
@@ -15768,9 +15829,9 @@
       {
         "id": "7a505faa8f19f249",
         "name": "Смесь лесных грибов",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-griby/svoy-urozhay/smes-lesnye-griby",
         "checkedAt": "2026-11-24"
@@ -15778,9 +15839,9 @@
       {
         "id": "ac6136e5679e4cf6",
         "name": "Шампиньоны резаные",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-griby/svoy-urozhay/shampinony-rezanye",
         "checkedAt": "2026-11-24"
@@ -15788,9 +15849,9 @@
       {
         "id": "942a3ab3408b65e2",
         "name": "Лисички",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-griby/svoy-urozhay/lisichki",
         "checkedAt": "2026-11-24"
@@ -15798,9 +15859,9 @@
       {
         "id": "54d80afe773ab1b6",
         "name": "Весенняя смесь",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/vesovyie/vesennyaya",
         "checkedAt": "2026-11-24"
@@ -15808,9 +15869,9 @@
       {
         "id": "d62be6aee198b7b5",
         "name": "Мексиканская смесь",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/vesovyie/meksikanskaya",
         "checkedAt": "2026-11-24"
@@ -15818,9 +15879,9 @@
       {
         "id": "a33687876a5cf13d",
         "name": "Гавайская смесь",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/vesovyie/gavaiskaya",
         "checkedAt": "2026-11-24"
@@ -15828,9 +15889,9 @@
       {
         "id": "23b9f1d97d608954",
         "name": "Паприкаш",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/svoy-urozhay/paprikash",
         "checkedAt": "2026-11-24"
@@ -15838,9 +15899,9 @@
       {
         "id": "2d9428520be8fdc2",
         "name": "Мексиканская",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/svoy-urozhay/meksikanskaya",
         "checkedAt": "2026-11-24"
@@ -15848,9 +15909,9 @@
       {
         "id": "23e35674d8100f00",
         "name": "Гавайская",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/svoy-urozhay/gavaiskaya",
         "checkedAt": "2026-11-24"
@@ -15858,9 +15919,9 @@
       {
         "id": "f163ea5c1621e40a",
         "name": "Лечо",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/svoy-urozhay/lecho",
         "checkedAt": "2026-11-24"
@@ -15868,9 +15929,9 @@
       {
         "id": "f787c7dae1c53f62",
         "name": "Весенняя",
-        "pack": null,
+        "pack": "Коробка 8 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/zamorozhennye-smesi/svoy-urozhay/vesennyaya",
         "checkedAt": "2026-11-24"
@@ -15878,9 +15939,9 @@
       {
         "id": "d93f1ddb7db95169",
         "name": "10 мм",
-        "pack": null,
+        "pack": "Коробка 12,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/kartofel-fri-zamorozhennyij/farm-frites/10-mm",
         "checkedAt": "2026-11-24"
@@ -15888,9 +15949,9 @@
       {
         "id": "c615cccf68edb807",
         "name": "Фаст Фрай",
-        "pack": null,
+        "pack": "Коробка 12,5 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/kartofel-fri-zamorozhennyij/farm-frites/fast-fry",
         "checkedAt": "2026-11-24"
@@ -15898,9 +15959,9 @@
       {
         "id": "68943105e4e5da41",
         "name": "Бланко 7мм",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/kartofel-fri-zamorozhennyij/farm-frites/blanko-7-mm",
         "checkedAt": "2026-11-24"
@@ -15908,9 +15969,9 @@
       {
         "id": "edc2dc3483bcd978",
         "name": "Дольки в кожуре",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/kartofel-fri-zamorozhennyij/farm-frites/dolki-v-kozhure",
         "checkedAt": "2026-11-24"
@@ -15918,9 +15979,9 @@
       {
         "id": "a309bedd3182db3b",
         "name": "Шарики",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
-          "kind": "not_published"
+          "kind": "on_request"
         },
         "sourceUrl": "https://postavkaoptom.ru/catalog/kartofel-fri-zamorozhennyij/farm-frites/shariki-farm-frites",
         "checkedAt": "2026-11-24"
@@ -15928,7 +15989,7 @@
       {
         "id": "5be042cd1803ae3e",
         "name": "10мм",
-        "pack": null,
+        "pack": "Коробка 10 кг",
         "price": {
           "kind": "not_published"
         },
@@ -16534,7 +16595,7 @@
       {
         "id": "e37780518bbe0f77",
         "name": "Капуста цветная",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 179.4,
@@ -16558,7 +16619,7 @@
       {
         "id": "f2952939135134e4",
         "name": "Капуста брокколи",
-        "pack": null,
+        "pack": "10 кг",
         "price": {
           "kind": "published",
           "amount": 189.8,
@@ -16678,7 +16739,7 @@
       {
         "id": "ee651bc3524d8aaa",
         "name": "Вареники с творогом",
-        "pack": null,
+        "pack": "5 кг",
         "price": {
           "kind": "published",
           "amount": 204.39,
@@ -16786,7 +16847,7 @@
       {
         "id": "1db74c266b95b886",
         "name": "Вареники с картофелем и грибами",
-        "pack": null,
+        "pack": "5 кг",
         "price": {
           "kind": "published",
           "amount": 194.88,
@@ -16798,7 +16859,7 @@
       {
         "id": "c4927ac8ff0c8e16",
         "name": "Сырники Классические NEW",
-        "pack": null,
+        "pack": "3 кг",
         "price": {
           "kind": "published",
           "amount": 443.79,
@@ -16846,7 +16907,7 @@
       {
         "id": "fb7f693bcf2f7ca4",
         "name": "Вареники с картофелем",
-        "pack": null,
+        "pack": "5 кг",
         "price": {
           "kind": "published",
           "amount": 173.96,
@@ -16894,7 +16955,7 @@
       {
         "id": "abe4ee3fd8b6a816",
         "name": "Вареники с картофелем",
-        "pack": null,
+        "pack": "3 кг",
         "price": {
           "kind": "published",
           "amount": 201.74,
@@ -16906,7 +16967,7 @@
       {
         "id": "10ebb8541967049a",
         "name": "Сырники ТВОРОЖНЫЕ Сладкие",
-        "pack": null,
+        "pack": "5 кг",
         "price": {
           "kind": "published",
           "amount": 405.9,
@@ -16930,7 +16991,7 @@
       {
         "id": "c387121f94c26462",
         "name": "Сырники с лесными ягодами (жареные)",
-        "pack": null,
+        "pack": "3,3 кг",
         "price": {
           "kind": "published",
           "amount": 640.99,
@@ -16942,7 +17003,7 @@
       {
         "id": "d1d8bfeb8bc187ea",
         "name": "Вареники Картофель с зеленью",
-        "pack": null,
+        "pack": "7,5 кг",
         "price": {
           "kind": "published",
           "amount": 147.19,

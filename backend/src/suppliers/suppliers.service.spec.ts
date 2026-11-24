@@ -115,6 +115,35 @@ describe('SuppliersService', () => {
     expect(new Set(spinach.map(product => product.pack)).size).toBe(2);
   });
 
+  it('keeps verified pack sizes, pricing units and volume thresholds distinct across suppliers', () => {
+    expect(getAssortment('sup-pack-01')!.products[0]).toMatchObject({
+      pack: 'Упаковка: 10 000 шт.', price: { kind: 'published', amount: 0.96, unit: 'шт.' },
+    });
+    expect(getAssortment('sup-pack-05')!.products[0]).toMatchObject({
+      pack: null, price: { kind: 'published', unit: 'шт.' }, priceNote: 'Мин. заказ этой позиции: 500 шт.',
+    });
+    const horazm = getAssortment('sup-spice-02')!.products;
+    expect(horazm.some(product => new URL(product.sourceUrl).pathname.startsWith('/katalog/page/'))).toBe(false);
+    expect(horazm.find(product => product.name === 'Базилик сушеный')).toMatchObject({
+      pack: '12 кг, полипропиленовые мешки', price: { kind: 'published', amount: 180, unit: 'кг' },
+      priceNote: 'От 100 кг — 180 ₽/кг; от 1 т — 175 ₽/кг.',
+    });
+    const fsTrade = getAssortment('sup-frozen-01')!.products;
+    expect(fsTrade.find(product => product.name === 'Черника садовая')).toMatchObject({
+      pack: null, price: { kind: 'published', unit: 'кг' },
+    });
+    expect(fsTrade.find(product => product.name === 'Яблоко дольки')).toMatchObject({
+      pack: null, price: { kind: 'published', unit: null },
+    });
+    const box = getAssortment('sup-pack-04')!.products.find(product => product.id === '66ab99ab79dc777f');
+    expect(box).toMatchObject({
+      pack: 'Короб: 500 шт.', sourceUrl: expect.stringMatching(/\.pdf#page=2$/u), price: { kind: 'not_published' },
+    });
+    expect(getAssortment('sup-dairy-04')!.products.find(product => product.id === '65676d2af91fc7ca')).toMatchObject({
+      pack: '0,2 / 3 / 5,5 / 6 кг', sourceUrl: 'https://milco.group/cheese_1', price: { kind: 'on_request' },
+    });
+  });
+
   it('reports the exact number of matching catalog positions without sending all rows to the registry', async () => {
     const source = fixture('sup-spice-01', { category: 'spices', description: 'Оптовые поставки' });
     const mock = { listWithWorkspace: () => [source] } as unknown as StorageService;

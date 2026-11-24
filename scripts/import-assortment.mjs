@@ -3,11 +3,15 @@ import { execFile } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { promisify } from 'node:util';
+import { applyReferencePacks, isHorazmProductUrl, needsProductDetails, withProductDetails } from './assortment-details.mjs';
+import referencePacks from './assortment-reference-packs.json' with { type: 'json' };
 
 const { JSDOM } = createRequire(new URL('../frontend/package.json', import.meta.url))('jsdom');
 const curl = promisify(execFile);
 const checkedAt = process.env.ASSORTMENT_CHECKED_AT ?? new Date().toISOString().slice(0, 10);
 const onlyUmpuls = process.argv.includes('--umpuls');
+const detailsOnly = process.argv.includes('--details-only');
+if (onlyUmpuls && detailsOnly) throw new Error('Use --umpuls and --details-only separately');
 const umpulsId = 'sup-frozen-02';
 const target = new URL('../backend/src/suppliers/assortment.snapshot.json', import.meta.url);
 const seed = JSON.parse(await readFile(new URL('../data/suppliers.seed.json', import.meta.url), 'utf8'));
@@ -25,10 +29,12 @@ const rubles = value => number(value.match(/([\d][\d ,.]*?)\s*(?:₽|руб\.)/u
 const packFrom = name => clean([...name.matchAll(/\d+(?:[.,]\d+)?\s*(?:кг|гр\.?|г|мл|л|шт\.?)(?=[\s,.;)]|$)/giu)].at(-1)?.[0]).replace(/(?<=\d)(?=\p{L})/gu, ' ') || null;
 const documents = new Map();
 const lanes = Array.from({ length: 8 }, () => Promise.resolve());
+const fetchPage = url => curl('curl', ['-fsSL', '--max-time', '22', '--retry', '1', '--max-filesize', '8000000', '-A', 'Mozilla/5.0', url], { maxBuffer: 8e6 })
+  .then(({ stdout }) => stdout);
 const contents = url => {
   if (!pages.has(url)) {
     const lane = pages.size % lanes.length;
-    const request = lanes[lane].then(() => curl('curl', ['-fsSL', '--max-time', '22', '--retry', '1', '--max-filesize', '8000000', '-A', 'Mozilla/5.0', url], { maxBuffer: 8e6 }).then(({ stdout }) => stdout));
+    const request = lanes[lane].then(() => fetchPage(url));
     pages.set(url, request);
     lanes[lane] = request.then(() => {}, () => {});
   }
@@ -183,7 +189,7 @@ const collectUmpuls = () => collect(umpulsId, ump + '/shop', ['Замороже�
     .then(products => Promise.all(products.map(umpulsProduct))).then(variants => variants.flat()),
 ]);
 
-const jobs = onlyUmpuls ? [collectUmpuls()] : [
+const jobs = detailsOnly ? [] : onlyUmpuls ? [collectUmpuls()] : [
   collect('sup-pack-01', `${rona}/catalog/`, ['Вакуумные пакеты', 'Одноразовая посуда', 'Пищевые контейнеры', 'Пищевая плёнка', 'Столовые приборы'], ronaPages.map(path => fromLinks(rona + path, '.item-title a', a => ({
     price: published(number(text(a.closest('.item_info'), '.price_value'))),
   }), 12))),
@@ -213,7 +219,7 @@ const jobs = onlyUmpuls ? [collectUmpuls()] : [
   ]),
   collect('sup-spice-01', fresh, ['Весовые специи и пряности', 'Смеси пряностей', 'Сушёные овощи и зелень'], [freshList()]),
   collect('sup-spice-02', `${hor}/katalog/`, ['Сушёные овощи', 'Специи и приправы', 'Сухофрукты и орехи'], [
-    fromLinks(`${hor}/katalog/`, 'a[href*="/katalog/"]', a => a.protocol === 'https:' && a.pathname.split('/').filter(Boolean).length === 3 ? {} : null),
+    fromLinks(`${hor}/katalog/`, 'a[href*="/katalog/"]', a => a.origin === hor && isHorazmProductUrl(a.pathname) ? {} : null),
   ]),
   collect('sup-spice-03', `${gur}/opt`, ['Грузинские специи', 'Смеси приправ', 'Сванская соль', 'Аджика'], [
     fromLinks(`${gur}/catalog/spices`, 'a[href*="/catalog/spices/"]', (a, name) => {
@@ -274,7 +280,39 @@ if (failure.length) {
   throw new Error('Snapshot not written: one or more sources could not be verified.');
 }
 const refreshed = Object.fromEntries(results.map(result => result.value));
-const snapshot = onlyUmpuls ? { ...JSON.parse(await readFile(target, 'utf8')), ...refreshed } : refreshed;
+const snapshot = onlyUmpuls || detailsOnly ? { ...JSON.parse(await readFile(target, 'utf8')), ...refreshed } : refreshed;
 if (seed.length !== Object.keys(snapshot).length || seed.some(supplier => !snapshot[supplier.id])) throw new Error('Supplier coverage does not match the seed');
+if (!onlyUmpuls) {
+  console.log(`Позиции дополнены из сверенных источников: ${applyReferencePacks(snapshot, referencePacks)}`);
+  snapshot['sup-spice-02'].products = snapshot['sup-spice-02'].products.filter(p => isHorazmProductUrl(new URL(p.sourceUrl).pathname));
+  const pending = Object.entries(snapshot).flatMap(([id, { products }]) => products.flatMap((product, index) =>
+    needsProductDetails(id, product) ? [{ id, product, index }] : []));
+  let updated = 0;
+  let failed = 0;
+  let cursor = 0;
+  await Promise.all(Array.from({ length: 8 }, async () => {
+    while (cursor < pending.length) {
+      const { id, product, index } = pending[cursor++];
+      const url = product.sourceUrl;
+      const html = await (pages.get(url) ?? fetchPage(url)).catch(error => {
+        failed++;
+        console.warn(`Не удалось проверить карточку ${url}: ${error.stderr?.trim() || error.message}`);
+        return null;
+      });
+      if (html === null) continue;
+      const { window } = new JSDOM(html, { url });
+      try {
+        const completed = withProductDetails(id, product, window.document, checkedAt);
+        if (completed !== product) updated++;
+        snapshot[id].products[index] = completed;
+      } finally {
+        window.close();
+      }
+    }
+  }));
+  console.log(`Карточек проверено: ${pending.length - failed}; дополнено: ${updated}; недоступно: ${failed}`);
+  if (failed && !detailsOnly) throw new Error('Snapshot not written: some product pages could not be verified. Use --details-only to enrich the existing snapshot without replacing prior data.');
+}
+
 console.table(seed.filter(({ id }) => !onlyUmpuls || id === umpulsId).map(({ id, name }) => ({ name, groups: snapshot[id].groups.length, positions: snapshot[id].products.length, priced: snapshot[id].products.filter(p => p.price.kind === 'published').length })));
 if (process.argv.includes('--write')) await writeFile(target, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
