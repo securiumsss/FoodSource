@@ -71,7 +71,8 @@ export type SupplierWithEvaluation = Supplier & {
   scoring: SupplierScoring;
   assortmentGroups?: string[];
   matchedProductCount?: number;
-  matchedProducts?: Pick<SupplierProduct, 'id' | 'name' | 'pack'>[];
+  matchedProducts?: Pick<SupplierProduct, 'id' | 'name' | 'pack' | 'price'>[];
+  matchedProductsApproximate?: boolean;
 };
 
 export interface RfqTemplate {
@@ -114,6 +115,7 @@ export interface ComparisonAssortment {
   /** Matches when searching, otherwise the first positions in the snapshot. */
   shown: SupplierProduct[];
   matchingTotal: number | null;
+  matchingApproximate?: boolean;
 }
 
 export interface CompareResponse {

@@ -1,3 +1,4 @@
+import { searchProducts } from '@food-suppliers/shared';
 import type { SupplierDetailResponse, SupplierProduct } from '@food-suppliers/shared';
 import { useEffect, useRef, useState } from 'react';
 import { Plus, Search } from 'lucide-react';
@@ -6,9 +7,6 @@ import { ExternalLink } from './ui';
 
 const priceFormat = new Intl.NumberFormat('ru-RU');
 const checkedDate = new Intl.DateTimeFormat('ru-RU', { timeZone: 'UTC' });
-const normalize = (value: string) => value.toLocaleLowerCase('ru').replaceAll('ё', 'е').replace(/(?<=\d),(?=\d)/gu, '.');
-const tokens = (value: string) => normalize(value).match(/\p{L}+|\d+(?:\.\d+)?(?:\s*%)?/gu)?.map(token => token.replace(/\s+/gu, '')) ?? [];
-
 export function describeProduct(product: SupplierProduct): string {
   return [product.name, product.pack].filter(Boolean).join(' — ');
 }
@@ -38,12 +36,8 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
   }
 
   const matched = new Set(matches);
-  const terms = tokens(query);
-  const products = assortment.products.filter(product => {
-    if (!terms.length) return true;
-    const words = tokens(describeProduct(product));
-    return terms.every(term => words.some(word => /^\d/u.test(term) ? word === term || word === term + '%' : word.startsWith(term)));
-  }).sort((a, b) => Number(matched.has(b.id)) - Number(matched.has(a.id)));
+  const searchResult = searchProducts(assortment.products, query);
+  const products = [...searchResult.products].sort((a, b) => Number(matched.has(b.id)) - Number(matched.has(a.id)));
   const size = Number(pageSize);
   const pageCount = Math.ceil(products.length / size);
   const currentPage = Math.min(page, Math.max(0, pageCount - 1));
@@ -66,6 +60,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
       <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
       <input type="search" className="field field-search" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
     </label>}
+    {searchResult.approximate && <p className="shrink-0 text-xs text-secondary">Точных совпадений нет. Показаны похожие позиции; уточните помол у поставщика.</p>}
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-line">
       <div ref={tableScrollRef} data-assortment-scroll className="min-h-0 flex-1 overflow-auto overscroll-contain focus-visible:outline-offset-[-2px]" role="region" aria-label="Позиции с сайта поставщика" tabIndex={0}>
         <table className="w-full min-w-[290px] text-left text-xs">
@@ -74,7 +69,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
           </thead>
           <tbody className="divide-y divide-separator">
             {!visible.length && <tr><td colSpan={3} className="px-3 py-5 text-center text-secondary">
-              {terms.length ? 'По вашему запросу ничего не найдено.' : 'Позиции пока не собраны.'}
+              {query.trim() ? 'По вашему запросу ничего не найдено.' : 'Позиции пока не собраны.'}
             </td></tr>}
             {visible.map(product => <tr key={product.id} className={matched.has(product.id) ? 'bg-brand-soft/60' : undefined}>
               <td className="px-2.5 py-3 align-top">

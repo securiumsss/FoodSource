@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { getDeliveryCoverage, requiresTemperatureControl } from '@food-suppliers/shared';
+import { getDeliveryCoverage, requiresTemperatureControl, searchProducts } from '@food-suppliers/shared';
 import type {
   CompareRequestDto, CompareResponse, ComparisonAssortment, ComparisonRow, SupplierCategory, SupplierDetailResponse,
   SupplierStatus, SuppliersListResponse, SuppliersQueryParams, SupplierWithEvaluation, WorkspaceUpdateDto,
 } from '@food-suppliers/shared';
-import { findProducts, getAssortment } from './assortment';
+import { getAssortment } from './assortment';
 import { ScoringService } from '../scoring/scoring.service';
 import { StorageService, type StoredSupplier } from '../storage/storage.service';
 
@@ -43,7 +43,7 @@ export class SuppliersService {
     for (const { workspace } of all) statusCounts[workspace.status]++;
     const needle = query.search?.trim().toLocaleLowerCase('ru');
 
-    const matchesBySupplier = new Map<string, Pick<SupplierWithEvaluation, 'matchedProducts' | 'matchedProductCount'>>();
+    const matchesBySupplier = new Map<string, Pick<SupplierWithEvaluation, 'matchedProducts' | 'matchedProductCount' | 'matchedProductsApproximate'>>();
     const filtered = all.filter(({ supplier: s, workspace }) => {
       if (query.category !== undefined && s.category !== query.category) return false;
       if (query.region !== undefined && !getDeliveryCoverage(s.regions, query.region)) return false;
@@ -58,14 +58,16 @@ export class SuppliersService {
         if (!knownRubMoq && query.includeUnknownMoq === false) return false;
       }
       if (needle) {
+        const catalog = getAssortment(s.id);
         const haystack = [s.name, s.description, s.city, s.categoryLabel, s.priceEstimate.label, s.delivery.terms,
-          ...s.documents, ...s.complianceSystems, ...s.pros, ...s.cons, ...(getAssortment(s.id)?.groups ?? []), workspace.notes]
+          ...s.documents, ...s.complianceSystems, ...s.pros, ...s.cons, ...(catalog?.groups ?? []), workspace.notes]
           .join('\n').toLocaleLowerCase('ru');
-        const matches = findProducts(s.id, needle);
+        const { products: matches, approximate } = searchProducts(catalog?.products ?? [], needle);
         if (!matches.length && !haystack.includes(needle)) return false;
         if (matches.length) matchesBySupplier.set(s.id, {
           matchedProductCount: matches.length,
-          matchedProducts: matches.slice(0, 3).map(({ id, name, pack }) => ({ id, name, pack })),
+          matchedProducts: matches.slice(0, 3).map(({ id, name, pack, price }) => ({ id, name, pack, price })),
+          ...(approximate ? { matchedProductsApproximate: true } : {}),
         });
       }
       return true;
@@ -142,10 +144,11 @@ export class SuppliersService {
     const assortments = Object.fromEntries(suppliers.map((s): [string, ComparisonAssortment | null] => {
       const catalog = getAssortment(s.id);
       if (!catalog) return [s.id, null];
-      const matching = search ? findProducts(s.id, search) : catalog.products;
+      const { products: matching, approximate } = searchProducts(catalog.products, search);
       return [s.id, {
         catalogUrl: catalog.catalogUrl, groups: catalog.groups, total: catalog.products.length,
         matchingTotal: search ? matching.length : null, shown: matching.slice(0, 5),
+        ...(approximate ? { matchingApproximate: true } : {}),
       }];
     }));
     const rows: ComparisonRow[] = [

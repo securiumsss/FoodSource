@@ -153,6 +153,30 @@ describe('SuppliersService', () => {
     expect(response.items[0].matchedProducts).toHaveLength(3);
   });
 
+  it('previews priced paprika variants, distinguishes similar products and keeps the requested pack', async () => {
+    const rows = ['sup-spice-01', 'sup-spice-05'].map(id => fixture(id, { category: 'spices' }));
+    const storage = {
+      listWithWorkspace: () => rows,
+      findWithWorkspace: (id: string) => rows.find(row => row.supplier.id === id),
+    } as unknown as StorageService;
+    const service = new SuppliersService(storage, new ScoringService());
+    const search = 'копчёная молотая паприка';
+    const response = await service.findAll({ search });
+    expect(response.items.find(item => item.id === 'sup-spice-01')).toMatchObject({
+      matchedProductCount: 2,
+      matchedProducts: [
+        { pack: 'Мешок 25 кг', price: { kind: 'published', amount: 485, unit: 'кг' } },
+        { pack: 'Пакет 1 кг', price: { kind: 'published', amount: 525, unit: 'кг' } },
+      ],
+    });
+    expect(response.items.find(item => item.id === 'sup-spice-01')?.matchedProductsApproximate).toBeUndefined();
+    expect(response.items.find(item => item.id === 'sup-spice-05')).toMatchObject({ matchedProductCount: 4, matchedProductsApproximate: true });
+    const compared = await service.compare({ ids: rows.map(row => row.supplier.id), search: `${search} 25 кг` });
+    expect(compared.assortments['sup-spice-05']).toMatchObject({ matchingApproximate: true, matchingTotal: 1, shown: [{ pack: '25 кг', price: { kind: 'published', amount: 11576, unit: 'уп.' } }] });
+    expect((await service.findAll({ search: `${search} 99 кг` })).items).toHaveLength(0);
+    expect((await service.findAll({ search: '...' })).items).toHaveLength(0);
+  });
+
   it('finds catalog positions with reordered words and keeps product prices distinct in comparison', async () => {
     const sample = ['sup-dairy-01', 'sup-dairy-03'].map(id => fixture(id, { category: 'dairy', regions: ['Москва и МО'] }));
     const store = {
@@ -172,7 +196,7 @@ describe('SuppliersService', () => {
     const result = await catalog.findAll({ region: 'Москва и МО', search: '33 % СЛИВКИ 1 л' });
     expect(ids(result.items)).toEqual(['sup-dairy-01', 'sup-dairy-03']);
     expect(result.items.find(item => item.id === 'sup-dairy-01')?.matchedProducts).toEqual([
-      { id: 'amanda-33-1l', name: 'Сливки ультрапастеризованные Amanda 33%', pack: '1 л' },
+      { id: 'amanda-33-1l', name: 'Сливки ультрапастеризованные Amanda 33%', pack: '1 л', price: { kind: 'published', amount: 430, unit: 'шт.' } },
     ]);
     expect((await catalog.findAll({ search: 'сливки 133%' })).total).toBe(0);
     expect((await catalog.findOne('sup-dairy-01')).assortment?.products[0]).toMatchObject({ price: { amount: 430 }, availabilityNote: expect.stringContaining('нет в наличии') });

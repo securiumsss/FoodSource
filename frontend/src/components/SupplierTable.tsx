@@ -12,6 +12,8 @@ const shortCategory: Record<SupplierCategory, string> = {
 };
 const numberFormat = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 20 });
 const moqUnits = { RUB: '₽', KG: 'кг', BOX: 'кор.', PCS: 'шт.' };
+const variantCount = new Intl.PluralRules('ru-RU');
+const variantsLabel = { zero: 'вариантов', one: 'вариант', two: 'варианта', few: 'варианта', many: 'вариантов', other: 'варианта' };
 
 function compactMoq({ amount, unit, label }: SupplierWithEvaluation['moq']): string {
   if (amount !== null && unit !== null) return 'от ' + numberFormat.format(amount) + ' ' + moqUnits[unit];
@@ -22,28 +24,51 @@ function compactMoq({ amount, unit, label }: SupplierWithEvaluation['moq']): str
 }
 
 function AssortmentPreview({ supplier, onOpen }: { supplier: SupplierWithEvaluation; onOpen: () => void }) {
-  const { matchedProducts = [], assortmentGroups = [] } = supplier;
+  const { matchedProducts = [], matchedProductsApproximate, assortmentGroups = [] } = supplier;
   const match = matchedProducts[0];
-  const groupLimit = 3;
-  if (!match && !assortmentGroups.length) return <span className="text-[11px] text-muted">Позиции не собраны</span>;
+  if (match) {
+    const { price } = match;
+    const priceText = price?.kind === 'published'
+      ? `${numberFormat.format(price.amount)} ₽${price.unit ? `/${price.unit}` : ''}`
+      : 'По запросу';
+    const priceUnitUnknown = price?.kind === 'published' && !price.unit;
+    const remaining = (supplier.matchedProductCount ?? matchedProducts.length) - 1;
+    const more = remaining > 0 ? `ещё ${remaining} ${variantsLabel[variantCount.select(remaining)]}` : '';
 
-  const text = match ? `Найдено: ${match.name}` : assortmentGroups.slice(0, groupLimit).join(' · ');
-  const more = match ? (supplier.matchedProductCount ?? matchedProducts.length) - 1 : assortmentGroups.length - groupLimit;
-  const title = match
-    ? matchedProducts.map(product => [product.name, product.pack].filter(Boolean).join(' · ')).join('\n')
-    : assortmentGroups.join(' · ');
+    return (
+      <button type="button" title={[match.name, match.pack, priceText, priceUnitUnknown ? 'Единицу цены уточнить' : '', more].filter(Boolean).join(' · ')}
+        onClick={event => { event.stopPropagation(); onOpen(); }}
+        className="group/assortment inline-flex max-w-full items-start gap-1.5 text-left text-xs">
+        <span className="min-w-0">
+          <span className="line-clamp-2 break-words text-[13px] font-semibold leading-snug text-brand-ink-strong group-hover/assortment:underline">{match.name}</span>
+          <span className="mt-0.5 flex flex-wrap items-baseline gap-x-1 gap-y-0.5 text-[11px] leading-tight text-secondary">
+            {match.pack && <span className="min-w-0 max-w-full truncate">{match.pack} <span aria-hidden="true">·</span></span>}
+            <span className={price?.kind === 'published' ? 'num whitespace-nowrap font-medium text-ink' : 'whitespace-nowrap'}>{priceText}{priceUnitUnknown && <span className="ml-1 font-sans font-normal text-secondary">(ед. уточнить)</span>}</span>
+            {more && <span className="whitespace-nowrap text-brand-ink">{more}</span>}
+          </span>
+          {matchedProductsApproximate && <span className="mt-1 block text-[10px] leading-tight text-secondary">Похожий товар</span>}
+        </span>
+        <ArrowUpRight size={12} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-ink" />
+      </button>
+    );
+  }
+
+  const groupLimit = 3;
+  if (!assortmentGroups.length) return <span className="text-[11px] text-muted">Позиции не собраны</span>;
+
+  const more = assortmentGroups.length - groupLimit;
 
   return (
     <button
       type="button"
-      title={title}
+      title={assortmentGroups.join(' · ')}
       onClick={event => { event.stopPropagation(); onOpen(); }}
-      className={`inline-flex max-w-full items-start gap-1 text-left text-xs hover:underline ${match ? 'font-semibold text-brand-ink-strong' : 'text-secondary hover:text-brand-ink-strong'}`}
+      className="inline-flex max-w-full items-start gap-1 text-left text-xs text-secondary hover:text-brand-ink-strong hover:underline"
     >
       <span className="min-w-0">
-        <span className="line-clamp-2 break-words">{text}</span>
-        {(match?.pack || more > 0) && <span className="mt-0.5 block truncate text-[11px] font-normal text-secondary">
-          {[match?.pack, more > 0 ? (match ? `ещё совпадения: ${more}` : `ещё групп: ${more}`) : null].filter(Boolean).join(' · ')}
+        <span className="line-clamp-2 break-words">{assortmentGroups.slice(0, groupLimit).join(' · ')}</span>
+        {more > 0 && <span className="mt-0.5 block truncate text-[11px] font-normal text-secondary">
+          ещё групп: {more}
         </span>}
       </span>
       <ArrowUpRight size={12} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-ink" />

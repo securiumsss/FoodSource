@@ -50,7 +50,7 @@ export function CompareAssortments({ result, query, onOpen, onRemove }: {
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <h3 className="break-words text-sm font-semibold text-ink">{supplier.name}</h3>
                     <div className="flex items-center gap-2">
-                      {catalog && <span className="text-[11px] text-secondary">{query ? `Совпадений: ${catalog.matchingTotal ?? 0}` : `Позиций собрано: ${catalog.total}`}</span>}
+                      {catalog && <span className="text-[11px] text-secondary">{query ? `${catalog.matchingApproximate ? 'Похожие позиции' : 'Совпадений'}: ${catalog.matchingTotal ?? 0}` : `Позиций собрано: ${catalog.total}`}</span>}
                       {onRemove && <button type="button" onClick={() => onRemove(supplier.id)} aria-label={`Убрать из сравнения: ${supplier.name}`} className="grid size-7 place-items-center rounded text-secondary hover:bg-line hover:text-ink"><X size={14} aria-hidden="true" /></button>}
                     </div>
                   </div>
@@ -65,7 +65,7 @@ export function CompareAssortments({ result, query, onOpen, onRemove }: {
                 </p>}
                 <footer className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-line px-3.5 py-2">
                   <button type="button" onClick={() => onOpen(supplier.id, query)} aria-label={`Открыть ассортимент: ${supplier.name}`} className="inline-flex min-h-7 items-center gap-1 font-medium text-brand-ink hover:underline">
-                    {query && catalog && (catalog.matchingTotal ?? 0) > catalog.shown.length ? `Все совпадения (${catalog.matchingTotal})` : 'Открыть ассортимент'} <ArrowUpRight aria-hidden="true" size={13} />
+                    {query && catalog && (catalog.matchingTotal ?? 0) > catalog.shown.length ? `${catalog.matchingApproximate ? 'Все похожие' : 'Все совпадения'} (${catalog.matchingTotal})` : 'Открыть ассортимент'} <ArrowUpRight aria-hidden="true" size={13} />
                   </button>
                   {catalog && <ExternalLink href={catalog.catalogUrl}>Сайт поставщика</ExternalLink>}
                 </footer>

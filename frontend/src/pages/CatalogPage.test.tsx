@@ -489,22 +489,41 @@ describe('Каталог поставщиков', () => {
   it('открывает найденную позицию в ассортименте и добавляет её с фасовкой в письмо', async () => {
     const user = userEvent.setup();
     const product = { id: 'cream', name: 'Сливки 33%', pack: '1 л', price: { kind: 'on_request' as const }, sourceUrl: 'https://supplier.test/cream', checkedAt: '2026-11-24' };
-    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [{ ...first, assortmentGroups: ['Молоко и сливки'], matchedProducts: [product] }, second] });
-    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Сливки'], products: [product] } });
+    const secondPack = { ...product, id: 'cream-2', pack: '2 л', price: { kind: 'published' as const, amount: 485, unit: 'л' } };
+    const unrelated = { ...product, id: 'milk', name: 'Молоко 3,2%' };
+    vi.mocked(client.fetchSuppliers).mockImplementation(async ({ search } = {}) => ({ ...list, items: [{
+      ...first, assortmentGroups: ['Молоко и сливки'], ...(search ? { matchedProducts: [product, secondPack], matchedProductCount: 2 } : {}),
+    }, second] }));
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment: { catalogUrl: 'https://supplier.test/catalog', groups: ['Сливки'], products: [product, secondPack, unrelated] } });
     render(<CatalogPage />);
-    const match = await screen.findByRole('button', { name: 'Найдено: Сливки 33% 1 л' });
+    const groups = await screen.findByRole('button', { name: 'Молоко и сливки' });
+    expect(within(groups).queryByText('По запросу')).toBeNull();
+    await user.type(screen.getByLabelText('Поиск', { exact: true }), 'Сливки 33%');
+    const match = await screen.findByRole('button', { name: 'Сливки 33% 1 л По запросу ещё 1 вариант' });
     expect(match.closest('td')?.cellIndex).toBe(2);
     await user.click(match);
     const drawer = within(await screen.findByRole('dialog'));
     expect((await drawer.findByRole('tab', { name: 'Ассортимент' })).getAttribute('aria-selected')).toBe('true');
+    expect((drawer.getByRole('searchbox', { name: 'Поиск по ассортименту' }) as HTMLInputElement).value).toBe('Сливки 33%');
     const table = await drawer.findByRole('table', { name: '' });
     expect(within(table).getByText('По запросу')).toBeTruthy();
-    expect(within(table).getByRole('link', { name: 'Товар' }).getAttribute('href')).toBe(product.sourceUrl);
-    await user.click(within(table).getByRole('button', { name: 'В запрос КП: Сливки 33%' }));
+    expect(within(table).queryByText('Молоко 3,2%')).toBeNull();
+    const firstPackRow = within(table).getByText('1 л').closest('tr')!;
+    expect(within(firstPackRow).getByRole('link', { name: 'Товар' }).getAttribute('href')).toBe(product.sourceUrl);
+    await user.click(within(firstPackRow).getByRole('button', { name: 'В запрос КП: Сливки 33%' }));
     expect(drawer.getByRole('tab', { name: /Запрос КП/ }).getAttribute('aria-selected')).toBe('true');
     expect(decodeURIComponent(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href') ?? '')).toContain('Сливки 33% — 1 л');
     await user.click(drawer.getByRole('button', { name: 'Убрать из запроса: Сливки 33%' }));
     expect(decodeURIComponent(drawer.getByRole('link', { name: 'Написать письмо' }).getAttribute('href') ?? '')).not.toContain('Сливки 33%');
+  });
+
+  it('показывает исходную цену найденной позиции и помечает похожий товар', async () => {
+    const product = { id: 'paprika', name: 'Паприка копчёная', pack: '25 кг', price: { kind: 'published' as const, amount: 11576, unit: 'уп.' } };
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: [{ ...first, matchedProducts: [product], matchedProductsApproximate: true }] });
+    render(<CatalogPage />);
+    const preview = await screen.findByRole('button', { name: /Паприка копчёная .*11\s576 ₽\/уп\. .*Похожий товар/ });
+    expect(within(preview).getByText('25 кг', { exact: false })).toBeTruthy();
+    expect(within(preview).queryByText(/ещё/)).toBeNull();
   });
 
   it('ищет по товару и фасовке в большом ассортименте и разбивает список на страницы', async () => {

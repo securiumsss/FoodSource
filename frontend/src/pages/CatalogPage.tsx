@@ -176,7 +176,7 @@ export function CatalogPage() {
           atLimit={selected.length >= 4}
           savingId={savingId}
           dimmed={loading && items.length > 0}
-          onOpen={openDrawer}
+          onOpen={(id, tab) => openDrawer(id, tab, tab === 'assortment' && items.some(item => item.id === id && item.matchedProducts?.length) ? debouncedSearch : '')}
           onCompare={toggleCompare}
           onStatusChange={(id, status) => void changeStatus(id, status).catch(reason => setError(readableError(reason)))}
         />
