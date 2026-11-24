@@ -1,5 +1,5 @@
 import type { SupplierDetailResponse, SupplierProduct } from '@food-suppliers/shared';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Search } from 'lucide-react';
 import { ExternalLink } from './ui';
 
@@ -21,9 +21,14 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
 }) {
   const [query, setQuery] = useState(initialSearch);
   const [page, setPage] = useState(0);
+  const tableScrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (tableScrollRef.current) tableScrollRef.current.scrollTop = 0;
+  }, [page, query]);
+
   const { assortment } = supplier;
   if (!assortment) {
-    return <section className="space-y-3 text-xs text-secondary">
+    return <section className="min-h-0 space-y-3 overflow-y-auto text-xs text-secondary">
       <h3 className="text-sm font-semibold text-ink">Ассортимент поставщика</h3>
       <p>{supplier.description}</p>
       <p>Позиции этого поставщика пока не собраны. Уточните ассортимент и цены у поставщика.</p>
@@ -42,30 +47,35 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
   const currentPage = Math.min(page, Math.max(0, pageCount - 1));
   const start = currentPage * pageSize;
   const visible = products.slice(start, start + pageSize);
+  const hasPagination = assortment.products.length > pageSize;
   const resultLabel = products.length === 1 ? '1 позиция'
-    : products.length ? `${start + 1}–${start + visible.length} из ${products.length}` : 'В собранных позициях ничего не нашлось.';
-  return <section className="space-y-4">
-    <div className="space-y-2">
-      <h3 className="text-sm font-semibold text-ink">Ассортимент поставщика</h3>
-      <div className="flex flex-wrap gap-1.5">
-        {assortment.groups.map(group => <span key={group} className="rounded border border-line bg-soft px-2 py-1 text-xs text-secondary">{group}</span>)}
+    : products.length ? `${start + 1}–${start + visible.length} из ${products.length}` : '0 позиций';
+  return <section className="flex min-h-0 flex-1 flex-col gap-2.5">
+    <div className="shrink-0 space-y-2">
+      <div className="flex items-baseline justify-between gap-3 text-xs">
+        <h3 className="text-sm font-semibold text-ink">Ассортимент поставщика</h3>
+        <ExternalLink href={assortment.catalogUrl}>На сайте поставщика</ExternalLink>
       </div>
-      <ExternalLink href={assortment.catalogUrl}>Ассортимент на сайте поставщика</ExternalLink>
+      {assortment.groups.length > 0 && <div className="flex flex-wrap gap-1.5">
+        {assortment.groups.map(group => <span key={group} className="rounded border border-line bg-soft px-2 py-1 text-xs text-secondary">{group}</span>)}
+      </div>}
+      {assortment.catalogNote && <p className="text-xs leading-snug text-secondary">{assortment.catalogNote}</p>}
     </div>
-    <div className="space-y-2">
-      <h4 className="text-xs font-semibold text-ink">Позиции с сайта поставщика</h4>
-      <p className="text-xs leading-relaxed text-secondary">{assortment.catalogNote ?? 'Это выборка с сайта, а не полный прайс. Перед заказом подтвердите наличие и оптовую цену.'}</p>
-      {(assortment.products.length > pageSize || Boolean(initialSearch)) && <label className="relative block">
-        <span className="sr-only">Поиск по ассортименту</span>
-        <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-        <input type="search" className="field" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
-      </label>}
-      {products.length > 0 && <div className="overflow-x-auto rounded-lg border border-line" role="region" aria-label="Позиции с сайта поставщика" tabIndex={0}>
+    {(hasPagination || Boolean(initialSearch)) && <label className="relative block shrink-0">
+      <span className="sr-only">Поиск по ассортименту</span>
+      <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+      <input type="search" className="field" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
+    </label>}
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-line">
+      <div ref={tableScrollRef} data-assortment-scroll className="min-h-0 flex-1 overflow-auto overscroll-contain focus-visible:outline-offset-[-2px]" role="region" aria-label="Позиции с сайта поставщика" tabIndex={0}>
         <table className="w-full min-w-[290px] text-left text-xs">
-          <thead className="bg-soft text-muted">
+          <thead className="sticky top-0 z-10 bg-soft text-muted shadow-[0_1px_0_var(--color-line)]">
             <tr><th scope="col" className="px-2.5 py-2">Товар / фасовка</th><th scope="col" className="px-2.5 py-2">Цена на сайте</th><th scope="col" className="px-2.5 py-2">Источник</th></tr>
           </thead>
           <tbody className="divide-y divide-separator">
+            {!visible.length && <tr><td colSpan={3} className="px-3 py-5 text-center text-secondary">
+              {terms.length ? 'По вашему запросу ничего не найдено.' : 'Позиции пока не собраны.'}
+            </td></tr>}
             {visible.map(product => <tr key={product.id} className={matched.has(product.id) ? 'bg-brand-soft/60' : undefined}>
               <td className="px-2.5 py-3 align-top">
                 <p className="font-semibold text-ink">{product.name}</p>
@@ -87,14 +97,14 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialS
             </tr>)}
           </tbody>
         </table>
-      </div>}
-      {(assortment.products.length > pageSize || terms.length > 0) && <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-secondary">
+      </div>
+      <div className="flex min-h-10 shrink-0 items-center justify-between gap-2 border-t border-line bg-soft px-2.5 py-1 text-[11px] text-secondary">
         <p role="status">{resultLabel}</p>
-        {pageCount > 1 && <div role="group" aria-label="Страницы ассортимента" className="flex gap-1">
+        {hasPagination && <div role="group" aria-label="Страницы ассортимента" className="flex gap-1">
           <button type="button" className="icon-btn disabled:opacity-40" aria-label="Предыдущая страница ассортимента" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}><ChevronLeft size={14} /></button>
           <button type="button" className="icon-btn disabled:opacity-40" aria-label="Следующая страница ассортимента" disabled={currentPage + 1 >= pageCount} onClick={() => setPage(currentPage + 1)}><ChevronRight size={14} /></button>
         </div>}
-      </div>}
+      </div>
     </div>
   </section>;
 }

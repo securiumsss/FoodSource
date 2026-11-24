@@ -215,7 +215,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
   function handleNavigationKey(event: KeyboardEvent<HTMLElement>) {
     if (!navigation || event.defaultPrevented || event.nativeEvent.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
-    if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable], [role="combobox"], [role="listbox"]')) return;
+    if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable], [role="combobox"], [role="listbox"], [data-assortment-scroll]')) return;
 
     event.preventDefault();
     navigate(event.key === 'ArrowUp' ? 'previous' : 'next');
@@ -342,8 +342,8 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
           )}
         </div>
 
-        <div key={id} className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6">
-          {message && <div role="alert" className="mb-4 rounded-md border border-rose-200 bg-rose-50 px-3 py-2.5 text-xs text-rose-800">{message}</div>}
+        <div key={id} className={`min-h-0 flex-1 px-5 sm:px-6 ${tab === 'assortment' ? 'flex flex-col overflow-hidden pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]' : 'overflow-y-auto py-5'}`}>
+          {message && <div role="alert" className="mb-4 shrink-0 rounded-md border border-rose-200 bg-rose-50 px-3 py-2.5 text-xs text-rose-800">{message}</div>}
           {!s && !message && <div className="flex min-h-52 items-center justify-center gap-2 text-xs text-muted"><LoaderCircle size={16} className="animate-spin" />Загружаем карточку...</div>}
 
           {s && tab === 'overview' && (
