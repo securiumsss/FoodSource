@@ -44,6 +44,13 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
   const dialogRef = useDialog<HTMLElement>(onClose);
 
   useEffect(() => {
+    const next = draft.trim();
+    if (next === productQuery) return;
+    const timer = window.setTimeout(() => setProductQuery(next), 300);
+    return () => window.clearTimeout(timer);
+  }, [draft, productQuery]);
+
+  useEffect(() => {
     let active = true;
     compareSuppliers(request)
       .then(result => { if (active) setResponse({ request, result }); })
@@ -52,7 +59,11 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
   }, [request]);
 
   const current = response?.request === request ? response : null;
-  const result = current?.result;
+  // When only the search changes, keep the last positions visible while fetching the next batch.
+  const sameSuppliers = response?.request.ids === ids && response.request.region === region && response.request.maxMoqRub === maxMoqRub;
+  const displayed = current ?? (sameSuppliers ? response : null);
+  const result = displayed?.result;
+  const displayedQuery = displayed?.request.search ?? '';
   const error = current?.error || statusError;
   const winner = result?.suppliers.find(s => s.id === result.winnerId);
   const rowsByKey = new Map(result?.rows.map(row => [row.key, row]));
@@ -93,10 +104,10 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
 
   return (
     <div className="overlay z-50" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
-      <section ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="compare-title" className="modal-panel animate-rise max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)]">
+      <section ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="compare-title" className="modal-panel animate-rise h-[48rem] max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)]">
         <header className="grid shrink-0 grid-cols-[1fr_auto] items-center gap-x-4 border-b border-separator px-4 py-2.5 sm:px-5">
           <h2 id="compare-title" className="text-base font-bold tracking-tight text-ink sm:text-lg">Сравнение поставщиков</h2>
-          <button ref={closeButton} data-dialog-initial-focus type="button" className="icon-btn" onClick={onClose} aria-label="Закрыть сравнение"><X size={17} /></button>
+          <button ref={closeButton} data-dialog-initial-focus type="button" className="grid size-9 place-items-center rounded-md text-secondary transition-colors hover:bg-soft hover:text-ink" onClick={onClose} aria-label="Закрыть сравнение" title="Закрыть (Esc)"><X size={17} /></button>
         </header>
 
         <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-3 py-2 sm:px-5">
@@ -111,19 +122,19 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
           </button>}
         </div>
 
-        <div key={section} className="min-h-0 overflow-y-auto px-3 py-3 sm:px-5">
-          {section === 'assortment' && <form role="search" aria-label="Поиск позиций в сравнении" className="mb-3 flex flex-wrap items-center gap-2" onSubmit={event => { event.preventDefault(); setProductQuery(draft.trim()); }}>
-            <label className="relative min-w-40 flex-1">
-              <span className="sr-only">Товар или фасовка</span>
-              <Search size={15} aria-hidden="true" className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted" />
-              <input value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field" style={{ paddingInlineStart: '2rem' }} />
-            </label>
-            <button type="submit" className="btn-primary">Найти</button>
-            {productQuery && <button type="button" className="btn-secondary" onClick={() => { setDraft(''); setProductQuery(''); }}>Сбросить</button>}
-          </form>}
+        {section === 'assortment' && <div role="search" aria-label="Поиск позиций в сравнении" className="shrink-0 px-3 pt-3 sm:px-5">
+          <label className="relative block">
+            <span className="sr-only">Товар или фасовка</span>
+            <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted">
+              {!current && result ? <LoaderCircle size={15} aria-label="Обновляем позиции" role="status" className="animate-spin" /> : <Search size={15} aria-hidden="true" />}
+            </span>
+            <input type="search" value={draft} onChange={event => setDraft(event.target.value)} maxLength={200} placeholder="Товар или фасовка" className="field" style={{ paddingInlineStart: '2rem' }} />
+          </label>
+        </div>}
+        <div key={section} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3 sm:px-5">
           {error && <div role="alert" className="mb-3 rounded-md border border-rose-100 bg-rose-50 px-3 py-2 text-xs text-rose-800">{error}</div>}
-          {!current && <div role="status" className="flex min-h-32 items-center justify-center gap-2 text-sm text-secondary"><LoaderCircle className="animate-spin" size={16} aria-hidden="true" /> Готовим сравнение…</div>}
-          {result && section === 'assortment' && <CompareAssortments result={result} query={productQuery} onOpen={(id, query) => onOpen(id, 'assortment', query)} onRemove={ids.length > 2 && !pending ? remove : undefined} />}
+          {!current && !result && <div role="status" className="flex min-h-32 items-center justify-center gap-2 text-sm text-secondary"><LoaderCircle className="animate-spin" size={16} aria-hidden="true" /> Готовим сравнение…</div>}
+          {result && section === 'assortment' && <CompareAssortments result={result} query={displayedQuery} onOpen={(id, query) => onOpen(id, 'assortment', query)} onRemove={ids.length > 2 && !pending ? remove : undefined} />}
           {result && section === 'conditions' && (
             <>
               {tied && <p className="mb-3 rounded-md border border-line bg-soft px-3 py-2 text-xs text-secondary">Несколько поставщиков набрали одинаковый максимальный балл.</p>}
@@ -204,7 +215,6 @@ export function CompareModal({ ids, search, region, maxMoqRub, onClose, onOpen, 
             </>
           )}
         </div>
-        {result && section === 'assortment' && <footer className="shrink-0 border-t border-separator px-4 py-2 text-[11px] text-secondary sm:px-5">Показаны позиции из собранной выборки. Перед сравнением цен проверьте товар, фасовку и единицу цены.</footer>}
       </section>
     </div>
   );

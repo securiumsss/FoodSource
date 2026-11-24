@@ -637,11 +637,14 @@ describe('Каталог поставщиков', () => {
     expect(modal.queryByText('Пример цены')).toBeNull();
     expect(modal.queryByText('430 ₽/л')).toBeNull();
     await user.click(modal.getByRole('button', { name: 'Ассортимент' }));
-    await user.clear(modal.getByRole('textbox', { name: 'Товар или фасовка' }));
-    await user.type(modal.getByRole('textbox', { name: 'Товар или фасовка' }), 'Молоко');
-    await user.click(modal.getByRole('button', { name: 'Найти' }));
+    expect(modal.queryByRole('button', { name: /^(Найти|Сбросить)$/ })).toBeNull();
+    const searchField = modal.getByRole('searchbox', { name: 'Товар или фасовка' });
+    await user.clear(searchField);
+    await modal.findByText('Позиций собрано: 2');
+    expect(client.compareSuppliers).toHaveBeenLastCalledWith(expect.not.objectContaining({ search: expect.anything() }));
+    await user.type(searchField, 'Молоко');
     await modal.findByText('Молоко 3,2%');
-    expect(client.compareSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'Молоко' }));
+    await waitFor(() => expect(client.compareSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'Молоко' })));
     await user.click(modal.getByRole('button', { name: 'Открыть ассортимент: Первый поставщик' }));
     const drawer = within(await screen.findByRole('dialog', { name: 'Первый поставщик' }));
     const productSearch = await drawer.findByRole<HTMLInputElement>('searchbox', { name: 'Поиск по ассортименту' });

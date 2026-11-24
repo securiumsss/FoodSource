@@ -1,4 +1,5 @@
-import type { CompareResponse, SupplierProduct } from '@food-suppliers/shared';
+import type { CSSProperties } from 'react';
+import type { CompareResponse, SupplierProduct, SupplierWithEvaluation } from '@food-suppliers/shared';
 import { ArrowUpRight, X } from 'lucide-react';
 import { ExternalLink } from './ui';
 
@@ -33,37 +34,45 @@ export function CompareAssortments({ result, query, onOpen, onRemove }: {
   onOpen: (id: string, query: string) => void;
   onRemove?: (id: string) => void;
 }) {
+  const pairs: SupplierWithEvaluation[][] = [];
+  for (let i = 0; i < result.suppliers.length; i += 2) pairs.push(result.suppliers.slice(i, i + 2));
   return (
-    <div className="grid items-start gap-3 sm:grid-cols-2">
-      {result.suppliers.map(supplier => {
-        const catalog = result.assortments[supplier.id];
-        return (
-          <article key={supplier.id} aria-label={`Ассортимент: ${supplier.name}`} className="min-w-0 overflow-hidden rounded-lg border border-line bg-white text-xs">
-            <header className="space-y-2 border-b border-line bg-soft px-3.5 py-3">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                <h3 className="break-words text-sm font-semibold text-ink">{supplier.name}</h3>
-                <div className="flex items-center gap-2">
-                  {catalog && <span className="text-[11px] text-secondary">{query ? `Совпадений: ${catalog.matchingTotal ?? 0}` : `Позиций собрано: ${catalog.total}`}</span>}
-                  {onRemove && <button type="button" onClick={() => onRemove(supplier.id)} aria-label={`Убрать из сравнения: ${supplier.name}`} className="grid size-7 place-items-center rounded text-secondary hover:bg-line hover:text-ink"><X size={14} aria-hidden="true" /></button>}
-                </div>
-              </div>
-              {!query && catalog && catalog.groups.length > 0 && <ul className="flex flex-wrap gap-1">
-                {catalog.groups.map(group => <li key={group} className="rounded border border-line bg-white px-1.5 py-0.5 text-[11px] text-secondary">{group}</li>)}
-              </ul>}
-            </header>
-            {catalog?.shown.length ? <ul className="divide-y divide-separator">
-              {catalog.shown.map(product => <ProductRow key={product.id} product={product} />)}
-            </ul> : <p className="px-3.5 py-4 leading-relaxed text-secondary">
-              {!catalog || !catalog.total ? 'Позиции этого поставщика пока не собраны.' : 'В собранных позициях совпадений нет. Это не означает, что товара нет у поставщика.'}
-            </p>}
-            <footer className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-line px-3.5 py-2">
-              <button type="button" onClick={() => onOpen(supplier.id, query)} aria-label={`Открыть ассортимент: ${supplier.name}`} className="inline-flex min-h-7 items-center gap-1 font-medium text-brand-ink hover:underline">
-                {query && catalog && (catalog.matchingTotal ?? 0) > catalog.shown.length ? `Все совпадения (${catalog.matchingTotal})` : 'Открыть ассортимент'} <ArrowUpRight aria-hidden="true" size={13} />
-              </button>
-              {catalog && <ExternalLink href={catalog.catalogUrl}>Сайт поставщика</ExternalLink>}
-            </footer>
-          </article>
-        );
+    <div className="space-y-3">
+      {pairs.map(pair => {
+        const rows = Math.max(1, ...pair.map(supplier => result.assortments[supplier.id]?.shown.length ?? 0));
+        // Each desktop pair shares the header, product, and footer tracks.
+        return <div key={pair[0].id} className="grid gap-3 sm:grid-cols-2 sm:gap-y-0" style={{ '--product-rows': rows, '--catalog-rows': rows + 2 } as CSSProperties}>
+          {pair.map(supplier => {
+            const catalog = result.assortments[supplier.id];
+            return (
+              <article key={supplier.id} aria-label={`Ассортимент: ${supplier.name}`} className="min-w-0 overflow-hidden rounded-lg border border-line bg-white text-xs sm:row-span-[var(--catalog-rows)] sm:grid sm:grid-rows-subgrid">
+                <header className="space-y-2 border-b border-line bg-soft px-3.5 py-3">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                    <h3 className="break-words text-sm font-semibold text-ink">{supplier.name}</h3>
+                    <div className="flex items-center gap-2">
+                      {catalog && <span className="text-[11px] text-secondary">{query ? `Совпадений: ${catalog.matchingTotal ?? 0}` : `Позиций собрано: ${catalog.total}`}</span>}
+                      {onRemove && <button type="button" onClick={() => onRemove(supplier.id)} aria-label={`Убрать из сравнения: ${supplier.name}`} className="grid size-7 place-items-center rounded text-secondary hover:bg-line hover:text-ink"><X size={14} aria-hidden="true" /></button>}
+                    </div>
+                  </div>
+                  {!query && catalog && catalog.groups.length > 0 && <ul className="flex flex-wrap gap-1">
+                    {catalog.groups.map(group => <li key={group} className="rounded border border-line bg-white px-1.5 py-0.5 text-[11px] text-secondary">{group}</li>)}
+                  </ul>}
+                </header>
+                {catalog?.shown.length ? <ul className="divide-y divide-separator sm:row-span-[var(--product-rows)] sm:grid sm:grid-rows-subgrid">
+                  {catalog.shown.map(product => <ProductRow key={product.id} product={product} />)}
+                </ul> : <p className="px-3.5 py-4 leading-relaxed text-secondary sm:row-span-[var(--product-rows)]">
+                  {!catalog || !catalog.total ? 'Позиции этого поставщика пока не собраны.' : 'В собранных позициях совпадений нет. Это не означает, что товара нет у поставщика.'}
+                </p>}
+                <footer className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-line px-3.5 py-2">
+                  <button type="button" onClick={() => onOpen(supplier.id, query)} aria-label={`Открыть ассортимент: ${supplier.name}`} className="inline-flex min-h-7 items-center gap-1 font-medium text-brand-ink hover:underline">
+                    {query && catalog && (catalog.matchingTotal ?? 0) > catalog.shown.length ? `Все совпадения (${catalog.matchingTotal})` : 'Открыть ассортимент'} <ArrowUpRight aria-hidden="true" size={13} />
+                  </button>
+                  {catalog && <ExternalLink href={catalog.catalogUrl}>Сайт поставщика</ExternalLink>}
+                </footer>
+              </article>
+            );
+          })}
+        </div>;
       })}
     </div>
   );
