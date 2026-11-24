@@ -49,6 +49,58 @@ async function chooseFilter(user: ReturnType<typeof userEvent.setup>, label: str
 }
 
 describe('Каталог поставщиков', () => {
+  it('разбивает реестр на страницы и сохраняет выбор для сравнения', async () => {
+    const user = userEvent.setup();
+    const items = Array.from({ length: 21 }, (_, i) => fixture(`supplier-${i + 1}`, `Поставщик №${i + 1}`));
+    vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items, total: items.length });
+    vi.mocked(client.fetchSupplierById).mockImplementation(async id => ({ ...detail, ...items.find(item => item.id === id) }));
+    render(<CatalogPage />);
+    const paging = within(await screen.findByRole('navigation', { name: 'Страницы поставщиков' }));
+    const table = within(screen.getByRole('region', { name: 'Таблица поставщиков' }));
+    const row = (number: number) => ({ name: `Открыть карточку поставщика Поставщик №${number}` });
+    expect(paging.getByText('1–20 из 21')).toBeTruthy();
+    expect(table.queryByRole('row', row(21))).toBeNull();
+    await user.click(table.getByRole('button', { name: 'Сравнить Поставщик №1' }));
+    await user.click(table.getByRole('row', row(20)));
+    await user.keyboard('{ArrowDown}');
+    expect(within(screen.getByRole('dialog')).getByRole('heading', { name: 'Поставщик №21' })).toBeTruthy();
+    expect(paging.getByText('21–21 из 21')).toBeTruthy();
+    expect(table.getByRole('row', row(21)).getAttribute('aria-current')).toBe('true');
+    await user.keyboard('{Escape}');
+    expect((paging.getByRole('button', { name: 'Следующая страница' }) as HTMLButtonElement).disabled).toBe(true);
+    await user.click(paging.getByRole('button', { name: 'Первая страница' }));
+    expect(table.getByRole('button', { name: 'Убрать Поставщик №1 из сравнения' })).toBeTruthy();
+    paging.getByRole('combobox', { name: 'Записей на странице' }).focus();
+    await user.keyboard('{Enter}');
+    (await screen.findByRole('option', { name: '10' })).focus();
+    await user.keyboard('{Enter}');
+    expect(paging.getByText('1–10 из 21')).toBeTruthy();
+    await user.click(paging.getByRole('button', { name: 'Последняя страница' }));
+    expect(paging.getByText('21–21 из 21')).toBeTruthy();
+    await user.type(screen.getByLabelText('Поиск'), 'овощи');
+    await waitFor(() => expect(paging.getByText('1–10 из 21')).toBeTruthy());
+  });
+
+  it('показывает обзор сразу и использует уже начатую фоновую загрузку', async () => {
+    const user = userEvent.setup();
+    let finish!: (response: SupplierDetailResponse) => void;
+    const slow = new Promise<SupplierDetailResponse>(resolve => { finish = resolve; });
+    const fetchDetail = vi.mocked(client.fetchSupplierById);
+    fetchDetail.mockImplementation(id => id === 'one' ? slow : Promise.resolve({ ...detail, ...second }));
+    render(<CatalogPage />);
+    const row = await screen.findByRole('row', { name: 'Открыть карточку поставщика Первый поставщик' });
+    await waitFor(() => expect(fetchDetail).toHaveBeenCalledWith('one', { region: undefined, maxMoqRub: undefined }));
+    await user.click(row);
+    const drawer = within(screen.getByRole('dialog'));
+    expect(drawer.getByText('Овощи оптом')).toBeTruthy();
+    expect(drawer.getByText('Как рассчитан скоринг')).toBeTruthy();
+    expect(fetchDetail.mock.calls.filter(([id]) => id === 'one')).toHaveLength(1);
+    await user.click(drawer.getByRole('tab', { name: 'Запрос КП' }));
+    expect(drawer.getByText('Готовим шаблон запроса…')).toBeTruthy();
+    await act(async () => finish(detail));
+    expect(drawer.getByText('Здравствуйте!')).toBeTruthy();
+  });
+
   it('передаёт поиск с дебаунсом и выбранную категорию', async () => {
     const user = userEvent.setup(); render(<CatalogPage />);
     await screen.findByText('Первый поставщик');

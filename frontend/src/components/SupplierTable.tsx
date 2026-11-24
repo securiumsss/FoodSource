@@ -81,6 +81,7 @@ function DeliveryRegions({ regions, regionFilter }: { regions: SupplierRegion[];
 
 interface Props {
   suppliers: SupplierWithEvaluation[];
+  scrollKey: string;
   regionFilter?: string;
   emptyContent?: ReactNode;
   selectedIds: string[];
@@ -96,6 +97,7 @@ interface Props {
 
 export function SupplierTable({
   suppliers,
+  scrollKey,
   regionFilter,
   emptyContent,
   selectedIds,
@@ -112,6 +114,10 @@ export function SupplierTable({
   const headerRef = useRef<HTMLTableSectionElement>(null);
   const viewportId = useId();
   const [scrolledRight, setScrolledRight] = useState(false);
+
+  useLayoutEffect(() => {
+    if (viewportRef.current) viewportRef.current.scrollTop = 0;
+  }, [scrollKey]);
 
   useLayoutEffect(() => {
     if (!activeId) return;

@@ -7,14 +7,15 @@ interface Props<Value extends string> {
   value: Value;
   options: readonly { value: Value; label: string }[];
   onChange: (value: Value) => void;
+  compactSuffix?: string;
 }
 
-export function FilterSelect<Value extends string>({ label, value, options, onChange }: Props<Value>) {
+export function FilterSelect<Value extends string>({ label, value, options, onChange, compactSuffix }: Props<Value>) {
   const id = useId();
 
   return (
     <div className="min-w-0">
-      <label id={id + '-label'} htmlFor={id} className="filter-label">{label}</label>
+      <label id={id + '-label'} htmlFor={id} className={compactSuffix ? 'sr-only' : 'filter-label'}>{label}</label>
       <Select.Root value={value} onValueChange={next => {
         const option = options.find(item => item.value === next);
         if (option) onChange(option.value);
@@ -22,15 +23,19 @@ export function FilterSelect<Value extends string>({ label, value, options, onCh
         <Select.Trigger
           id={id}
           aria-labelledby={id + '-label'}
-          className="mt-1 flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-line bg-white px-2.5 py-1.5 text-left text-[13px]! text-ink hover:border-line-strong hover:bg-soft data-[state=open]:border-brand-hover"
+          className={compactSuffix
+            ? 'flex min-h-9 items-center gap-1.5 rounded-md px-1.5 text-xs font-medium text-ink hover:bg-soft sm:gap-2 sm:px-2'
+            : 'mt-1 flex min-h-9 w-full min-w-0 items-center justify-between gap-2 rounded-md border border-line bg-white px-2.5 py-1.5 text-left text-[13px]! text-ink hover:border-line-strong hover:bg-soft data-[state=open]:border-brand-hover'}
         >
           <span className="min-w-0 truncate"><Select.Value /></span>
+          {compactSuffix && <span aria-hidden="true" className="text-secondary">{compactSuffix}</span>}
           <Select.Icon asChild><ChevronDown size={14} className="shrink-0 text-muted" aria-hidden="true" /></Select.Icon>
         </Select.Trigger>
         <Select.Portal>
           <Select.Content
             position="popper"
-            align="start"
+            align={compactSuffix ? 'end' : 'start'}
+            side={compactSuffix ? 'top' : 'bottom'}
             sideOffset={4}
             collisionPadding={12}
             className="z-[45] flex max-h-[min(17rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] flex-col overflow-hidden rounded-lg border border-line bg-white text-[13px] text-ink shadow-lg"

@@ -33,9 +33,9 @@ interface Props {
   ref?: Ref<SupplierDrawerHandle>;
   id: string;
   supplier: SupplierDetailResponse | null;
+  preview?: SupplierWithEvaluation;
   loadError: string;
   initialTab?: DrawerTab;
-  supplierName?: string;
   matchedProductIds?: string[];
   navigation?: {
     position: number;
@@ -64,7 +64,7 @@ function Tags({ items }: { items: string[] }) {
   );
 }
 
-function SupplierConditions({ supplier: s }: { supplier: SupplierDetailResponse }) {
+function SupplierConditions({ supplier: s }: { supplier: SupplierWithEvaluation }) {
   const hasPrice = s.priceEstimate.min !== null || s.priceEstimate.max !== null;
   const priceDetails = hasPrice ? (s.pricingNote ? 'Пример цены и примечание' : 'Пример цены') : 'Примечание к заказу';
   const deliveryFacts = [
@@ -133,7 +133,8 @@ function sourceLabel(value: string): string {
   }
 }
 
-export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialTab = 'overview', supplierName, matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
+export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
+  const s = detail ?? preview;
   const [tab, setTab] = useState<DrawerTab>(initialTab);
   const [rfqProductIds, setRfqProductIds] = useState<string[]>([]);
   const [draft, setDraft] = useState<{ id: string; notes: string } | null>(null);
@@ -216,14 +217,15 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
     navigate(event.key === 'ArrowUp' ? 'previous' : 'next');
   }
 
-  const rfqProducts = s?.assortment?.products.filter(product => rfqProductIds.includes(product.id)) ?? [];
-  const rfqBody = s && (rfqProducts.length ? (() => {
+  const rfq = detail?.rfqTemplate;
+  const rfqProducts = detail?.assortment?.products.filter(product => rfqProductIds.includes(product.id)) ?? [];
+  const rfqBody = rfq ? (rfqProducts.length ? (() => {
     const details = 'Пожалуйста, сообщите наличие, оптовую цену и минимальный объём по следующим позициям:\n'
       + rfqProducts.map(product => '• ' + describeProduct(product)).join('\n');
-    const signature = s.rfqTemplate.body.lastIndexOf('\n\nС уважением,');
-    return signature === -1 ? s.rfqTemplate.body + '\n\n' + details
-      : s.rfqTemplate.body.slice(0, signature) + '\n\n' + details + s.rfqTemplate.body.slice(signature);
-  })() : s.rfqTemplate.body);
+    const signature = rfq.body.lastIndexOf('\n\nС уважением,');
+    return signature === -1 ? rfq.body + '\n\n' + details
+      : rfq.body.slice(0, signature) + '\n\n' + details + rfq.body.slice(signature);
+  })() : rfq.body) : null;
   const verdictStyle = s ? getVerdictStyle(s.scoring.verdict) : null;
   const limitations = s ? [...new Map([...s.cons, ...s.scoring.clarifications].map(item =>
     [item.trim().toLocaleLowerCase('ru-RU').replace(/[.!?]+$/u, ''), item],
@@ -238,7 +240,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
         <div role="group" aria-label="Управление карточкой" className="flex h-11 shrink-0 items-center px-3 sm:px-4">
           {navigation && (
             <div data-supplier-navigation role="group" aria-label="Навигация по таблице" className="flex items-center gap-0.5">
-              <span role="status" className="sr-only">{s?.name ?? supplierName}, {navigation.position} из {navigation.total}</span>
+              <span role="status" className="sr-only">{s?.name}, {navigation.position} из {navigation.total}</span>
               {([
                 { direction: 'previous', label: 'Предыдущий поставщик', key: 'ArrowUp', hint: '↑', Icon: ArrowUp },
                 { direction: 'next', label: 'Следующий поставщик', key: 'ArrowDown', hint: '↓', Icon: ArrowDown },
@@ -261,7 +263,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
         <div className="shrink-0 border-b border-line px-5 pt-1 sm:px-6">
           <p className="eyebrow mb-1">{s ? `${s.categoryLabel} · ${s.city}` : 'Карточка поставщика'}</p>
           <h2 id="detail-title" className="min-w-0 break-words text-lg font-semibold tracking-tight text-ink">
-            {s?.name ?? supplierName ?? 'Карточка поставщика'}
+            {s?.name ?? 'Карточка поставщика'}
           </h2>
           <div className="my-2 flex flex-wrap items-center gap-x-3 gap-y-2">
             {s && (
@@ -297,7 +299,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
                   { id: 'overview', label: 'Обзор и скоринг' },
                   { id: 'assortment', label: 'Ассортимент' },
                   { id: 'workspace', label: 'Заметки', dot: Boolean(s.workspace.notes.trim()) },
-                  { id: 'rfq', label: 'Запрос КП', count: s.rfqTemplate.checklist.length },
+                  { id: 'rfq', label: 'Запрос КП', count: rfq?.checklist.length },
                 ] as Array<{ id: DrawerTab; label: string; dot?: boolean; count?: number }>
               ).map(item => {
                 const active = tab === item.id;
@@ -381,7 +383,11 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
             </div>
           )}
 
-          {s && tab === 'assortment' && <SupplierAssortmentPanel key={s.id} supplier={s} matches={matchedProductIds} onRequest={productId => {
+          {s && !detail && !message && (tab === 'assortment' || tab === 'rfq') && (
+            <p role="status" className="flex items-center gap-2 text-xs text-muted"><LoaderCircle size={14} className="animate-spin" aria-hidden="true" />{tab === 'assortment' ? 'Загружаем ассортимент…' : 'Готовим шаблон запроса…'}</p>
+          )}
+
+          {detail && tab === 'assortment' && <SupplierAssortmentPanel key={id} supplier={detail} matches={matchedProductIds} onRequest={productId => {
             setRfqProductIds(current => current.includes(productId) ? current : [...current, productId]);
             setCopiedKey(null);
             setTab('rfq');
@@ -394,9 +400,9 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
             </div>
           )}
 
-          {s && rfqBody !== null && tab === 'rfq' && (
+          {detail && rfq && rfqBody !== null && tab === 'rfq' && (
             <div className="space-y-5">
-              <div><h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Что спросить перед заказом</h3><div className="mt-3"><FactList items={s.rfqTemplate.checklist} kind="clarify" /></div></div>
+              <div><h3 className="text-xs font-semibold uppercase tracking-[0.08em]">Что спросить перед заказом</h3><div className="mt-3"><FactList items={rfq.checklist} kind="clarify" /></div></div>
               {rfqProducts.length > 0 && <section aria-label="Позиции в запросе" className="space-y-2">
                 <h3 className="text-xs font-semibold text-ink">Позиции в запросе</h3>
                 <ul className="space-y-1">{rfqProducts.map(product => <li key={product.id} className="flex items-center justify-between gap-2 rounded-md border border-line px-2.5 py-1 text-xs text-secondary">
@@ -404,8 +410,8 @@ export function SupplierDetailDrawer({ ref, id, supplier: s, loadError, initialT
                   <button type="button" aria-label={`Убрать из запроса: ${product.name}`} className="grid size-7 shrink-0 place-items-center rounded hover:bg-separator" onClick={() => { setRfqProductIds(current => current.filter(id => id !== product.id)); setCopiedKey(null); }}><X size={14} aria-hidden="true" /></button>
                 </li>)}</ul>
               </section>}
-              <div className="rounded-md border border-line bg-soft p-4"><p className="fact-label">Тема</p><p className="mt-1 text-xs font-medium">{s.rfqTemplate.subject}</p><p className="fact-label mt-4">Текст письма</p><p className="mt-1 whitespace-pre-wrap text-xs leading-relaxed text-secondary">{rfqBody}</p></div>
-              <div className="flex flex-wrap gap-2"><button type="button" className="btn-primary" onClick={() => void copyText('rfq', `Тема: ${s.rfqTemplate.subject}\n\n${rfqBody}`)}>{copiedKey === 'rfq' ? <Check size={14} /> : <Clipboard size={14} />}{copiedKey === 'rfq' ? 'Скопировано' : 'Скопировать текст КП'}</button>{s.contacts.email && <a className="btn-secondary" href={`mailto:${s.contacts.email}?subject=${encodeURIComponent(s.rfqTemplate.subject)}&body=${encodeURIComponent(rfqBody)}`}><Mail size={14} />Написать письмо</a>}</div>
+              <div className="rounded-md border border-line bg-soft p-4"><p className="fact-label">Тема</p><p className="mt-1 text-xs font-medium">{rfq.subject}</p><p className="fact-label mt-4">Текст письма</p><p className="mt-1 whitespace-pre-wrap text-xs leading-relaxed text-secondary">{rfqBody}</p></div>
+              <div className="flex flex-wrap gap-2"><button type="button" className="btn-primary" onClick={() => void copyText('rfq', `Тема: ${rfq.subject}\n\n${rfqBody}`)}>{copiedKey === 'rfq' ? <Check size={14} /> : <Clipboard size={14} />}{copiedKey === 'rfq' ? 'Скопировано' : 'Скопировать текст КП'}</button>{detail.contacts.email && <a className="btn-secondary" href={`mailto:${detail.contacts.email}?subject=${encodeURIComponent(rfq.subject)}&body=${encodeURIComponent(rfqBody)}`}><Mail size={14} />Написать письмо</a>}</div>
             </div>
           )}
         </div>

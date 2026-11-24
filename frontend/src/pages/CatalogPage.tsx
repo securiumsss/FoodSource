@@ -6,6 +6,7 @@ import { fetchSuppliers, updateSupplierWorkspace } from '../api/client';
 import { useSupplierDetails } from '../api/useSupplierDetails';
 import { CompareBar } from '../components/CompareBar';
 import { CompareModal } from '../components/CompareModal';
+import { CatalogPagination, type PageSize } from '../components/CatalogPagination';
 import { CatalogToolbar } from '../components/CatalogToolbar';
 import { Header, sidebarId } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
@@ -20,6 +21,8 @@ const emptyByStatus = {
 };
 
 const sidebarStorageKey = 'foodsource.sidebarCollapsed';
+const emptyItems: SupplierWithEvaluation[] = [];
+const emptyIds: string[] = [];
 
 export function CatalogPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
@@ -40,12 +43,18 @@ export function CatalogPage() {
   const detailReturnFocusRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<SupplierDrawerHandle>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
-  const { detail, loadError, updateWorkspace } = useSupplierDetails(detailId, filters.region, filters.maxMoqRub);
   const [detailStartTab, setDetailStartTab] = useState<DrawerTab>('overview');
   const [compareIds, setCompareIds] = useState<string[] | null>(null);
   const [savingId, setSavingId] = useState('');
   const [refresh, setRefresh] = useState(0);
-  useEffect(() => { const timer = window.setTimeout(() => setDebouncedSearch(search.trim()), 300); return () => window.clearTimeout(timer); }, [search]);
+  const [pageIndex, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState<PageSize>('20');
+  useEffect(() => {
+    const value = search.trim();
+    if (value === debouncedSearch) return;
+    const timer = window.setTimeout(() => { setPage(0); setDebouncedSearch(value); }, 300);
+    return () => window.clearTimeout(timer);
+  }, [search, debouncedSearch]);
   const query = useMemo(() => ({ ...filters, search: debouncedSearch || undefined }), [filters, debouncedSearch]);
   useEffect(() => {
     let active = true; setLoading(true); setError('');
@@ -58,13 +67,23 @@ export function CatalogPage() {
   }, [query, refresh]);
   const emptyStatus = !search.trim() && filters.status && filters.status !== 'new' && catalog?.facets.statusCounts?.[filters.status] === 0
     ? emptyByStatus[filters.status] : null;
-  const clearSearch = () => { setSearch(''); setDebouncedSearch(''); };
+  const clearSearch = () => { setSearch(''); setDebouncedSearch(''); setPage(0); };
   const reset = () => { clearSearch(); setFilters({}); };
-  const changeFilters = (patch: Partial<SuppliersQueryParams>) => setFilters(current => {
-    const next = { ...current, ...patch };
-    if (next.category && !requiresTemperatureControl(next.category)) next.temperatureControlled = undefined;
-    return next;
-  });
+  const changeFilters = (patch: Partial<SuppliersQueryParams>) => {
+    setPage(0);
+    setFilters(current => {
+      const next = { ...current, ...patch };
+      if (next.category && !requiresTemperatureControl(next.category)) next.temperatureControlled = undefined;
+      return next;
+    });
+  };
+  const items = catalog?.items ?? emptyItems;
+  const size = Number(pageSize);
+  const page = Math.min(pageIndex, Math.max(0, Math.ceil(items.length / size) - 1));
+  useEffect(() => { if (page !== pageIndex) setPage(page); }, [page, pageIndex]);
+  const pageItems = useMemo(() => items.slice(page * size, (page + 1) * size), [items, page, size]);
+  const pageIds = useMemo(() => pageItems.map(item => item.id), [pageItems]);
+  const { detail, loadError, updateWorkspace } = useSupplierDetails(detailId, filters.region, filters.maxMoqRub, loading ? emptyIds : pageIds);
   const saved = useCallback((id: string, workspace: SupplierWorkspaceState) => {
     updateWorkspace(id, workspace);
     setCatalog(current => current && ({ ...current, items: current.items.map(s => s.id === id ? { ...s, workspace } : s) }));
@@ -77,11 +96,12 @@ export function CatalogPage() {
     finally { setSavingId(''); }
   }, [saved]);
   const toggleCompare = (supplier: SupplierWithEvaluation) => setSelected(current => current.some(item => item.id === supplier.id) ? current.filter(item => item.id !== supplier.id) : current.length < 4 ? [...current, supplier] : current);
-  const items = catalog?.items ?? [];
   const openDrawer = (id: string, tab?: DrawerTab) => {
     if (detailId === id && !tab) return;
     if (detailId !== null && drawerRef.current?.canSwitchSupplier() === false) return;
     detailReturnFocusRef.current = null;
+    const index = items.findIndex(item => item.id === id);
+    if (index >= 0) setPage(Math.floor(index / size));
     setDetailStartTab(tab ?? 'overview');
     setDetailId(id);
   };
@@ -91,6 +111,7 @@ export function CatalogPage() {
     setSelected(current => current.filter(s => s.id !== id));
   };
   const detailIndex = items.findIndex(s => s.id === detailId);
+  const detailPreview = items[detailIndex] ?? selected.find(s => s.id === detailId);
   const closeDrawer = useCallback(() => setDetailId(null), []);
   const closeCompare = useCallback(() => setCompareIds(null), []);
   const tableGutters = 'px-4 sm:px-6';
@@ -103,7 +124,7 @@ export function CatalogPage() {
       category={filters.category}
       facets={catalog?.facets ?? null}
       selectedCount={selected.length}
-      onStatusChange={status => setFilters(current => ({ ...current, status }))}
+      onStatusChange={status => changeFilters({ status })}
       onCategoryChange={category => changeFilters({ category })}
       onCompare={() => setCompareIds(selected.map(s => s.id))}
     />
@@ -134,7 +155,8 @@ export function CatalogPage() {
           </div>
         )}
         <SupplierTable
-          suppliers={items}
+          suppliers={pageItems}
+          scrollKey={`${page}:${pageSize}:${JSON.stringify(query)}`}
           regionFilter={filters.region}
           emptyContent={error ? undefined : loading ? (
             <p role="status" className="text-xs text-secondary">Загрузка поставщиков…</p>
@@ -156,6 +178,13 @@ export function CatalogPage() {
           onCompare={toggleCompare}
           onStatusChange={(id, status) => void changeStatus(id, status).catch(reason => setError(readableError(reason)))}
         />
+        {catalog && <CatalogPagination
+          page={page}
+          size={pageSize}
+          total={items.length}
+          onPageChange={setPage}
+          onSizeChange={next => { setPageSize(next); setPage(0); }}
+        />}
         {selected.length >= 4 && <p role="status" className={`mt-3 shrink-0 text-xs text-brand-ink ${tableGutters}`}>Выбраны 4 поставщика — это максимум для сравнения. Уберите одного, чтобы добавить другого.</p>}
       </section>
     </main>
@@ -165,16 +194,16 @@ export function CatalogPage() {
         ref={drawerRef}
         id={detailId}
         supplier={detail}
+        preview={detailPreview}
         loadError={loadError === undefined ? '' : readableError(loadError)}
         initialTab={detailStartTab}
-        supplierName={items[detailIndex]?.name}
         matchedProductIds={items[detailIndex]?.matchedProducts?.map(product => product.id)}
         navigation={detailIndex >= 0 ? {
           position: detailIndex + 1,
           total: items.length,
           previous: items[detailIndex - 1]?.id,
           next: items[detailIndex + 1]?.id,
-          onNavigate: id => { setDetailStartTab('overview'); setDetailId(id); },
+          onNavigate: openDrawer,
         } : undefined}
         returnFocusRef={detailReturnFocusRef}
         selected={selected.some(s => s.id === detailId)}
