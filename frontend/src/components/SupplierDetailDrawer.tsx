@@ -36,6 +36,7 @@ interface Props {
   preview?: SupplierWithEvaluation;
   loadError: string;
   initialTab?: DrawerTab;
+  assortmentSearch?: string;
   matchedProductIds?: string[];
   navigation?: {
     position: number;
@@ -133,7 +134,7 @@ function sourceLabel(value: string): string {
   }
 }
 
-export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
+export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadError, initialTab = 'overview', assortmentSearch = '', matchedProductIds = [], navigation, returnFocusRef, selected, atLimit, onCompare, onClose, onSaved }: Props) {
   const s = detail ?? preview;
   const [tab, setTab] = useState<DrawerTab>(initialTab);
   const [rfqProductIds, setRfqProductIds] = useState<string[]>([]);
@@ -387,7 +388,7 @@ export function SupplierDetailDrawer({ ref, id, supplier: detail, preview, loadE
             <p role="status" className="flex items-center gap-2 text-xs text-muted"><LoaderCircle size={14} className="animate-spin" aria-hidden="true" />{tab === 'assortment' ? 'Загружаем ассортимент…' : 'Готовим шаблон запроса…'}</p>
           )}
 
-          {detail && tab === 'assortment' && <SupplierAssortmentPanel key={id} supplier={detail} matches={matchedProductIds} onRequest={productId => {
+          {detail && tab === 'assortment' && <SupplierAssortmentPanel key={`${id}:${assortmentSearch}`} initialSearch={assortmentSearch} supplier={detail} matches={matchedProductIds} onRequest={productId => {
             setRfqProductIds(current => current.includes(productId) ? current : [...current, productId]);
             setCopiedKey(null);
             setTab('rfq');

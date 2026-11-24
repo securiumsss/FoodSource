@@ -44,6 +44,7 @@ export function CatalogPage() {
   const drawerRef = useRef<SupplierDrawerHandle>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
   const [detailStartTab, setDetailStartTab] = useState<DrawerTab>('overview');
+  const [detailAssortmentSearch, setDetailAssortmentSearch] = useState('');
   const [compareIds, setCompareIds] = useState<string[] | null>(null);
   const [savingId, setSavingId] = useState('');
   const [refresh, setRefresh] = useState(0);
@@ -96,13 +97,14 @@ export function CatalogPage() {
     finally { setSavingId(''); }
   }, [saved]);
   const toggleCompare = (supplier: SupplierWithEvaluation) => setSelected(current => current.some(item => item.id === supplier.id) ? current.filter(item => item.id !== supplier.id) : current.length < 4 ? [...current, supplier] : current);
-  const openDrawer = (id: string, tab?: DrawerTab) => {
+  const openDrawer = (id: string, tab?: DrawerTab, assortmentSearch = '') => {
     if (detailId === id && !tab) return;
     if (detailId !== null && drawerRef.current?.canSwitchSupplier() === false) return;
     detailReturnFocusRef.current = null;
     const index = items.findIndex(item => item.id === id);
     if (index >= 0) setPage(Math.floor(index / size));
     setDetailStartTab(tab ?? 'overview');
+    setDetailAssortmentSearch(assortmentSearch);
     setDetailId(id);
   };
   const removeFromComparison = (id: string) => {
@@ -197,6 +199,7 @@ export function CatalogPage() {
         preview={detailPreview}
         loadError={loadError === undefined ? '' : readableError(loadError)}
         initialTab={detailStartTab}
+        assortmentSearch={detailAssortmentSearch}
         matchedProductIds={items[detailIndex]?.matchedProducts?.map(product => product.id)}
         navigation={detailIndex >= 0 ? {
           position: detailIndex + 1,
@@ -213,6 +216,6 @@ export function CatalogPage() {
         onSaved={saved}
       />
     )}
-    {compareIds && <CompareModal ids={compareIds} search={debouncedSearch || undefined} region={filters.region} maxMoqRub={filters.maxMoqRub} onClose={closeCompare} onOpen={(id, tab) => { closeCompare(); openDrawer(id, tab ?? 'overview'); }} onRemove={removeFromComparison} onStatus={changeStatus} />}
+    {compareIds && <CompareModal ids={compareIds} search={debouncedSearch || undefined} region={filters.region} maxMoqRub={filters.maxMoqRub} onClose={closeCompare} onOpen={(id, tab, query) => { closeCompare(); openDrawer(id, tab ?? 'overview', query); }} onRemove={removeFromComparison} onStatus={changeStatus} />}
   </div></div>;
 }

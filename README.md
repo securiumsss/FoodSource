@@ -87,7 +87,7 @@ docker run --rm -p 3000:3000 -v foodsource-data:/app/storage foodsource
 - `GET /api/health` — состояние сервера и количество поставщиков.
 - `GET /api/suppliers` — поиск, фильтры, сортировка и фасеты; параметры описаны в `SuppliersQueryParams`.
 - `GET /api/suppliers/:id` — карточка и шаблон КП; `region` и `maxMoqRub` задают контекст оценки.
-- `POST /api/suppliers/compare` — сравнение 2–4 уникальных ID с необязательными `region` и `maxMoqRub`.
+- `POST /api/suppliers/compare` — сравнение 2–4 уникальных ID: условия в `rows`, а позиции с фасовками и ссылками — отдельно в `assortments`. Необязательный `search` ищет по собранным позициям; `region` и `maxMoqRub` задают контекст оценки.
 - `PATCH /api/suppliers/:id/workspace` — сохранение статуса и заметок до 2000 символов.
 
 ## Как развивать сервис в продакшене

@@ -19,11 +19,3 @@ export function findProducts(supplierId: string, search: string | undefined): Su
       : word.startsWith(term)));
   }) ?? [];
 }
-
-export function productPrice(product: SupplierProduct): string {
-  if (product.price.kind === 'published') {
-    const { amount, unit } = product.price;
-    return `${amount.toLocaleString('ru')} ₽${unit ? `/${unit}` : ' (единицу уточнить)'}`;
-  }
-  return product.price.kind === 'on_request' ? 'Цена по запросу' : 'Цена не опубликована';
-}

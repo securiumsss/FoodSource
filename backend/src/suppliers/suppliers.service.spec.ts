@@ -133,10 +133,18 @@ describe('SuppliersService', () => {
     expect((await catalog.findAll({ search: 'сливки 133%' })).total).toBe(0);
     expect((await catalog.findOne('sup-dairy-01')).assortment?.products[0]).toMatchObject({ price: { amount: 430 }, availabilityNote: expect.stringContaining('нет в наличии') });
     const compared = await catalog.compare(parseCompare({ ids: ['sup-dairy-01', 'sup-dairy-03'], search: 'сливки 33%' }));
-    const row = compared.rows.find(item => item.key === 'matchedProducts');
-    expect(row?.values['sup-dairy-03']).toContain('Цена по запросу');
-    expect(row?.values['sup-dairy-01']).toContain('нет в наличии');
-    expect(row?.bestSupplierIds).toEqual([]);
+    expect(compared.rows.some(item => item.key === 'matchedProducts')).toBe(false);
+    expect(compared.assortments['sup-dairy-03']?.shown).toContainEqual(expect.objectContaining({ price: { kind: 'on_request' } }));
+    expect(compared.assortments['sup-dairy-01']?.shown).toContainEqual(expect.objectContaining({
+      pack: '1 л', price: expect.objectContaining({ kind: 'published', amount: 430 }),
+      sourceUrl: expect.stringMatching(/^https:\/\//u), availabilityNote: expect.stringContaining('нет в наличии'),
+    }));
+    const comparedIds = ['sup-dairy-01', 'sup-dairy-03'];
+    const unsearched = await catalog.compare({ ids: comparedIds });
+    expect(unsearched.assortments['sup-dairy-03']).toMatchObject({ matchingTotal: null, total: expect.any(Number) });
+    expect(unsearched.assortments['sup-dairy-03']?.shown.length).toBeLessThanOrEqual(5);
+    const absent = await catalog.compare({ ids: comparedIds, search: '133% сливки' });
+    expect(absent.assortments['sup-dairy-01']).toMatchObject({ matchingTotal: 0, shown: [] });
   });
 
   it('compares scores, known RUB MOQ, documents and confirmed logistics', async () => {
@@ -146,13 +154,16 @@ describe('SuppliersService', () => {
     expect(result.rows.find(row => row.key === 'moq')?.bestSupplierIds).toEqual(['a']);
     expect(result.rows.find(row => row.key === 'documents')?.bestSupplierIds).toEqual(['a']);
     expect(result.rows.find(row => row.key === 'delivery')?.bestSupplierIds).toEqual(['a']);
-    expect(result.rows.find(row => row.key === 'delivery')?.values.a).toContain('Своя доставка: да');
-    expect(result.rows.find(row => row.key === 'delivery')?.values.b).toContain('Своя доставка: нет');
+    expect(result.rows.find(row => row.key === 'delivery')?.values).toEqual({ a: 'Курьером', b: 'По запросу' });
+    expect(result.rows.find(row => row.key === 'leadTime')?.values).toEqual({ a: '1 день', b: 'Не указан' });
     expect(result.rows.find(row => row.key === 'temperature')?.bestSupplierIds).toEqual(['a']);
     expect(result.rows.map(row => row.key)).toEqual([
-      'score', 'regions', 'moq', 'price', 'delivery', 'temperature', 'documents', 'complianceSystems', 'contacts', 'status', 'pricingNote',
+      'score', 'regions', 'moq', 'price', 'leadTime', 'delivery', 'temperature', 'documents', 'complianceSystems', 'contacts', 'status', 'pricingNote',
     ]);
-    expect((await service.compare({ ids: ['a', 'd'] })).rows.find(row => row.key === 'temperature')?.values.d).toBe('Не применяется');
+    expect(result.assortments).toEqual({ a: null, b: null });
+    const mixed = await service.compare({ ids: ['a', 'd'] });
+    expect(mixed.rows.find(row => row.key === 'temperature')).toMatchObject({ values: { d: 'Не применяется' }, bestSupplierIds: [] });
+    expect(mixed.rows.find(row => row.key === 'documents')?.bestSupplierIds).toEqual([]);
     for (const bad of [['a'], ['a', 'b', 'c', 'd', 'e'], ['a', 'a'], ['a', 'missing']]) {
       await expect(service.compare({ ids: bad })).rejects.toThrow(BadRequestException);
     }
@@ -163,6 +174,7 @@ describe('SuppliersService', () => {
     const bestMoq = async (ids: string[]) => (await service.compare({ ids })).rows.find(row => row.key === 'moq')?.bestSupplierIds;
     expect(await bestMoq(['a', 'c', 'e'])).toEqual([]);
     expect(await bestMoq(['c', 'e'])).toEqual([]);
+    expect(await bestMoq(['a', 'd'])).toEqual([]);
     expect(await bestMoq(['a', 'b', 'c', 'e'])).toEqual(['a']);
     expect(await bestMoq(['b', 'd', 'a', 'c'])).toEqual(['d', 'a']);
   });

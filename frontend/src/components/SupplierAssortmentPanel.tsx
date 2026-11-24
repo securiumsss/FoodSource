@@ -13,12 +13,13 @@ export function describeProduct(product: SupplierProduct): string {
   return [product.name, product.pack].filter(Boolean).join(' — ');
 }
 
-export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
+export function SupplierAssortmentPanel({ supplier, matches, onRequest, initialSearch = '' }: {
   supplier: SupplierDetailResponse;
   matches: string[];
+  initialSearch?: string;
   onRequest: (id: string) => void;
 }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(initialSearch);
   const [page, setPage] = useState(0);
   const { assortment } = supplier;
   if (!assortment) {
@@ -54,7 +55,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
     <div className="space-y-2">
       <h4 className="text-xs font-semibold text-ink">Позиции с сайта поставщика</h4>
       <p className="text-xs leading-relaxed text-secondary">{assortment.catalogNote ?? 'Это выборка с сайта, а не полный прайс. Перед заказом подтвердите наличие и оптовую цену.'}</p>
-      {assortment.products.length > pageSize && <label className="relative block">
+      {(assortment.products.length > pageSize || Boolean(initialSearch)) && <label className="relative block">
         <span className="sr-only">Поиск по ассортименту</span>
         <Search size={14} aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
         <input type="search" className="field" style={{ paddingInlineStart: '2.25rem' }} placeholder="Товар или фасовка" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
@@ -87,7 +88,7 @@ export function SupplierAssortmentPanel({ supplier, matches, onRequest }: {
           </tbody>
         </table>
       </div>}
-      {assortment.products.length > pageSize && <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-secondary">
+      {(assortment.products.length > pageSize || terms.length > 0) && <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-secondary">
         <p role="status">{resultLabel}</p>
         {pageCount > 1 && <div role="group" aria-label="Страницы ассортимента" className="flex gap-1">
           <button type="button" className="icon-btn disabled:opacity-40" aria-label="Предыдущая страница ассортимента" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}><ChevronLeft size={14} /></button>

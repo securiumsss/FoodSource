@@ -561,16 +561,71 @@ describe('Каталог поставщиков', () => {
     await waitFor(() => expect(status.textContent).toBe('В шортлисте'));
   });
 
+  it('разделяет совпадения по ассортименту и условия поставки и сохраняет поиск при переходе в карточку', async () => {
+    const user = userEvent.setup();
+    const products = [
+      { id: 'cream', name: 'Сливки 33%', pack: '1 л', price: { kind: 'published' as const, amount: 430, unit: 'л' }, sourceUrl: 'https://supplier.test/cream', availabilityNote: 'Нет в наличии', checkedAt: '2026-11-24' },
+      { id: 'milk', name: 'Молоко 3,2%', pack: '1 л', price: { kind: 'on_request' as const }, sourceUrl: 'https://supplier.test/milk', checkedAt: '2026-11-24' },
+    ];
+    const assortment = { catalogUrl: 'https://supplier.test/catalog', groups: ['Молоко и сливки'], products };
+    vi.mocked(client.fetchSupplierById).mockResolvedValue({ ...detail, assortment });
+    vi.mocked(client.compareSuppliers).mockImplementation(async ({ search }) => ({
+      suppliers: [first, second], winnerId: 'one', winnerReason: 'Равный скоринг',
+      rows: [
+        { key: 'moq', label: 'Минимальный заказ', values: { one: '1000 ₽', two: '2000 ₽' }, bestSupplierIds: ['one'] },
+        { key: 'price', label: 'Пример цены', values: { one: 'Кориандр 98 ₽/кг', two: 'Лук-порей 270 ₽/кг' }, bestSupplierIds: [] },
+      ],
+      assortments: {
+        one: { ...assortment, total: 2, matchingTotal: search ? 1 : null, shown: search === 'Сливки 33%' ? [products[0]] : search === 'Молоко' ? [products[1]] : products },
+        two: { catalogUrl: 'https://other.test/catalog', groups: [], total: 4, matchingTotal: 0, shown: [] },
+      },
+    }));
+    render(<CatalogPage />);
+    await screen.findByText('Первый поставщик');
+    await user.type(screen.getByLabelText('Поиск'), 'Сливки 33%');
+    await waitFor(() => expect(client.fetchSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'Сливки 33%' })));
+    for (const supplier of [first, second]) await user.click(screen.getByRole('button', { name: 'Сравнить ' + supplier.name }));
+    await user.click(screen.getByRole('button', { name: 'Сравнить (2)' }));
+    const modal = within(await screen.findByRole('dialog', { name: 'Сравнение поставщиков' }));
+    const firstCatalog = within(await modal.findByRole('article', { name: 'Ассортимент: Первый поставщик' }));
+    expect(firstCatalog.getByText('430 ₽/л')).toBeTruthy();
+    expect(firstCatalog.getByText('Нет в наличии')).toBeTruthy();
+    expect(firstCatalog.getByRole('link', { name: 'Источник' }).getAttribute('href')).toBe('https://supplier.test/cream');
+    expect(modal.getByText(/это не означает, что товара нет/i)).toBeTruthy();
+    expect(modal.queryByText('Минимальный заказ')).toBeNull();
+    await user.click(modal.getByRole('button', { name: 'Условия поставки' }));
+    expect(modal.getByRole('rowheader', { name: 'Минимальный заказ' })).toBeTruthy();
+    expect(modal.getByText(/одинаковый максимальный балл/)).toBeTruthy();
+    expect(modal.queryByText('Пример цены')).toBeNull();
+    expect(modal.queryByText('430 ₽/л')).toBeNull();
+    await user.click(modal.getByRole('button', { name: 'Ассортимент' }));
+    await user.clear(modal.getByRole('textbox', { name: 'Товар или фасовка' }));
+    await user.type(modal.getByRole('textbox', { name: 'Товар или фасовка' }), 'Молоко');
+    await user.click(modal.getByRole('button', { name: 'Найти' }));
+    await modal.findByText('Молоко 3,2%');
+    expect(client.compareSuppliers).toHaveBeenLastCalledWith(expect.objectContaining({ search: 'Молоко' }));
+    await user.click(modal.getByRole('button', { name: 'Открыть ассортимент: Первый поставщик' }));
+    const drawer = within(await screen.findByRole('dialog', { name: 'Первый поставщик' }));
+    const productSearch = await drawer.findByRole<HTMLInputElement>('searchbox', { name: 'Поиск по ассортименту' });
+    expect(productSearch.value).toBe('Молоко');
+    expect(drawer.getByText('Молоко 3,2%')).toBeTruthy();
+    expect(drawer.queryByText('Сливки 33%')).toBeNull();
+  });
+
   it('обновляет сравнение при удалении колонки, скрывает одинаковые условия и открывает КП лидера', async () => {
     const user = userEvent.setup();
-    const third = fixture('three', 'Третий поставщик');
-    const suppliers = [first, second, third];
+    const third = { ...fixture('three', 'Третий поставщик'), pricingNote: 'За штуку', scoring: { ...first.scoring, total: 50 } };
+    const suppliers = [
+      { ...first, pricingNote: 'На короб', delivery: { ...first.delivery, hasOwnDelivery: true } },
+      { ...second, pricingNote: 'На короб', scoring: { ...second.scoring, total: 55 } }, third,
+    ];
     vi.mocked(client.fetchSuppliers).mockResolvedValue({ ...list, items: suppliers, total: 3 });
     vi.mocked(client.compareSuppliers).mockImplementation(async ({ ids }) => ({
       suppliers: suppliers.filter(s => ids.includes(s.id)),
       winnerId: 'one', winnerReason: 'Максимальный скоринг',
+      assortments: {},
       rows: [
-        { key: 'score', label: 'Итоговый скоринг', values: { one: '60 / 100', two: '60 / 100', three: '60 / 100' }, bestSupplierIds: ['one'] },
+        { key: 'score', label: 'Итоговый скоринг', values: { one: '60 / 100', two: '55 / 100', three: '50 / 100' }, bestSupplierIds: ['one'] },
         { key: 'delivery', label: 'Доставка и сроки', values: { one: 'Своя доставка: да', two: 'Своя доставка: нет', three: 'Своя доставка: нет' }, bestSupplierIds: ['one'] },
         { key: 'pricingNote', label: 'Примечание к условиям', values: { one: 'На короб', two: 'На короб', three: 'За штуку' }, bestSupplierIds: [] },
         { key: 'regions', label: 'Регионы доставки', values: { one: 'Вся РФ', two: 'Вся РФ', three: 'Вся РФ' }, bestSupplierIds: [] },
@@ -584,7 +639,9 @@ describe('Каталог поставщиков', () => {
     const modal = within(dialog);
     await modal.findByText('Максимальный скоринг');
     expect(client.compareSuppliers).toHaveBeenCalledWith({ ids: ['one', 'two', 'three'], region: undefined, maxMoqRub: undefined });
-    expect(modal.getAllByText('Лучшее')).toHaveLength(2);
+    expect(modal.getByText('Мин. среди заказов в ₽')).toBeTruthy();
+    expect(modal.queryByText('Лучшее')).toBeNull();
+    expect(modal.getAllByText('Читать примечание')).toHaveLength(3);
     expect(modal.getAllByRole('rowheader').map(header => header.textContent)).toEqual(['Регионы доставки', 'Минимальный заказ (MOQ)', 'Доставка и сроки', 'Примечание к условиям']);
     expect(modal.getByText('Своя доставка', { exact: true })).toBeTruthy();
     const different = modal.getByRole('switch', { name: 'Только различия' });
@@ -592,8 +649,8 @@ describe('Каталог поставщиков', () => {
     expect(modal.queryByRole('rowheader', { name: 'Регионы доставки' })).toBeNull();
     expect(modal.getByRole('rowheader', { name: 'Примечание к условиям' })).toBeTruthy();
     await user.click(modal.getByRole('button', { name: 'Убрать из сравнения: Третий поставщик' }));
-    const remove = await modal.findByRole<HTMLButtonElement>('button', { name: 'Убрать из сравнения: Первый поставщик' });
-    expect(remove.disabled).toBe(true);
+    await modal.findByRole('button', { name: 'Перейти к КП' });
+    expect(modal.queryByRole('button', { name: /Убрать из сравнения/ })).toBeNull();
     expect(client.compareSuppliers).toHaveBeenLastCalledWith({ ids: ['one', 'two'], region: undefined, maxMoqRub: undefined });
     expect(screen.getByRole('dialog')).toBe(dialog);
     expect(modal.queryByRole('rowheader', { name: 'Примечание к условиям' })).toBeNull();

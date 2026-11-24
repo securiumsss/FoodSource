@@ -107,11 +107,21 @@ export interface ComparisonRow {
   bestSupplierIds: string[];
 }
 
+export interface ComparisonAssortment {
+  catalogUrl: string;
+  groups: string[];
+  total: number;
+  /** Matches when searching, otherwise the first positions in the snapshot. */
+  shown: SupplierProduct[];
+  matchingTotal: number | null;
+}
+
 export interface CompareResponse {
   suppliers: SupplierWithEvaluation[];
   winnerId: string | null;
   winnerReason: string;
   rows: ComparisonRow[];
+  assortments: Record<string, ComparisonAssortment | null>;
 }
 
 export interface WorkspaceUpdateDto {

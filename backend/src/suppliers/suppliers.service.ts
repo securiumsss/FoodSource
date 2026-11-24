@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { getDeliveryCoverage, requiresTemperatureControl } from '@food-suppliers/shared';
 import type {
-  CompareRequestDto, CompareResponse, ComparisonRow, SupplierCategory, SupplierDetailResponse,
+  CompareRequestDto, CompareResponse, ComparisonAssortment, ComparisonRow, SupplierCategory, SupplierDetailResponse,
   SupplierStatus, SuppliersListResponse, SuppliersQueryParams, SupplierWithEvaluation, WorkspaceUpdateDto,
 } from '@food-suppliers/shared';
-import { findProducts, getAssortment, productPrice } from './assortment';
+import { findProducts, getAssortment } from './assortment';
 import { ScoringService } from '../scoring/scoring.service';
 import { StorageService, type StoredSupplier } from '../storage/storage.service';
 
@@ -131,32 +131,39 @@ export class SuppliersService {
     const makeRow = (key: string, label: string, format: (supplier: SupplierWithEvaluation) => string, best: string[] = []): ComparisonRow => ({
       key, label, values: Object.fromEntries(suppliers.map(supplier => [supplier.id, format(supplier)])), bestSupplierIds: best,
     });
-    const bestPositiveCount = (value: (supplier: SupplierWithEvaluation) => number): string[] => {
-      return suppliers.filter(supplier => value(supplier) > 0).map(supplier => supplier.id);
+    const distinguish = (hasFact: (supplier: SupplierWithEvaluation) => boolean, comparable = suppliers) => {
+      const positive = comparable.filter(hasFact);
+      return positive.length < comparable.length ? positive.map(s => s.id) : [];
     };
     const knownMoq = suppliers.map(rubMoq).filter((value): value is number => value !== null);
-    const minMoq = knownMoq.length >= 2 ? Math.min(...knownMoq) : null;
-    const productsBySupplier = new Map(suppliers.map(s => [s.id, findProducts(s.id, request.search)]));
+    const minMoq = new Set(knownMoq).size >= 2 ? Math.min(...knownMoq) : null;
+    const coldSuppliers = suppliers.filter(s => requiresTemperatureControl(s.category));
+    const search = request.search?.trim();
+    const assortments = Object.fromEntries(suppliers.map((s): [string, ComparisonAssortment | null] => {
+      const catalog = getAssortment(s.id);
+      if (!catalog) return [s.id, null];
+      const matching = search ? findProducts(s.id, search) : catalog.products;
+      return [s.id, {
+        catalogUrl: catalog.catalogUrl, groups: catalog.groups, total: catalog.products.length,
+        matchingTotal: search ? matching.length : null, shown: matching.slice(0, 5),
+      }];
+    }));
     const rows: ComparisonRow[] = [
       makeRow('score', 'Итоговый скоринг', s => `${s.scoring.total} / 100`, winners.map(s => s.id)),
       makeRow('regions', 'Регионы доставки', s => s.regions.join(', ') || 'Не указаны'),
       makeRow('moq', 'Минимальный заказ (MOQ)', s => s.moq.label, minMoq === null ? [] : suppliers.filter(s => rubMoq(s) === minMoq).map(s => s.id)),
-      ...([...productsBySupplier.values()].some(items => items.length) ? [
-        makeRow('matchedProducts', 'Позиции по запросу', s => productsBySupplier.get(s.id)?.slice(0, 3).map(product =>
-          [product.name, product.pack, productPrice(product), product.availabilityNote].filter(Boolean).join(' · '),
-        ).join('\n') || 'Нет совпадений в собранных позициях'),
-      ] : []),
       makeRow('price', 'Пример цены', s => s.priceEstimate.label),
-      makeRow('delivery', 'Доставка и сроки', s => [`Своя доставка: ${s.delivery.hasOwnDelivery === true ? 'да' : s.delivery.hasOwnDelivery === false ? 'нет' : 'не указано'}.`, s.delivery.terms, s.delivery.leadTime ? `Срок: ${s.delivery.leadTime}` : 'Срок не указан'].join(' '), suppliers.filter(s => s.delivery.hasOwnDelivery === true).map(s => s.id)),
-      ...(suppliers.some(s => requiresTemperatureControl(s.category)) ? [
-        makeRow('temperature', 'Температурный режим', s => !requiresTemperatureControl(s.category) ? 'Не применяется' : s.delivery.temperatureControlled === true ? 'Подтверждён' : s.delivery.temperatureControlled === false ? 'Не предусмотрен' : 'Не подтверждён', suppliers.filter(s => requiresTemperatureControl(s.category) && s.delivery.temperatureControlled === true).map(s => s.id)),
+      makeRow('leadTime', 'Срок доставки', s => s.delivery.leadTime || 'Не указан'),
+      makeRow('delivery', 'Условия доставки', s => s.delivery.terms, distinguish(s => s.delivery.hasOwnDelivery === true)),
+      ...(coldSuppliers.length ? [
+        makeRow('temperature', 'Температурный режим', s => !requiresTemperatureControl(s.category) ? 'Не применяется' : s.delivery.temperatureControlled === true ? 'Подтверждён' : s.delivery.temperatureControlled === false ? 'Не предусмотрен' : 'Не подтверждён', distinguish(s => s.delivery.temperatureControlled === true, coldSuppliers)),
       ] : []),
-      makeRow('documents', 'Документы', s => s.documents.join(', ') || 'Не указаны', bestPositiveCount(s => s.documents.length)),
-      makeRow('complianceSystems', 'Системы прослеживаемости', s => s.complianceSystems.join(', ') || 'Не указаны', bestPositiveCount(s => s.complianceSystems.length)),
+      makeRow('documents', 'Документы', s => s.documents.join(', ') || 'Не указаны', distinguish(s => s.documents.length > 0)),
+      makeRow('complianceSystems', 'Системы прослеживаемости', s => s.complianceSystems.join(', ') || 'Не указаны', distinguish(s => s.complianceSystems.length > 0)),
       makeRow('contacts', 'Контакты', s => [s.contacts.phone, s.contacts.email, s.contacts.telegramOrWhatsapp].filter(Boolean).join(', ') || 'Не указаны'),
       makeRow('status', 'Статус работы', s => statusLabels[s.workspace.status]),
       makeRow('pricingNote', 'Примечание к условиям', s => s.pricingNote?.trim() || 'Не указано'),
     ];
-    return { suppliers, winnerId: winner.id, winnerReason, rows };
+    return { suppliers, winnerId: winner.id, winnerReason, rows, assortments };
   }
 }
